@@ -26,10 +26,26 @@
 
     <section class="p-4">
         <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
-            <div class="relative z-10 max-w-[70%]">
-                <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Bisa Jadi Ide Hampers! ♡</span>
+            <div class="relative z-10 max-w-full">
+                
+                <div class="flex flex-wrap items-center gap-2 mb-2">
+                    <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Bisa Jadi Ide Hampers! ♡</span>
+                    
+                    <div class="bg-black/20 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-[10px] font-mono flex items-center space-x-1.5 border border-white/10 shadow-sm">
+                        <i class="fa-regular fa-clock text-amber-300 animate-pulse"></i>
+                        <span id="clock-time">00:00:00</span>
+                    </div>
+                </div>
+
                 <h1 class="text-xl font-bold mt-2 leading-tight">OPEN PRE-ORDER BUNDLING!</h1>
                 <p class="text-xs text-purple-100 mt-1">Enak, Gurih, Praktis, cocok untuk bekal keluarga & acara arisan.</p>
+                
+                <div class="running-text-box bg-black/20 backdrop-blur-xs rounded-xl p-2 mt-3 border border-white/5 shadow-inner">
+                    <div class="running-text-gerak text-[11px] md:text-xs font-medium text-amber-300 tracking-wide">
+                        Melancarkan dagangan kami sama dengan melancarkan ekonomi Indonesia! Ayo dukung UMKM! &nbsp;&nbsp;&nbsp;&nbsp; 🇮🇩✨
+                    </div>
+                </div>
+
             </div>
             <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
         </div>
@@ -149,10 +165,10 @@
     
     <script>
         const products = [
-            { id: 1, name: "PAKET HEMAT (Cireng + Cimol)", price: 23000, category: "Bundling", stock: 100, variantType: "food", desc: "Perpaduan pas untuk ngemil santai! Terdiri dari 1 Pack Cireng Frozen isi ayam/keju (4pcs) dan 1 Pack Cimol Frozen isi keju melimpah (25 butir). Lengkap dengan bumbu tabur gurih.", img: "images/paket-komplit.jpg" },
-            { id: 2, name: "PAKET KOMPLIT (Cireng + Cimol)", price: 33000, category: "Bundling", stock: 100, variantType: "food", desc: "Porsi lebih puas untuk keluarga! Dapat 2 Pack Cireng Frozen (total 8 pcs, bebas pilih varian rasa isi ayam/keju) dan 1 Pack Cimol Frozen isi keju (25 butir).", img: "images/paket-bundling.jpg" },
-            { id: 3, name: "PAKET FAMILY (Cireng + Cimol)", price: 46000, category: "Bundling", stock: 100, variantType: "food", desc: "Paket super untung untuk acara arisan atau kumpul besar! Berisi 2 Pack Cireng Frozen (8pcs) ditambah 2 Pack Cimol Frozen isi keju (total 50 butir). Sangat cocok dijadikan ide hampers cantik.", img: "images/paket-keluarga.jpg" },
-            { id: 4, name: "Cireng Isi Ayam / Keju", price: 10000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs per bungkus. Cireng premium bertekstur renyah garing di luar namun sangat lembut di dalam. Dilengkapi isian daging ayam suwir pedas atau keju gurih melimpah.", img: ["images/cireng-isi-ayam-pedas.jpg", "images/cireng-isi-keju.jpg"] },
+            { id: 1, name: "PAKET HEMAT (Cireng + Cimol)", price: 25000, originalPrice: 31000,category: "Bundling", stock: 100, variantType: "food", desc: "Perpaduan pas untuk ngemil santai! Terdiri dari 1 Pack Cireng Frozen isi ayam/keju (4pcs) dan 1 Pack Cimol Frozen isi keju melimpah (25 butir). Lengkap dengan bumbu tabur gurih.", img: "images/paket-komplit.jpg" },
+            { id: 2, name: "PAKET KOMPLIT (Cireng + Cimol)", price: 33000, originalPrice: 40000,category: "Bundling", stock: 100, variantType: "food", desc: "Porsi lebih puas untuk keluarga! Dapat 2 Pack Cireng Frozen (total 8 pcs, bebas pilih varian rasa isi ayam/keju) dan 1 Pack Cimol Frozen isi keju (25 butir).", img: "images/paket-bundling.jpg" },
+            { id: 3, name: "PAKET FAMILY (Cireng + Cimol)", price: 46000, originalPrice: 53000 ,category: "Bundling", stock: 100, variantType: "food", desc: "Paket super untung untuk acara arisan atau kumpul besar! Berisi 2 Pack Cireng Frozen (8pcs) ditambah 2 Pack Cimol Frozen isi keju (total 50 butir). Sangat cocok dijadikan ide hampers cantik.", img: "images/paket-keluarga.jpg" },
+            { id: 4, name: "Cireng Isi Ayam / Keju", price: 10000, originalPrice: 13000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs per bungkus. Cireng premium bertekstur renyah garing di luar namun sangat lembut di dalam. Dilengkapi isian daging ayam suwir pedas atau keju gurih melimpah.", img: ["images/cireng-isi-ayam-pedas.jpg", "images/cireng-isi-keju.jpg"] },
             { id: 5, name: "Cireng Kuah Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs. Sensasi baru makan cireng isi hangat yang disiram racikan bumbu kuah keju spesial yang kental, creamy, dan gurih pedas manis berpadu sempurna.", img: "images/cireng-kuah-keju.jpg" },
             { id: 6, name: "Cimol Isi Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 25 Butir. Cimol kopong anti-meledak saat digoreng. Isian potongan keju di dalamnya meleleh pas dikunyah, makin nikmat dicampur dengan aneka pilihan bumbu tabur.", img: "images/cimol-isi-keju.jpg" },
             { id: 8, name: "Add On: Cooler Bag", price: 5000, category: "Frozen", stock: 100, variantType: "none", desc: "Tas aluminium foil pelindung suhu dingin khusus berukuran 26x17x28cm. Menjaga kualitas frozen food Cimocabi tetap beku dan fresh selama proses pengiriman ke rumah Anda.", img: "images/cooler-bag.jpg" },
@@ -162,8 +178,7 @@
         let cart = [];
         let currentCategory = 'all';
         let activeProductId = null;
-
-        function renderProducts(items) {
+       function renderProducts(items) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
             if(items.length === 0) {
@@ -172,25 +187,37 @@
             }
             items.forEach(prod => {
                 const coverImg = Array.isArray(prod.img) ? prod.img[0] : prod.img;
+                
+                // Logika memunculkan badge DISKON merah berkedip hanya jika ada originalPrice
+                const promoBadge = prod.originalPrice ? `<span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-md animate-kedip shadow-md z-10">DISKON</span>` : '';
+                
+                // Logika memisahkan tampilan harga normal dan harga coret diskon
+                const priceHTML = prod.originalPrice 
+                    ? `<div class="flex flex-col">
+                           <span class="text-[9px] text-gray-400 line-through leading-none mb-0.5">Rp ${prod.originalPrice.toLocaleString('id-ID')}</span>
+                           <span class="text-xs font-bold text-purple-600 leading-none">Rp ${prod.price.toLocaleString('id-ID')}</span>
+                       </div>`
+                    : `<span class="text-xs font-bold text-purple-600">Rp ${prod.price.toLocaleString('id-ID')}</span>`;
+
                 grid.innerHTML += `
                     <div onclick="openDetail(${prod.id})" class="bg-white rounded-2xl border border-purple-50/80 p-2.5 shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform">
                         <div>
                             <div class="w-full h-36 bg-gray-50 rounded-xl overflow-hidden mb-2 relative flex items-center justify-center p-1">
                                 <img src="${coverImg}" alt="${prod.name}" class="max-w-full max-h-full object-contain">
                                 <span class="absolute top-1 left-1 bg-purple-100 text-purple-700 text-[8px] font-bold px-1.5 py-0.5 rounded-md">${prod.category}</span>
+                                ${promoBadge}
                             </div>
                             <h3 class="text-xs font-bold text-gray-800 line-clamp-1">${prod.name}</h3>
                             <p class="text-[10px] text-gray-400 line-clamp-2 mt-0.5">${prod.desc}</p>
                         </div>
                         <div class="mt-2 flex items-center justify-between">
-                            <span class="text-xs font-bold text-purple-600">Rp ${prod.price.toLocaleString('id-ID')}</span>
+                            ${priceHTML}
                             <span class="text-[9px] bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded font-medium">Detail →</span>
                         </div>
                     </div>
                 `;
             });
         }
-
         function openDetail(id) {
             const prod = products.find(p => p.id === id);
             activeProductId = id;
@@ -243,9 +270,12 @@
                 <div>
                     <h3 class="text-base font-bold text-gray-800 mt-2">${prod.name}</h3>
                     <div class="flex justify-between items-center mt-1">
-                        <span class="text-lg font-bold text-purple-600">Rp ${prod.price.toLocaleString('id-ID')}</span>
+                        <div class="flex items-baseline space-x-1.5">
+                            <span class="text-lg font-bold text-purple-600">Rp ${prod.price.toLocaleString('id-ID')}</span>
+                            ${prod.originalPrice ? `<span class="text-xs text-gray-400 line-through">Rp ${prod.originalPrice.toLocaleString('id-ID')}</span>` : ''}
+                        </div>
                         <span class="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md"><i class="fa-solid fa-box-open mr-1"></i>Stok: ${prod.stock}</span>
-                    </div>
+                         </div>
                 </div>
                 <hr class="border-gray-100">
                 <p class="text-xs text-gray-500 leading-relaxed">${prod.desc}</p>
@@ -419,7 +449,21 @@
             if (waFloatingBtn) {
                 const generalAdmins = ["6281326916315", "628991183100"];
                 const randomAdmin = generalAdmins[Math.floor(Math.random() * generalAdmins.length)];
-                waFloatingBtn.href = `https://api.whatsapp.com/send?phone=${randomAdmin}&text=${encodeURIComponent("Halo Admin Cimocabi, saya mau tanya-tanya lebih detail mengenai produknya dong... ✨")}`;
+                waFloatingBtn.href = `https://api.whatsapp.com/send?phone=${randomAdmin}&text=${encodeURIComponent("Halo Admin Cimocabi, saya mau tanya-tanya lebih detail mengenai produknya dong... ✨")}`;                
+            // 3. Logika Jam Digital Berjalan Aktual Sesuai Device Pengunjung
+            function jalankanJamAktual() {
+                const elemenJam = document.getElementById('clock-time');
+                if (elemenJam) {
+                    const waktuSekarang = new Date();
+                    const jam = String(waktuSekarang.getHours()).padStart(2, '0');
+                    const menit = String(waktuSekarang.getMinutes()).padStart(2, '0');
+                    const detik = String(waktuSekarang.getSeconds()).padStart(2, '0');
+                    elemenJam.innerText = `${jam}:${menit}:${detik}`;
+                }
+            }
+            setInterval(jalankanJamAktual, 1000);
+            jalankanJamAktual(); // Jalankan langsung tanpa nunggu 1 detik
+            
             }
 
             let toggleTitle = true;
