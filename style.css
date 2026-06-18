@@ -69,3 +69,31 @@
 .lucu-bounce span:nth-child(6) { animation-delay: 0.6s; }
 .lucu-bounce span:nth-child(7) { animation-delay: 0.7s; }
 .lucu-bounce span:nth-child(8) { animation-delay: 0.8s; }
+
+/* ANIMASI BERKEDIP (BLINK) UNTUK BADGE DISKON MERAH */
+@keyframes kedip-diskon {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.95); }
+}
+
+.animate-kedip {
+    animation: kedip-diskon 1.2s ease-in-out infinite;
+}
+/* ==========================================
+   ANIMASI RUNNING TEXT (MARQUEE EFFECT) 
+   ========================================== */
+@keyframes jalan-marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.running-text-box {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.running-text-gerak {
+    display: inline-block;
+    animation: jalan-marquee 20s linear infinite;
+}
