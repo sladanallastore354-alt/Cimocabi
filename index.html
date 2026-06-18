@@ -13,38 +13,50 @@
 <body class="bg-purple-50/30 text-gray-800">
 
     <header class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-40 px-4 py-3 flex justify-between items-center border-b border-purple-100">
-        <div class="flex items-center space-x-2"><img src="images/logo.jpg" alt="Logo Cimocabi" class="w-9 h-9 rounded-full object-cover border border-purple-100 shadow-sm flex-shrink-0">
+        
+        <div class="flex items-center space-x-2">
+            <img src="images/logo.jpg" alt="Logo Cimocabi" class="w-9 h-9 rounded-full object-cover border border-purple-100 shadow-sm flex-shrink-0">
             <span class="text-2xl font-bold text-purple-600 tracking-wide lucu-bounce">
                 <span>C</span><span>I</span><span>M</span><span>O</span><span>C</span><span>A</span><span>B</span><span>I</span>
             </span>
         </div>
-        <button onclick="toggleCart()" class="relative p-2 text-gray-700 hover:text-purple-600 transition">
-            <i class="fa-solid fa-basket-shopping text-2xl"></i>
-            <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
-        </button>
+        
+        <div class="flex items-center space-x-3">
+            
+            <div class="bg-transparent text-[11px] font-mono text-gray-500 flex items-center space-x-1 flex-shrink-0">
+                <i class="fa-regular fa-clock text-purple-500 animate-pulse"></i>
+                <span id="clock-time">00:00:00</span>
+            </div>
+            
+            <button onclick="toggleCart()" class="relative p-2 text-gray-700 hover:text-purple-600 transition">
+                <i class="fa-solid fa-basket-shopping text-2xl"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">00</span>
+            </button>
+            
+        </div>
     </header>
 
     <section class="p-4">
-        <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-6 text-white shadow-md relative overflow-hidden">
-            <div class="relative z-10 max-w-full">
+        <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl pt-5 px-5 pb-0 text-white shadow-md relative overflow-hidden">
+            <div class="relative z-10 max-w-full pb-4">
                 
                 <div class="flex flex-wrap items-center gap-2 mb-2">
                     <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Bisa Jadi Ide Hampers! ♡</span>
-                    
-                    <div class="bg-black/20 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-[10px] font-mono flex items-center space-x-1.5 border border-white/10 shadow-sm">
-                        <i class="fa-regular fa-clock text-amber-300 animate-pulse"></i>
-                        <span id="clock-time">00:00:00</span>
-                    </div>
                 </div>
 
-                <h1 class="text-xl font-bold mt-2 leading-tight">OPEN PRE-ORDER BUNDLING!</h1>
-                <p class="text-xs text-purple-100 mt-1">Enak, Gurih, Praktis, cocok untuk bekal keluarga & acara arisan.</p>
-                
-                <div class="running-text-box bg-black/20 backdrop-blur-sm rounded-xl p-2 mt-3 border border-white/5 shadow-inner">
-                    <div class="running-text-gerak text-[9px] md:text-xs font-medium text-amber-300 tracking-wide">
-                        Melancarkan dagangan kami sama dengan melancarkan ekonomi Indonesia! Ayo dukung UMKM! &nbsp;&nbsp;&nbsp;&nbsp; 🇮🇩✨
-                    </div>
+                <h1 class="text-xl font-bold mt-2 leading-tight">OPEN PRE-ORDER NOW!</h1>
+                <p class="text-xs text-purple-100 mt-1">Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
+            </div>
+
+            <div class="running-text-box bg-black/25 backdrop-blur-xs -mx-5 p-2 border-t border-white/10 relative z-20">
+                <div class="running-text-gerak text-[10px] font-medium text-amber-300 tracking-wide">
+                    Melancarkan dagangan kami sama dengan melancarkan ekonomi Indonesia! Ayo lariskan dagangan kami dan dukung UMKM! &nbsp;&nbsp;&nbsp;&nbsp; 🇮🇩✨
                 </div>
+            </div>
+
+            <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
+        </div>
+    </section>
 
             </div>
             <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
@@ -443,14 +455,15 @@
             }
             filterProducts();
         }
-
         window.onload = function() {
             const waFloatingBtn = document.getElementById('wa-floating-btn');
             if (waFloatingBtn) {
                 const generalAdmins = ["6281326916315", "628991183100"];
                 const randomAdmin = generalAdmins[Math.floor(Math.random() * generalAdmins.length)];
                 waFloatingBtn.href = `https://api.whatsapp.com/send?phone=${randomAdmin}&text=${encodeURIComponent("Halo Admin Cimocabi, saya mau tanya-tanya lebih detail mengenai produknya dong... ✨")}`;                
-            // 3. Logika Jam Digital Berjalan Aktual Sesuai Device Pengunjung
+            } // <-- BENAR: Kurung kurawal langsung ditutup di sini agar tombol WA selesai mandiri.
+
+            // 3. Logika Jam Digital Berjalan Aktual (Sekarang Bebas & Anti-Mogok)
             function jalankanJamAktual() {
                 const elemenJam = document.getElementById('clock-time');
                 if (elemenJam) {
@@ -463,8 +476,6 @@
             }
             setInterval(jalankanJamAktual, 1000);
             jalankanJamAktual(); // Jalankan langsung tanpa nunggu 1 detik
-            
-            }
 
             let toggleTitle = true;
             setInterval(() => {
