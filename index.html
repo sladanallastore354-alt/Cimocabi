@@ -175,8 +175,8 @@
                 grid.innerHTML += `
                     <div onclick="openDetail(${prod.id})" class="bg-white rounded-2xl border border-purple-50/80 p-2.5 shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform">
                         <div>
-                            <div class="w-full h-28 bg-gray-100 rounded-xl overflow-hidden mb-2 relative">
-                                <img src="${coverImg}" alt="${prod.name}" class="w-full h-full object-cover">
+                            <div class="w-full h-36 bg-gray-50 rounded-xl overflow-hidden mb-2 relative flex items-center justify-center p-1">
+                                <img src="${coverImg}" alt="${prod.name}" class="max-w-full max-h-full object-contain">
                                 <span class="absolute top-1 left-1 bg-purple-100 text-purple-700 text-[8px] font-bold px-1.5 py-0.5 rounded-md">${prod.category}</span>
                             </div>
                             <h3 class="text-xs font-bold text-gray-800 line-clamp-1">${prod.name}</h3>
@@ -202,9 +202,9 @@
                 thumbnailsHTML = `<div class="flex space-x-2 mt-1 overflow-x-auto pb-1">`;
                 prod.img.forEach(image => {
                     thumbnailsHTML += `
-                        <div onclick="changeDetailImage('${image}')" class="w-14 h-14 bg-gray-100 rounded-lg overflow-hidden border border-purple-200 cursor-pointer active:scale-95 transition-transform flex-shrink-0">
-                            <img src="${image}" class="w-full h-full object-cover">
-                        </div>`;
+                        <div onclick="changeDetailImage('${image}')" class="w-14 h-14 bg-gray-50 rounded-lg overflow-hidden border border-purple-200 cursor-pointer active:scale-95 transition-transform flex-shrink-0 flex items-center justify-center p-0.5">
+    <img src="${image}" class="max-w-full max-h-full object-contain">
+                         </div>`;
                 });
                 thumbnailsHTML += `</div>`;
             }
@@ -236,8 +236,8 @@
                     <span class="bg-purple-100 text-purple-700 text-[9px] font-bold px-2 py-0.5 rounded-md">${prod.category}</span>
                     <button onclick="closeDetail()" class="text-gray-400 text-lg"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-                <div class="w-full h-44 bg-gray-100 rounded-2xl overflow-hidden shadow-sm">
-                    <img id="main-detail-img" src="${firstImg}" class="w-full h-full object-cover">
+              <div class="w-full h-60 bg-gray-50 rounded-2xl overflow-hidden shadow-sm flex items-center justify-center p-2">
+    <img id="main-detail-img" src="${firstImg}" class="max-w-full max-h-full object-contain">
                 </div>
                 ${thumbnailsHTML}
                 <div>
