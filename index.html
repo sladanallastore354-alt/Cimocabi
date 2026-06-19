@@ -3,466 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cimocabi - Frozen Food & Cemilan Praktis</title>
-    <link class="style-link" rel="stylesheet" href="style.css?v4">
+    <title>Cimocabi - Frozen Food & Cemilan Praktis ❄️</title>
+    <link class="style-link" rel="stylesheet" href="style.css?v=8">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>body { font-family: 'Poppins', sans-serif; }</style>
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+
+        /* 1. DEKLARASI FONT EKSTERNAL DIGITAL LIQUID CRYSTAL */
+        @font-face {
+            font-family: 'Liquid Crystal';
+            src: url('Liquid-Crystal.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* 2. ANIMASI SHAKE INTELLIGENT UNTUK BUTTON GAMBAR */
+        @keyframes getar-tombol {
+            0%, 100%, 40% { transform: scale(1) translateX(0) rotate(0deg); }
+            5% { transform: scale(1.02) translateX(-2px) rotate(-0.5deg); }
+            10% { transform: scale(1.02) translateX(2px) rotate(0.5deg); }
+            15% { transform: scale(1.02) translateX(-2px) rotate(-0.5deg); }
+            20% { transform: scale(1.02) translateX(2px) rotate(0.5deg); }
+            25%, 35% { transform: scale(1.01) translateX(0) rotate(0deg); }
+        }
+
+        .animate-shake {
+            animation: getar-tombol 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+    </style>
 </head>
-<body class="bg-purple-50/30 text-gray-800">
+<body class="bg-purple-50/30 text-gray-800 pb-16 overflow-x-hidden">
 
     <header class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-40 px-4 py-3 flex justify-between items-center border-b border-purple-100">
         
         <div class="flex items-center space-x-2">
             <img src="images/logo.jpg" alt="Logo Cimocabi" class="w-9 h-9 rounded-full object-cover border border-purple-100 shadow-sm flex-shrink-0">
-            <span class="text-2xl font-bold text-purple-600 tracking-wide lucu-bounce">
+            <span class="text-xl md:text-2xl font-bold text-purple-600 tracking-wide lucu-bounce flex-shrink-0">
                 <span>C</span><span>I</span><span>M</span><span>O</span><span>C</span><span>A</span><span>B</span><span>I</span>
             </span>
         </div>
         
-        <div class="flex items-center space-x-3">
+        <div class="flex flex-col items-center space-y-1.5 flex-shrink-0">
             
-            <div class="bg-transparent text-[11px] font-mono text-gray-500 flex items-center space-x-1 flex-shrink-0">
-                <i class="fa-regular fa-clock text-purple-500 animate-pulse"></i>
-                <span id="clock-time">00:00:00</span>
-            </div>
-            <button onclick="lanjutKeCheckout()" class="relative p-0 overflow-hidden rounded-xl active:scale-[0.98] transition animate-shake w-28 md:w-36 flex items-center justify-center cursor-pointer border-0 bg-transparent flex-shrink-0">
-                <img src="images/lanjut-bayar.jpg" alt="pesan & bayar disini" class="w-full h-auto object-cover">
-                <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">00</span>
+            <button onclick="lanjutKeCheckout()" class="relative block w-28 h-10 overflow-hidden rounded-xl active:scale-[0.98] transition p-0 border-0 bg-transparent cursor-pointer shadow-xs flex-shrink-0 animate-shake">
+                <img src="images/lanjut-bayar.jpg" alt="pesan & bayar disini" class="w-full h-full object-cover scale-[1.28]">
+                <span id="cart-count" class="absolute top-0.5 right-0.5 bg-amber-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">00</span>
             </button>
+            
+            <div class="text-purple-600 font-bold tracking-wider select-none text-center leading-none" style="font-family: 'Liquid Crystal', monospace; font-size: 13.5px;">
+                <span id="clock-time">00:00</span>
+            </div>
+            
         </div>
     </header>
-    
+
     <section class="p-4 pb-2">
         <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
-            <div class="relative z-10 max-w-full">
-                <div class="flex flex-wrap items-center gap-2 mb-2">
+            <div class="relative z-10 max-w-full pb-4">
+                <div class="mb-2">
                     <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Bisa Jadi Ide Hampers! ♡</span>
                 </div>
-                <h1 class="text-xl font-bold mt-2 leading-tight">OPEN PRE-ORDER NOW!</h1>
+                <h1 class="text-xl font-bold mt-2 leading-tight uppercase tracking-tight">OPEN PRE-ORDER NOW!</h1>
                 <p class="text-xs text-purple-100 mt-1">Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
             </div>
             <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
         </div>
     </section>
 
-    <div class="running-text-box bg-transparent py-2 border-b border-purple-100/60 relative z-20">
-        <div class="running-text-gerak text-[10px] md:text-xs font-semibold text-purple-700 tracking-wide">
+    <div class="running-text-box bg-transparent py-2 border-b border-purple-100/60 relative z-20 overflow-hidden">
+        <div class="running-text-gerak text-[10px] md:text-xs font-semibold text-purple-700 tracking-wide whitespace-nowrap">
             Melancarkan dagangan kami sama dengan melancarkan ekonomi Indonesia! Ayo lariskan dagangan kami dan dukung UMKM! &nbsp;&nbsp;&nbsp;&nbsp; 🇮🇩✨ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </div>
 
-            <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
-        </div>
-    </section>
+    <main class="p-4 grid grid-cols-2 md:grid-cols-4 gap-4" id="product-grid">
+        </main>
 
-            </div>
-            <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
-        </div>
-    </section>
+    <a href="#" id="wa-floating-btn" target="_blank" class="fixed bottom-6 right-6 bg-emerald-500 text-white p-4 rounded-full shadow-lg text-2xl z-40 transition-transform hover:scale-110 active:scale-95">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-    <section class="px-4 my-2 space-y-3">
-        <div class="relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-gray-400"></i>
-            <input type="text" id="search-bar" oninput="filterProducts()" placeholder="Cari cireng, cimol, atau paket hemat..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition shadow-sm">
-        </div>
-        <div class="flex space-x-2 overflow-x-auto pb-1" id="category-container">
-            <button onclick="setCategory('all', this)" class="category-btn bg-purple-600 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm whitespace-nowrap">Semua Menu</button>
-            <button onclick="setCategory('Bundling', this)" class="category-btn bg-white text-gray-600 border border-gray-200 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap">Pilihan Bundling</button>
-            <button onclick="setCategory('Frozen', this)" class="category-btn bg-white text-gray-600 border border-gray-200 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap">Satuan / Frozen</button>
-             <button onclick="setCategory('COMING SOON', this)" class="category-btn bg-white text-gray-600 border border-gray-200 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap">COMING SOON</button>
-        </div>
-    </section>
-
-    <main class="px-4 py-2">
-        <h2 class="text-sm font-bold text-gray-700 mb-3">Yuk, Stock Sekarang! Klik produk untuk detail ♡</h2>
-        <div id="product-grid" class="grid grid-cols-2 gap-3"></div>
-    </main>
-
-    <div id="detail-modal" class="fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 hidden opacity-0 flex items-end justify-center">
-        <div class="w-full max-w-md bg-white rounded-t-3xl p-5 space-y-4 max-h-[85vh] overflow-y-auto transform translate-y-full transition-transform duration-300" id="detail-container"></div>
-    </div>
-
-    <div id="cart-drawer" class="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 hidden opacity-0">
-        <div class="absolute right-0 bottom-0 top-0 w-full max-w-md bg-white rounded-t-2xl md:rounded-l-2xl md:rounded-t-none flex flex-col shadow-2xl">
-            <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-purple-50/50">
-                <h3 class="font-bold text-gray-700"><i class="fa-solid fa-basket-shopping text-purple-600 mr-2"></i>Keranjang Belanja</h3>
-                <button onclick="toggleCart()" class="text-gray-400 hover:text-gray-600 text-xl"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
-            <div class="p-4 border-t border-gray-100 bg-gray-50 space-y-3">
-                <div class="flex justify-between font-bold text-sm text-gray-700">
-                    <span>Total Pembayaran:</span>
-                    <span id="cart-total" class="text-purple-600">Rp 0</span>
-                </div>
-                <hr class="border-gray-200">
-                <div class="space-y-2">
-                    <input type="text" id="buyer-name" placeholder="Nama Lengkap Pembeli" class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-xs focus:outline-none focus:border-purple-500">
-                    <input type="text" id="buyer-phone" placeholder="Nomor HP / WhatsApp" class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-xs focus:outline-none focus:border-purple-500">
-                    <textarea id="buyer-address" placeholder="Alamat Lengkap Pengiriman (sertakan kecamatan)" rows="2" class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-xs focus:outline-none focus:border-purple-500"></textarea>
-                    <select id="payment-method" class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-xs focus:outline-none focus:border-purple-500">
-                        <option value="Transfer Bank (BCA/Mandiri)">Transfer Bank</option>
-                        <option value="E-Wallet (Dana/Ovo/Gopay/ShopeePay)">E-Wallet</option>
-                        <option value="COD (Area Depok Tertentu)">COD (Khusus Area Depok)</option>
-                    </select>
-                </div>
-                <button onclick="checkoutToWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl text-xs shadow transition flex items-center justify-center space-x-2">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>Kirim Pesanan Ke WhatsApp Admin</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-white border-t border-purple-100 py-6 mt-8 text-center px-4 mb-24">
-        
+    <footer class="bg-white border-t border-purple-100 py-6 mt-8 text-center px-4 mb-8">
         <div class="mb-6">
             <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-3">Hubungi & Kunjungi Kami Di</p>
             <div class="flex justify-center items-center space-x-2 overflow-x-auto pb-1">
-                
                 <a href="https://shopee.co.id/mugo_jaya" target="_blank" class="flex items-center space-x-1.5 bg-orange-50 hover:bg-orange-100 border border-orange-200 px-3 py-1.5 rounded-xl transition shadow-sm flex-shrink-0 active:scale-95">
                     <i class="fa-solid fa-bag-shopping text-orange-500 text-sm"></i>
                     <span class="text-xs font-semibold text-gray-700">Shopee</span>
                 </a>
-                
                 <a href="https://www.instagram.com/cimocabi?igsh=MTRhYzMwdGcxM2NjbQ==" target="_blank" class="flex items-center space-x-1.5 bg-pink-50 hover:bg-pink-100 border border-pink-200 px-3 py-1.5 rounded-xl transition shadow-sm flex-shrink-0 active:scale-95">
                     <i class="fa-brands fa-instagram text-pink-500 text-sm"></i>
                     <span class="text-xs font-semibold text-gray-700">Instagram</span>
                 </a>
-                
                 <a href="https://www.facebook.com/share/18xwt1YSVq/" target="_blank" class="flex items-center space-x-1.5 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-3 py-1.5 rounded-xl transition shadow-sm flex-shrink-0 active:scale-95">
                     <i class="fa-brands fa-facebook text-blue-600 text-sm"></i>
                     <span class="text-xs font-semibold text-gray-700">Facebook</span>
                 </a>
-                
             </div>
         </div>
-
-        <hr class="border-purple-50/50 mb-4 max-w-[80%] mx-auto">
-        <p class="text-xs text-gray-500">&copy; 2026 <span class="font-bold text-purple-600">Cimocabi</span>. All Rights Reserved.</p>
-        <button onclick="toggleTerms()" class="text-[11px] text-purple-500 hover:underline mt-2 block mx-auto font-medium cursor-pointer">
-            <i class="fa-solid fa-gavel mr-1"></i>Ketentuan Penggunaan & Pengiriman
-        </button>
+        <p class="text-[11px] text-gray-400 font-medium">© 2026 Cimocabi Official Store. All Rights Reserved.</p>
+        <button onclick="toggleTerms()" class="text-[10px] text-purple-400 hover:text-purple-600 mt-1 underline cursor-pointer">Syarat & Ketentuan Layanan</button>
     </footer>
 
-    <div id="terms-modal" class="fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 hidden opacity-0 flex items-center justify-center p-4">
-        <div class="w-full max-w-sm bg-white rounded-2xl p-5 space-y-4 max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b border-gray-100 pb-2">
-                <h3 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-shield-halved text-purple-600 mr-2"></i>Ketentuan Cimocabi</h3>
-                <button onclick="toggleTerms()" class="text-gray-400 text-lg cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="text-[11px] text-gray-600 space-y-3 leading-relaxed text-left">
-                <div>
-                    <p class="font-bold text-purple-600">1. Sistem Pemesanan (Pre-Order)</p>
-                    <p class="text-gray-500">Semua produk makanan Cimocabi diproduksi secara fresh. Kami menggunakan sistem Pre-Order (PO). Jadwal pengiriman akan diinfokan kembali oleh Admin via WhatsApp.</p>
-                </div>
-                <div>
-                    <p class="font-bold text-purple-600">2. Area & Kurir Pengiriman</p>
-                    <p class="text-gray-500">Demi menjaga kualitas produk frozen food agar tidak rusak, pengiriman sangat disarankan menggunakan paxel, lion parcel untuk selain wilayah Depok sekitarnya, adapun kurir instan/sameday/diantar (Gojek/Grab) untuk wilayah Depok & sekitarnya.</p>
-                </div>
-                <div>
-                    <p class="font-bold text-purple-600">3. Validasi Pembayaran</p>
-                    <p class="text-gray-500">Pesanan hanya akan diproses dan masuk antrean masak setelah pembeli mengirimkan bukti transfer berupa foto/tangkapan layar yang sah kepada Admin.</p>
-                </div>
-            </div>
-            <button onclick="toggleTerms()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl text-xs shadow transition cursor-pointer">Saya Mengerti & Setuju</button>
-        </div>
-    </div>
-
-    <a href="#" id="wa-floating-btn" target="_blank" class="wa-floating">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-    
     <script>
+        const ADMIN_WHATSAPP = "6281326916315";
+
         const products = [
-            { id: 1, name: "PAKET HEMAT (Cireng + Cimol)", price: 25000, originalPrice: 31000,category: "Bundling", stock: 100, variantType: "food", desc: "Perpaduan pas untuk ngemil santai! Terdiri dari 1 Pack Cireng Frozen isi ayam/keju (4pcs) dan 1 Pack Cimol Frozen isi keju melimpah (25 butir). Lengkap dengan bumbu tabur gurih.", img: "images/paket-komplit.jpg" },
-            { id: 2, name: "PAKET KOMPLIT (Cireng + Cimol)", price: 33000, originalPrice: 40000,category: "Bundling", stock: 100, variantType: "food", desc: "Porsi lebih puas untuk keluarga! Dapat 2 Pack Cireng Frozen (total 8 pcs, bebas pilih varian rasa isi ayam/keju) dan 1 Pack Cimol Frozen isi keju (25 butir).", img: "images/paket-bundling.jpg" },
-            { id: 3, name: "PAKET FAMILY (Cireng + Cimol)", price: 46000, originalPrice: 53000 ,category: "Bundling", stock: 100, variantType: "food", desc: "Paket super untung untuk acara arisan atau kumpul besar! Berisi 2 Pack Cireng Frozen (8pcs) ditambah 2 Pack Cimol Frozen isi keju (total 50 butir). Sangat cocok dijadikan ide hampers cantik.", img: "images/paket-keluarga.jpg" },
-            { id: 4, name: "Cireng Isi Ayam / Keju", price: 10000, originalPrice: 13000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs per bungkus. Cireng premium bertekstur renyah garing di luar namun sangat lembut di dalam. Dilengkapi isian daging ayam suwir pedas atau keju gurih melimpah.", img: ["images/cireng-isi-ayam-pedas.jpg", "images/cireng-isi-keju.jpg"] },
-            { id: 5, name: "Cireng Kuah Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs. Sensasi baru makan cireng isi hangat yang disiram racikan bumbu kuah keju spesial yang kental, creamy, dan gurih pedas manis berpadu sempurna.", img: "images/cireng-kuah-keju.jpg" },
-            { id: 6, name: "Cimol Isi Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 25 Butir. Cimol kopong anti-meledak saat digoreng. Isian potongan keju di dalamnya meleleh pas dikunyah, makin nikmat dicampur dengan aneka pilihan bumbu tabur.", img: "images/cimol-isi-keju.jpg" },
-            { id: 8, name: "Add On: Cooler Bag", price: 5000, category: "Frozen", stock: 100, variantType: "none", desc: "Tas aluminium foil pelindung suhu dingin khusus berukuran 26x17x28cm. Menjaga kualitas frozen food Cimocabi tetap beku dan fresh selama proses pengiriman ke rumah Anda.", img: "images/cooler-bag.jpg" },
-            { id: 7, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }
+            { id: 1, name: "PAKET HEMAT (Cireng + Cimol)", price: 25000, category: "Bundling", desc: "1 Pack Cireng Frozen (4pcs) & 1 Pack Cimol Frozen isi keju (25 butir).", img: "images/paket-komplit.jpg" },
+            { id: 2, name: "PAKET KOMPLIT (Cireng + Cimol)", price: 33000, category: "Bundling", desc: "2 Pack Cireng Frozen (total 8 pcs) & 1 Pack Cimol Frozen isi keju (25 butir).", img: "images/paket-bundling.jpg" },
+            { id: 3, name: "PAKET FAMILY (Cireng + Cimol)", price: 46000, category: "Bundling", desc: "2 Pack Cireng Frozen (8pcs) & 2 Pack Cimol Frozen (total 50 butir).", img: "images/paket-keluarga.jpg" },
+            { id: 4, name: "Cireng Isi Ayam / Keju", price: 10000, category: "Frozen", desc: "Isi 4 Pcs per bungkus. Renyah garing di luar, lembut di dalam.", img: "images/cireng-isi-ayam-pedas.jpg" },
+            { id: 5, name: "Cireng Kuah Keju", price: 15000, category: "Frozen", desc: "Isi 4 Pcs. Cireng hangat disiram kuah keju creamy.", img: "images/cireng-kuah-keju.jpg" },
+            { id: 6, name: "Cimol Isi Keju", price: 15000, category: "Frozen", desc: "Isi 25 Butir. Kopong anti-meledak, keju meleleh di dalam.", img: "images/cimol-isi-keju.jpg" },
+            { id: 7, name: "Add On: Cooler Bag", price: 5000, category: "Frozen", desc: "Tas aluminium foil pelindung suhu dingin ukuran 26x17x28cm.", img: "images/cooler-bag.jpg" },
+            { id: 8, name: "Coming Soon", price: 0, category: "COMING SOON", desc: "Produk akan tersedia nanti....", img: "images/coming-soon.jpg" }
         ];
 
-        let cart = [];
-        let currentCategory = 'all';
-        let activeProductId = null;
-       function renderProducts(items) {
+        // Membaca atau membuat data keranjang belanja
+        let cart = JSON.parse(localStorage.getItem('cimocabi_cart_data')) || [];
+
+        function renderProducts() {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
-            if(items.length === 0) {
-                grid.innerHTML = '<p class="text-xs text-gray-400 col-span-2 text-center py-8">Produk tidak ditemukan...</p>';
-                return;
-            }
-            items.forEach(prod => {
-                const coverImg = Array.isArray(prod.img) ? prod.img[0] : prod.img;
-                
-                // Logika memunculkan badge DISKON merah berkedip hanya jika ada originalPrice
-                const promoBadge = prod.originalPrice ? `<span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-md animate-kedip shadow-md z-10">DISKON</span>` : '';
-                
-                // Logika memisahkan tampilan harga normal dan harga coret diskon
-                const priceHTML = prod.originalPrice 
-                    ? `<div class="flex flex-col">
-                           <span class="text-[9px] text-gray-400 line-through leading-none mb-0.5">Rp ${prod.originalPrice.toLocaleString('id-ID')}</span>
-                           <span class="text-xs font-bold text-purple-600 leading-none">Rp ${prod.price.toLocaleString('id-ID')}</span>
-                       </div>`
-                    : `<span class="text-xs font-bold text-purple-600">Rp ${prod.price.toLocaleString('id-ID')}</span>`;
-
+            products.forEach(p => {
                 grid.innerHTML += `
-                    <div onclick="openDetail(${prod.id})" class="bg-white rounded-2xl border border-purple-50/80 p-2.5 shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform">
+                    <div class="bg-white rounded-xl border border-purple-50 shadow-sm p-3 flex flex-col justify-between hover:shadow-md transition">
                         <div>
-                            <div class="w-full h-36 bg-gray-50 rounded-xl overflow-hidden mb-2 relative flex items-center justify-center p-1">
-                                <img src="${coverImg}" alt="${prod.name}" class="max-w-full max-h-full object-contain">
-                                <span class="absolute top-1 left-1 bg-purple-100 text-purple-700 text-[8px] font-bold px-1.5 py-0.5 rounded-md">${prod.category}</span>
-                                ${promoBadge}
-                            </div>
-                            <h3 class="text-xs font-bold text-gray-800 line-clamp-1">${prod.name}</h3>
-                            <p class="text-[10px] text-gray-400 line-clamp-2 mt-0.5">${prod.desc}</p>
+                            <img src="${p.img}" alt="${p.name}" class="w-full h-24 object-contain rounded-lg mb-2">
+                            <span class="text-[9px] font-bold text-purple-600 bg-purple-100 px-2 py-0.5 rounded uppercase">${p.category}</span>
+                            <h3 class="text-xs font-bold text-gray-800 mt-1 line-clamp-1">${p.name}</h3>
+                            <p class="text-[10px] text-gray-400 line-clamp-2 mt-0.5">${p.desc}</p>
                         </div>
                         <div class="mt-2 flex items-center justify-between">
-                            ${priceHTML}
-                            <span class="text-[9px] bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded font-medium">Detail →</span>
+                            <span class="text-xs font-bold text-purple-600">Rp ${p.price.toLocaleString('id-ID')}</span>
+                            ${p.price > 0 ? 
+                                `<button onclick="addToCart(${p.id})" class="text-[10px] bg-purple-500 text-white px-2 py-0.5 rounded font-medium cursor-pointer"><i class="fa-solid fa-cart-plus"></i></button>` :
+                                `<span class="text-[9px] text-gray-300">Habis</span>`
+                            }
                         </div>
                     </div>
                 `;
             });
         }
-        function openDetail(id) {
-            const prod = products.find(p => p.id === id);
-            activeProductId = id;
-            const container = document.getElementById('detail-container');
-            const firstImg = Array.isArray(prod.img) ? prod.img[0] : prod.img;
 
-            let thumbnailsHTML = '';
-            if (Array.isArray(prod.img)) {
-                thumbnailsHTML = `<div class="flex space-x-2 mt-1 overflow-x-auto pb-1">`;
-                prod.img.forEach(image => {
-                    thumbnailsHTML += `
-                        <div onclick="changeDetailImage('${image}')" class="w-14 h-14 bg-gray-50 rounded-lg overflow-hidden border border-purple-200 cursor-pointer active:scale-95 transition-transform flex-shrink-0 flex items-center justify-center p-0.5">
-    <img src="${image}" class="max-w-full max-h-full object-contain">
-                         </div>`;
-                });
-                thumbnailsHTML += `</div>`;
-            }
-
-            let variantHTML = '';
-            if (prod.variantType === "food") {
-                variantHTML = `
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-gray-600 block">Pilih Varian Penyajian:</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <label class="border border-purple-200 rounded-xl p-2.5 flex items-center justify-between cursor-pointer hover:bg-purple-50">
-                                <span class="text-xs font-medium text-gray-700">❄️ Tetap Frozen</span>
-                                <input type="radio" name="prod-variant" value="Tetap Frozen" checked class="accent-purple-600">
-                            </label>
-                            <label class="border border-purple-200 rounded-xl p-2.5 flex items-center justify-between cursor-pointer hover:bg-purple-50">
-                                <span class="text-xs font-medium text-gray-700">🔥 Sudah Digoreng</span>
-                                <input type="radio" name="prod-variant" value="Sudah Digoreng" class="accent-purple-600">
-                            </label>
-                        </div>
-                    </div>
-                `;
-            } else {
-                variantHTML = `<input type="hidden" name="prod-variant" value="Standar">`;
-            }
-
-            container.innerHTML = `
-                <div class="w-12 h-1 bg-gray-200 rounded-full mx-auto mb-1" onclick="closeDetail()"></div>
-                <div class="flex justify-between items-start">
-                    <span class="bg-purple-100 text-purple-700 text-[9px] font-bold px-2 py-0.5 rounded-md">${prod.category}</span>
-                    <button onclick="closeDetail()" class="text-gray-400 text-lg"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-              <div class="w-full h-60 bg-gray-50 rounded-2xl overflow-hidden shadow-sm flex items-center justify-center p-2">
-    <img id="main-detail-img" src="${firstImg}" class="max-w-full max-h-full object-contain">
-                </div>
-                ${thumbnailsHTML}
-                <div>
-                    <h3 class="text-base font-bold text-gray-800 mt-2">${prod.name}</h3>
-                    <div class="flex justify-between items-center mt-1">
-                        <div class="flex items-baseline space-x-1.5">
-                            <span class="text-lg font-bold text-purple-600">Rp ${prod.price.toLocaleString('id-ID')}</span>
-                            ${prod.originalPrice ? `<span class="text-xs text-gray-400 line-through">Rp ${prod.originalPrice.toLocaleString('id-ID')}</span>` : ''}
-                        </div>
-                        <span class="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md"><i class="fa-solid fa-box-open mr-1"></i>Stok: ${prod.stock}</span>
-                         </div>
-                </div>
-                <hr class="border-gray-100">
-                <p class="text-xs text-gray-500 leading-relaxed">${prod.desc}</p>
-                ${variantHTML}
-                <div class="flex items-center justify-between pt-2">
-                    <div class="flex items-center space-x-3 bg-gray-100 px-3 py-1.5 rounded-xl">
-                        <button onclick="adjustDetailQty(-1)" class="font-bold text-gray-600 text-sm">-</button>
-                        <span id="detail-qty" class="font-bold text-gray-800 text-sm w-4 text-center">1</span>
-                        <button onclick="adjustDetailQty(1)" class="font-bold text-gray-600 text-sm">+</button>
-                    </div>
-                    <button onclick="addFromModalToCart()" class="flex-1 ml-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl text-xs shadow transition flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-cart-plus"></i><span>Masukkan Keranjang</span>
-                    </button>
-                </div>
-            `;
-
-            const modal = document.getElementById('detail-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.replace('opacity-0', 'opacity-100');
-                container.classList.replace('translate-y-full', 'translate-y-0');
-            }, 10);
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCartState();
+            alert(`${product.name} berhasil ditambahkan ke keranjang!`);
         }
 
-        /* ADDED: Fungsi interaktif untuk mengubah tampilan foto utama detail saat thumbnail diklik */
-        function changeDetailImage(src) {
-            const mainImg = document.getElementById('main-detail-img');
-            if (mainImg) mainImg.src = src;
-        }
-
-        function closeDetail() {
-            const modal = document.getElementById('detail-modal');
-            const container = document.getElementById('detail-container');
-            container.classList.replace('translate-y-0', 'translate-y-full');
-            modal.classList.replace('opacity-100', 'opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-            activeProductId = null;
-        }
-
-        function adjustDetailQty(delta) {
-            const qtyEl = document.getElementById('detail-qty');
-            let currentQty = parseInt(qtyEl.innerText) + delta;
-            if(currentQty < 1) currentQty = 1;
-            qtyEl.innerText = currentQty;
-        }
-
-        function addFromModalToCart() {
-            const prod = products.find(p => p.id === activeProductId);
-            const qty = parseInt(document.getElementById('detail-qty').innerText);
-            const variantRadio = document.querySelector('input[name="prod-variant"]:checked');
-            const variant = variantRadio ? variantRadio.value : "Standar";
-
-            const cartItemKey = `${prod.id}-${variant}`;
-            const exist = cart.find(item => item.cartKey === cartItemKey);
-
-            if(exist) { exist.qty += qty; } else {
-                cart.push({ cartKey: cartItemKey, id: prod.id, name: prod.name, price: prod.price, variant: variant, qty: qty });
-            }
-            updateCart();
-            closeDetail();
-        }
-
-        function updateCart() {
-            const countEl = document.getElementById('cart-count');
-            const itemsEl = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total');
+        function updateCartState() {
+            localStorage.setItem('cimocabi_cart_data', JSON.stringify(cart));
+            const countBadge = document.getElementById('cart-count');
             
-            let totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
-            let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-
-            countEl.innerText = totalItems;
-            countEl.classList.toggle('hidden', totalItems === 0);
-            totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
-
-            itemsEl.innerHTML = cart.length === 0 ? '<p class="text-xs text-gray-400 text-center py-6">Keranjang masih kosong</p>' : '';
-            cart.forEach(item => {
-                const variantLabel = item.variant !== "Standar" ? ` <span class="text-[10px] bg-purple-100 text-purple-700 px-1 py-0.2 rounded font-semibold">[ ${item.variant} ]</span>` : '';
-                itemsEl.innerHTML += `
-                    <div class="flex items-center justify-between border-b border-purple-50 pb-2">
-                        <div class="max-w-[65%]">
-                            <h4 class="text-xs font-bold text-gray-700 truncate">${item.name}</h4>
-                            <p class="text-[10px] text-purple-500 mt-0.5">Rp ${item.price.toLocaleString('id-ID')} ${variantLabel}</p>
-                        </div>
-                        <div class="flex items-center space-x-1">
-                            <button onclick="changeCartQty('${item.cartKey}', -1)" class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-bold">-</button>
-                            <span class="text-xs font-bold px-1">${item.qty}</span>
-                            <button onclick="changeCartQty('${item.cartKey}', 1)" class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-bold">+</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function changeCartQty(cartKey, delta) {
-            const item = cart.find(i => i.cartKey === cartKey);
-            if(item) {
-                item.qty += delta;
-                if(item.qty <= 0) cart = cart.filter(i => i.cartKey !== cartKey);
-                updateCart();
-            }
-        }
-
-        function toggleCart() {
-            const drawer = document.getElementById('cart-drawer');
-            if(drawer.classList.contains('hidden')) {
-                drawer.classList.remove('hidden');
-                setTimeout(() => drawer.classList.replace('opacity-0', 'opacity-100'), 10);
+            if (cart.length > 0) {
+                countBadge.innerText = cart.length;
+                countBadge.classList.remove('hidden');
             } else {
-                drawer.classList.replace('opacity-100', 'opacity-0');
-                setTimeout(() => drawer.classList.add('hidden'), 300);
+                countBadge.classList.add('hidden');
             }
         }
 
-        function checkoutToWhatsApp() {
-            const name = document.getElementById('buyer-name').value;
-            const phone = document.getElementById('buyer-phone').value;
-            const address = document.getElementById('buyer-address').value;
-            const payment = document.getElementById('payment-method').value;
-
-            if(!name || !phone || !address) {
-                alert('Mohon isi Nama, No HP, dan Alamat Anda.');
+        function lanjutKeCheckout() {
+            if (cart.length === 0) {
+                alert("Keranjang belanja Anda masih kosong! Silakan pilih menu Cimocabi terlebih dahulu sebelum klik checkout.");
                 return;
             }
-            if(cart.length === 0) {
-                alert('Keranjang Anda masih kosong.');
-                return;
-            }
-
-            const admins = ["6281326916315", "628991183100"];
-            const chosenAdmin = admins[Math.floor(Math.random() * admins.length)];
-
-            let text = `*HALO ADMIN CIMOCABI, SAYA MAU ORDER* 🥳\n\n`;
-            text += `*Data Pembeli:*\n• Nama: ${name}\n• No HP: ${phone}\n• Alamat: ${address}\n• Pembayaran: ${payment}\n\n`;
-            text += `*Pesanan:*\n`;
-            
-            cart.forEach((item, idx) => {
-                const variantString = item.variant !== "Standar" ? ` [${item.variant}]` : '';
-                text += `${idx+1}. ${item.name}${variantString} (${item.qty}x) -> Rp ${(item.price * item.qty).toLocaleString('id-ID')}\n`;
-            });
-            
-            let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-            text += `\n*Total Belanja:* Rp ${totalPrice.toLocaleString('id-ID')}\n\n_Mohon dihitung ongkirnya ya kak!_`;
-
-            window.open(`https://api.whatsapp.com/send?phone=${chosenAdmin}&text=${encodeURIComponent(text)}`, '_blank');
+            window.location.href = 'checkout.html';
         }
 
-        function filterProducts() {
-            const searchVal = document.getElementById('search-bar').value.toLowerCase();
-            const filtered = products.filter(p => {
-                const matchCategory = currentCategory === 'all' || p.category === currentCategory;
-                return matchCategory && (p.name.toLowerCase().includes(searchVal) || p.desc.toLowerCase().includes(searchVal));
-            });
-            renderProducts(filtered);
-        }
-
-        function setCategory(cat, btnElement) {
-            currentCategory = cat;
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('bg-purple-600', 'text-white', 'shadow-sm');
-                btn.classList.add('bg-white', 'text-gray-600', 'border', 'border-gray-200');
-            });
-            if(btnElement) {
-                btnElement.classList.remove('bg-white', 'text-gray-600', 'border', 'border-gray-200');
-                btnElement.classList.add('bg-purple-600', 'text-white', 'shadow-sm');
-            }
-            filterProducts();
-        }
+        // Sinkronisasi sistem saat pertama kali halaman dibuka
         window.onload = function() {
-            const waFloatingBtn = document.getElementById('wa-floating-btn');
-            if (waFloatingBtn) {
-                const generalAdmins = ["6281326916315", "628991183100"];
-                const randomAdmin = generalAdmins[Math.floor(Math.random() * generalAdmins.length)];
-                waFloatingBtn.href = `https://api.whatsapp.com/send?phone=${randomAdmin}&text=${encodeURIComponent("Halo Admin Cimocabi, saya mau tanya-tanya lebih detail mengenai produknya dong... ✨")}`;                
-            } // <-- BENAR: Kurung kurawal langsung ditutup di sini agar tombol WA selesai mandiri.
-
-            // 3. Logika Jam Digital Berjalan Aktual (Sekarang Bebas & Anti-Mogok)
+            renderProducts();
+            updateCartState();
+            
+            document.getElementById('wa-floating-btn').href = `https://api.whatsapp.com/send?phone=${ADMIN_WHATSAPP}&text=${encodeURIComponent("Halo Admin Cimocabi, saya ingin tanya-tanya mengenai menu frozen foodnya.")}`;
+            
+            // JALANKAN LOGIKA JAM DIGITAL AKTUAL
             function jalankanJamAktual() {
                 const elemenJam = document.getElementById('clock-time');
                 if (elemenJam) {
@@ -474,43 +196,8 @@
                 }
             }
             setInterval(jalankanJamAktual, 1000);
-            jalankanJamAktual(); // Jalankan langsung tanpa nunggu 1 detik
-
-            let toggleTitle = true;
-            setInterval(() => {
-                document.title = toggleTitle ? "Cimocabi - Frozen Food & Cemilan Praktis ❄️" : "Ada Promo Menarik Hari Ini! 🥳";
-                toggleTitle = !toggleTitle;
-            }, 2000);
+            jalankanJamAktual();
         };
-
-        renderProducts(products);
-
-        function toggleTerms() {
-            const modal = document.getElementById('terms-modal');
-            if(modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                setTimeout(() => modal.classList.replace('opacity-0', 'opacity-100'), 10);
-            } else {
-                modal.classList.replace('opacity-100', 'opacity-0');
-                setTimeout(() => modal.classList.add('hidden'), 300);
-            }
-        }
-        // ========================================================
-// FUNGSI JEMBATAN UNTUK TRANSFER DATA KERANJANG KE FORM CHECKOUT
-// ========================================================
-function lanjutKeCheckout() {
-    // Memastikan variabel array keranjang belanja Anda (cart) ada dan tidak kosong
-    if (typeof cart === 'undefined' || cart.length === 0) {
-        alert("Keranjang belanja Anda masih kosong! Silakan pilih menu Cimocabi terlebih dahulu sebelum checkout.");
-        return;
-    }
-    
-    // Simpan data keranjang asli ke memori lokal browser (localStorage) dengan nama kunci terstandarisasi
-    localStorage.setItem('cimocabi_cart_data', JSON.stringify(cart));
-    
-    // Alihkan halaman secara mulus ke formulir checkout
-    window.location.href = 'checkout.html';
-}
     </script>
 </body>
 </html>
