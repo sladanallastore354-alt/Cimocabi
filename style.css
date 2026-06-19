@@ -161,10 +161,10 @@
     -webkit-transform: translateZ(0) !important;
     -webkit-mask-image: -webkit-radial-gradient(white, black) !important;
 }
-
-/* Menjinakkan paksa elemen tombol bawaan iOS Apple agar seragam */
-button, select, input {
+/* Menjinakkan paksa elemen bawaan iOS Apple secara spesifik (Tanda bulat radio AMAN) */
+button, input[type="text"], input[type="tel"], textarea {
     -webkit-appearance: none;
     appearance: none;
-    border-radius: 0;
+}
+
 }
