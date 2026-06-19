@@ -100,7 +100,7 @@
 
 
 /* ========================================================
-   MODUL BARU: INTEGRASI KODE PINDAHAN DARI FILE HTML
+   MODUL INTEGRASI FITUR PREMIUM & SAFARI ARMOR PATCH
    ======================================================== */
 
 /* 1. REGISTRASI FONT EKSTERNAL LIQUID CRYSTAL DIGITAL */
@@ -161,10 +161,18 @@
     -webkit-transform: translateZ(0) !important;
     -webkit-mask-image: -webkit-radial-gradient(white, black) !important;
 }
-/* Menjinakkan paksa elemen bawaan iOS Apple secara spesifik (Tanda bulat radio AMAN) */
+
+/* Menjinakkan paksa elemen input ketikan iOS Apple agar seragam */
 button, input[type="text"], input[type="tel"], textarea {
     -webkit-appearance: none;
     appearance: none;
 }
 
+/* PENGUNCI FIX BULATAN: Memaksa semua browser menampilkan indikator radio button bawaan */
+input[type="radio"] {
+    -webkit-appearance: radio !important;
+    appearance: radio !important;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
