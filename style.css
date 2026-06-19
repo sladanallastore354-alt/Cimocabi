@@ -1,0 +1,99 @@
+/* ANIMASI MEMANTUL HALUS (FLOATING) */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ANIMASI GELOMBANG RADAR (PULSE RING) */
+@keyframes pulse-ring {
+    0% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+    70% { transform: scale(1.1); opacity: 0; box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+    100% { transform: scale(0.95); opacity: 0; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* CLASS UNTUK TOMBOL WHATSAPP */
+.wa-floating {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: #22c55e;
+    color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+    z-index: 30; /* Di bawah Z-index Keranjang agar tidak menabrak */
+    text-decoration: none;
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+/* MEMBUAT EFEK RADAR DI BELAKANG IKON */
+.wa-floating::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #22c55e;
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+/* EFEK KETIKA DIKLIK */
+.wa-floating:active {
+    scale: 0.9;
+}
+
+/* ANIMASI HURUF MEMANTUL SEPERTI GELOMBANG (WAVE BOUNCE) */
+@keyframes wave-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); } /* Jarak huruf naik ke atas */
+}
+
+.lucu-bounce span {
+    display: inline-block;
+    animation: wave-bounce 1.2s ease-in-out infinite;
+}
+/* Memberikan jeda waktu (delay) tiap huruf agar membentuk efek gelombang beriringan */
+.lucu-bounce span:nth-child(1) { animation-delay: 0.1s; }
+.lucu-bounce span:nth-child(2) { animation-delay: 0.2s; }
+.lucu-bounce span:nth-child(3) { animation-delay: 0.3s; }
+.lucu-bounce span:nth-child(4) { animation-delay: 0.4s; }
+.lucu-bounce span:nth-child(5) { animation-delay: 0.5s; }
+.lucu-bounce span:nth-child(6) { animation-delay: 0.6s; }
+.lucu-bounce span:nth-child(7) { animation-delay: 0.7s; }
+.lucu-bounce span:nth-child(8) { animation-delay: 0.8s; }
+
+/* ANIMASI BERKEDIP (BLINK) UNTUK BADGE DISKON MERAH */
+@keyframes kedip-diskon {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.95); }
+}
+
+.animate-kedip {
+    animation: kedip-diskon 1.2s ease-in-out infinite;
+}
+/* ==========================================
+   ANIMASI RUNNING TEXT (MARQUEE EFFECT) 
+   ========================================== */
+@keyframes jalan-marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.running-text-box {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.running-text-gerak {
+    display: inline-block;
+    animation: jalan-marquee 20s linear infinite;
+}
