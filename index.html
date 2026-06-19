@@ -28,7 +28,7 @@
                 <span id="clock-time">00:00:00</span>
             </div>
             
-            <button onclick="toggleCart()" class="relative p-2 text-gray-700 hover:text-purple-600 transition">
+            <button onclick="lanjutKeCheckout()" class="relative p-2 text-gray-700 hover:text-purple-600 transition">Lanjut ke Pengisian Alamat →</button>
                 <i class="fa-solid fa-basket-shopping text-2xl"></i>
                 <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">00</span>
             </button>
@@ -497,6 +497,22 @@
                 setTimeout(() => modal.classList.add('hidden'), 300);
             }
         }
+        // ========================================================
+// FUNGSI JEMBATAN UNTUK TRANSFER DATA KERANJANG KE FORM CHECKOUT
+// ========================================================
+function lanjutKeCheckout() {
+    // Memastikan variabel array keranjang belanja Anda (cart) ada dan tidak kosong
+    if (typeof cart === 'undefined' || cart.length === 0) {
+        alert("Keranjang belanja Anda masih kosong! Silakan pilih menu Cimocabi terlebih dahulu sebelum checkout.");
+        return;
+    }
+    
+    // Simpan data keranjang asli ke memori lokal browser (localStorage) dengan nama kunci terstandarisasi
+    localStorage.setItem('cimocabi_cart_data', JSON.stringify(cart));
+    
+    // Alihkan halaman secara mulus ke formulir checkout
+    window.location.href = 'checkout.html';
+}
     </script>
 </body>
 </html>
