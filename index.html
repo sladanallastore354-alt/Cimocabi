@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cimocabi - Frozen Food & Cemilan Praktis</title>
-    <link class="style-link" rel="stylesheet" href="style.css?v12">
+    <link class="style-link" rel="stylesheet" href="style.css?v13">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -44,9 +44,9 @@
                 <h1 class="text-xl font-bold mt-2 leading-tight">OPEN PRE-ORDER NOW!</h1>
                 <p class="text-xs text-purple-100 mt-1">Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
             </div>
-           <div class="bg-transparent text-[11px] font-mono text-gray-500 flex items-center space-x-1 flex-shrink-0">
-                <i class="fa-regular fa-clock text-purple-500 animate-pulse"></i>
-                <span id="clock-time">00:00:00</span>
+            <div class="inline-flex items-center bg-amber-300 text-amber-950 px-2 py-0.5 rounded-md shadow-sm font-bold text-[11px] mt-1 digital-clock-style">
+    <i class="fa-solid fa-clock mr-1 text-[10px]"></i>
+          </div>
             <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
         </div>
     </section>
@@ -186,8 +186,16 @@
             { id: 4, name: "Cireng Isi Ayam / Keju", price: 10000, originalPrice: 13000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs per bungkus. Cireng premium bertekstur renyah garing di luar namun sangat lembut di dalam. Dilengkapi isian daging ayam suwir pedas atau keju gurih melimpah.", img: ["images/cireng-isi-ayam-pedas.jpg", "images/cireng-isi-keju.jpg"] },
             { id: 5, name: "Cireng Kuah Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs. Sensasi baru makan cireng isi hangat yang disiram racikan bumbu kuah keju spesial yang kental, creamy, dan gurih pedas manis berpadu sempurna.", img: "images/cireng-kuah-keju.jpg" },
             { id: 6, name: "Cimol Isi Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 25 Butir. Cimol kopong anti-meledak saat digoreng. Isian potongan keju di dalamnya meleleh pas dikunyah, makin nikmat dicampur dengan aneka pilihan bumbu tabur.", img: "images/cimol-isi-keju.jpg" },
-            { id: 8, name: "Add On: Cooler Bag", price: 5000, category: "Frozen", stock: 100, variantType: "none", desc: "Tas aluminium foil pelindung suhu dingin khusus berukuran 26x17x28cm. Menjaga kualitas frozen food Cimocabi tetap beku dan fresh selama proses pengiriman ke rumah Anda.", img: "images/cooler-bag.jpg" },
-            { id: 7, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }
+            { id: 7, name: "Add On: Cooler Bag", price: 5000, category: "Frozen", stock: 100, variantType: "none", desc: "Tas aluminium foil pelindung suhu dingin khusus berukuran 26x17x28cm. Menjaga kualitas frozen food Cimocabi tetap beku dan fresh selama proses pengiriman ke rumah Anda.", img: "images/cooler-bag.jpg" },
+            { id: 8, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 9, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+             { id: 10, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 11, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 12, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 13, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 14, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 15, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 16, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }
         ];
 
         let cart = [];
@@ -235,21 +243,96 @@
         }
         function openDetail(id) {
             const prod = products.find(p => p.id === id);
+            if (!prod) return; // Keamanan jika ID tidak ditemukan
             activeProductId = id;
+            
             const container = document.getElementById('detail-container');
             const firstImg = Array.isArray(prod.img) ? prod.img[0] : prod.img;
 
+            // Thumbnail Gallery
             let thumbnailsHTML = '';
             if (Array.isArray(prod.img)) {
                 thumbnailsHTML = `<div class="flex space-x-2 mt-1 overflow-x-auto pb-1">`;
                 prod.img.forEach(image => {
                     thumbnailsHTML += `
                         <div onclick="changeDetailImage('${image}')" class="w-14 h-14 bg-gray-50 rounded-lg overflow-hidden border border-purple-200 cursor-pointer active:scale-95 transition-transform flex-shrink-0 flex items-center justify-center p-0.5">
-    <img src="${image}" class="max-w-full max-h-full object-contain">
+                            <img src="${image}" class="max-w-full max-h-full object-contain">
                          </div>`;
                 });
                 thumbnailsHTML += `</div>`;
             }
+
+            // Variant Selector
+            let variantHTML = '';
+            if (prod.variantType === "food") {
+                variantHTML = `
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-gray-600 block">Pilih Varian Penyajian:</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="border border-purple-200 rounded-xl p-2.5 flex items-center justify-between cursor-pointer hover:bg-purple-50">
+                                <span class="text-xs font-medium text-gray-700">❄️ Tetap Frozen</span>
+                                <input type="radio" name="prod-variant" value="Tetap Frozen" checked class="accent-purple-600">
+                            </label>
+                            <label class="border border-purple-200 rounded-xl p-2.5 flex items-center justify-between cursor-pointer hover:bg-purple-50">
+                                <span class="text-xs font-medium text-gray-700">🔥 Sudah Digoreng</span>
+                                <input type="radio" name="prod-variant" value="Sudah Digoreng" class="accent-purple-600">
+                            </label>
+                        </div>
+                    </div>
+                `;
+            } else {
+                variantHTML = `<input type="hidden" name="prod-variant" value="Standar">`;
+            }
+
+            // MODAL CONTENT
+            container.innerHTML = `
+                <div class="w-12 h-1 bg-gray-200 rounded-full mx-auto mb-1" onclick="closeDetail()"></div>
+                <div class="flex justify-between items-start">
+                    <span class="bg-purple-100 text-purple-700 text-[9px] font-bold px-2 py-0.5 rounded-md">${prod.category}</span>
+                    <button onclick="closeDetail()" class="text-gray-400 text-lg"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="w-full h-60 bg-gray-50 rounded-2xl overflow-hidden shadow-sm flex items-center justify-center p-2">
+                    <img id="main-detail-img" src="${firstImg}" class="max-w-full max-h-full object-contain">
+                </div>
+                ${thumbnailsHTML}
+                <div>
+                    <h3 class="text-base font-bold text-gray-800 mt-2">${prod.name}</h3>
+                    <div class="flex justify-between items-center mt-1">
+                        <div class="flex items-baseline space-x-1.5">
+                            <span class="text-lg font-bold text-purple-600">Rp ${prod.price.toLocaleString('id-ID')}</span>
+                            ${prod.originalPrice ? `<span class="text-xs text-gray-400 line-through">Rp ${prod.originalPrice.toLocaleString('id-ID')}</span>` : ''}
+                        </div>
+                        <span class="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md"><i class="fa-solid fa-box-open mr-1"></i>Stok: ${prod.stock}</span>
+                    </div>
+                </div>
+                <hr class="border-gray-100">
+                <p class="text-xs text-gray-500 leading-relaxed">${prod.desc}</p>
+                ${variantHTML}
+                <div class="flex items-center justify-between pt-2">
+                    <div class="flex items-center space-x-3 bg-gray-100 px-3 py-1.5 rounded-xl">
+                        <button onclick="adjustDetailQty(-1)" class="font-bold text-gray-600 text-sm">-</button>
+                        <span id="detail-qty" class="font-bold text-gray-800 text-sm w-4 text-center">1</span>
+                        <button onclick="adjustDetailQty(1)" class="font-bold text-gray-600 text-sm">+</button>
+                    </div>
+                    
+                    ${prod.price > 0 ? 
+                        `<button onclick="addFromModalToCart()" class="flex-1 ml-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl text-xs shadow transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-cart-plus"></i><span>Masukkan Keranjang</span>
+                        </button>` :
+                        `<button disabled class="flex-1 ml-4 bg-gray-300 text-gray-500 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-clock"></i><span>Segera Hadir</span>
+                        </button>`
+                    }
+                </div>
+            `;
+
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.replace('opacity-0', 'opacity-100');
+                container.classList.replace('translate-y-full', 'translate-y-0');
+            }, 10);
+        }
 
             let variantHTML = '';
             if (prod.variantType === "food") {
@@ -301,9 +384,14 @@
                         <span id="detail-qty" class="font-bold text-gray-800 text-sm w-4 text-center">1</span>
                         <button onclick="adjustDetailQty(1)" class="font-bold text-gray-600 text-sm">+</button>
                     </div>
-                    <button onclick="addFromModalToCart()" class="flex-1 ml-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl text-xs shadow transition flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-cart-plus"></i><span>Masukkan Keranjang</span>
-                    </button>
+                    ${prod.price > 0 ? 
+                        `<button onclick="addFromModalToCart()" class="flex-1 ml-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl text-xs shadow transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-cart-plus"></i><span>Masukkan Keranjang</span>
+                        </button>` :
+                        `<button disabled class="flex-1 ml-4 bg-gray-300 text-gray-500 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-clock"></i><span>Segera Hadir</span>
+                        </button>`
+                    }
                 </div>
             `;
 
