@@ -90,14 +90,14 @@
         <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
             <div class="relative z-10 max-w-full">
                 <div class="flex flex-wrap items-center gap-2 mb-2">
-                    <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Bisa Jadi Ide Hampers! ♡</span>
+                    <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Lagi Cari Ide Hampers? Cimocabi aja♡</span>
                 </div>
                 <h1 class="text-xl font-bold mt-2 leading-tight">OPEN PRE-ORDER NOW!</h1>
-                <p class="text-xs text-purple-100 mt-1">Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
+                <p class="text-xs text-purple-100 mt-1">Camilan Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
             </div>
-        <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
-    <i class="fa-solid fa-clock mr-1 text-[10px]"></i>
-    <span id="clock-time">00:00:00</span>
+           <div class="inline-flex items-center bg-amber-400/40 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-amber-200/30 shadow-sm digital-clock-style text-amber-950 font-bold mt-4">
+    <i class="fa-solid fa-clock mr-1.5 text-[11px]"></i>
+    <span id="clock-time" class="text-xs tracking-wider">00:00:00</span>
             </div>
             <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
         </div>
@@ -105,7 +105,7 @@
 
     <div class="running-text-box bg-transparent py-2 border-b border-purple-100/60 relative z-20">
         <div class="running-text-gerak text-[10px] md:text-xs font-semibold text-purple-700 tracking-wide">
-            Melancarkan dagangan kami sama dengan melancarkan ekonomi Indonesia! Ayo lariskan dagangan kami dan dukung UMKM! &nbsp;&nbsp;&nbsp;&nbsp; 🇮🇩✨ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Melancarkan dagangan kami sama dengan melancarkan ekonomi Indonesia! Ayo lariskan dagangan kami dan dukung UMKM Indonesia! &nbsp;&nbsp;&nbsp;&nbsp; 🇮🇩✨ "Semoga Alloh memberikan ganti rezeki yang banyak, lancar dan barokah" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </div>
 
@@ -230,14 +230,21 @@
     
     <script>
         const products = [
-            { id: 1, name: "PAKET HEMAT (Cireng + Cimol)", price: 25000, originalPrice: 31000,category: "Bundling", stock: 100, variantType: "food", desc: "Perpaduan pas untuk ngemil santai! Terdiri dari 1 Pack Cireng Frozen isi ayam/keju (4pcs) dan 1 Pack Cimol Frozen isi keju melimpah (25 butir). Lengkap dengan bumbu tabur gurih.", img: "images/paket-komplit.jpg" },
-            { id: 2, name: "PAKET KOMPLIT (Cireng + Cimol)", price: 33000, originalPrice: 40000,category: "Bundling", stock: 100, variantType: "food", desc: "Porsi lebih puas untuk keluarga! Dapat 2 Pack Cireng Frozen (total 8 pcs, bebas pilih varian rasa isi ayam/keju) dan 1 Pack Cimol Frozen isi keju (25 butir).", img: "images/paket-bundling.jpg" },
-            { id: 3, name: "PAKET FAMILY (Cireng + Cimol)", price: 46000, originalPrice: 53000 ,category: "Bundling", stock: 100, variantType: "food", desc: "Paket super untung untuk acara arisan atau kumpul besar! Berisi 2 Pack Cireng Frozen (8pcs) ditambah 2 Pack Cimol Frozen isi keju (total 50 butir). Sangat cocok dijadikan ide hampers cantik.", img: "images/paket-keluarga.jpg" },
-            { id: 4, name: "Cireng Isi Ayam / Keju", price: 10000, originalPrice: 13000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs per bungkus. Cireng premium bertekstur renyah garing di luar namun sangat lembut di dalam. Dilengkapi isian daging ayam suwir pedas atau keju gurih melimpah.", img: ["images/cireng-isi-ayam-pedas.jpg", "images/cireng-isi-keju.jpg"] },
-            { id: 5, name: "Cireng Kuah Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs. Sensasi baru makan cireng isi hangat yang disiram racikan bumbu kuah keju spesial yang kental, creamy, dan gurih pedas manis berpadu sempurna.", img: "images/cireng-kuah-keju.jpg" },
-            { id: 6, name: "Cimol Isi Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 25 Butir. Cimol kopong anti-meledak saat digoreng. Isian potongan keju di dalamnya meleleh pas dikunyah, makin nikmat dicampur dengan aneka pilihan bumbu tabur.", img: "images/cimol-isi-keju.jpg" },
-            { id: 8, name: "Add On: Cooler Bag", price: 5000, category: "Frozen", stock: 100, variantType: "none", desc: "Tas aluminium foil pelindung suhu dingin khusus berukuran 26x17x28cm. Menjaga kualitas frozen food Cimocabi tetap beku dan fresh selama proses pengiriman ke rumah Anda.", img: "images/cooler-bag.jpg" },
-            { id: 7, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }
+            { id: 1, name: "PAKET HEMAT (Cireng + Cimol)", price: 25000, originalPrice: 31000, status: " available", category: "Bundling", stock: 100, variantType: "food", desc: "Perpaduan pas untuk ngemil santai! Terdiri dari 1 Pack Cireng Frozen isi ayam/keju (4pcs) dan 1 Pack Cimol Frozen isi keju melimpah (25 butir). Lengkap dengan bumbu tabur gurih.", img: "images/paket-komplit.jpg" },
+            { id: 2, name: "PAKET KOMPLIT (Cireng + Cimol)", price: 33000, originalPrice: 40000, status: "available", category: "Bundling", stock: 100, variantType: "food", desc: "Porsi lebih puas untuk keluarga! Dapat 2 Pack Cireng Frozen (total 8 pcs, bebas pilih varian rasa isi ayam/keju) dan 1 Pack Cimol Frozen isi keju (25 butir).", img: "images/paket-bundling.jpg" },
+            { id: 3, name: "PAKET FAMILY (Cireng + Cimol)", price: 46000, originalPrice: 53000, status: "available", category: "Bundling", stock: 100, variantType: "food", desc: "Paket super untung untuk acara arisan atau kumpul besar! Berisi 2 Pack Cireng Frozen (8pcs) ditambah 2 Pack Cimol Frozen isi keju (total 50 butir). Sangat cocok dijadikan ide hampers cantik.", img: "images/paket-keluarga.jpg" },
+            { id: 4, name: "Cireng Isi Ayam / Keju", price: 10000, originalPrice: 13000, status: "available", category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs per bungkus. Cireng premium bertekstur renyah garing di luar namun sangat lembut di dalam. Dilengkapi isian daging ayam suwir pedas atau keju gurih melimpah.", img: ["images/cireng-isi-ayam-pedas.jpg", "images/cireng-isi-keju.jpg"] },
+            { id: 5, name: "Cireng Kuah Keju", price: 15000, status: "available", category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs. Sensasi baru makan cireng isi hangat yang disiram racikan bumbu kuah keju spesial yang kental, creamy, dan gurih pedas manis berpadu sempurna.", img: "images/cireng-kuah-keju.jpg" },
+            { id: 6, name: "Cimol Isi Keju", price: 15000, status: "available", category: "Frozen", stock: 100, variantType: "food", desc: "Isi 25 Butir. Cimol kopong anti-meledak saat digoreng. Isian potongan keju di dalamnya meleleh pas dikunyah, makin nikmat dicampur dengan aneka pilihan bumbu tabur.", img: "images/cimol-isi-keju.jpg" },
+            { id: 8, name: "Add On: Cooler Bag", price: 5000, status: "available", category: "Frozen", stock: 100, variantType: "none", desc: "Tas aluminium foil pelindung suhu dingin khusus berukuran 26x17x28cm. Menjaga kualitas frozen food Cimocabi tetap beku dan fresh selama proses pengiriman ke rumah Anda.", img: "images/cooler-bag.jpg" },
+            { id: 7, name: "Coming Soon", price: 0, status: "comingsoon", category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 9,name: "Coming Soon", price: 0, status: "comingsoon", category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 10, name: "Coming Soon", price: 0, status: "comingsoon", category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 11, name: "Coming Soon", price: 0, status: "comingsoon", category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 12, name: "Coming Soon", price: 0, status: "comingsoon", category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 13, name: "Coming Soon", price: 0, status: "comingsoon", category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 14, name: "Coming Soon", price: 0, status: "comingsoon", category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }, 
+            { id: 15, name: "Coming Soon", price: 0, status: "comingsoon", category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }
         ];
 
         let cart = [];
@@ -351,9 +358,13 @@
                         <span id="detail-qty" class="font-bold text-gray-800 text-sm w-4 text-center">1</span>
                         <button onclick="adjustDetailQty(1)" class="font-bold text-gray-600 text-sm">+</button>
                     </div>
+                    ${prod.price > 0 ?
                     <button onclick="addFromModalToCart()" class="flex-1 ml-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl text-xs shadow transition flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-cart-plus"></i><span>Masukkan Keranjang</span>
                     </button>
+                    <button disabled class="flex-1 ml-4 bg-gray-300 text-gray-500 font-bold py-2.5 rounded-xl text-xs shadow transition flex items-center justify-center space-x-2 cursor-not-allowed">
+    Segera Hadir🙏
+                     </button>
                 </div>
             `;
 
@@ -389,10 +400,15 @@
 
         function addFromModalToCart() {
             const prod = products.find(p => p.id === activeProductId);
-            const qty = parseInt(document.getElementById('detail-qty').innerText);
-            const variantRadio = document.querySelector('input[name="prod-variant"]:checked');
-            const variant = variantRadio ? variantRadio.value : "Standar";
-
+// --- TAMBAHKAN LOGIKA PENGAMAN DI SINI ---
+    if (prod.price === 0) {
+        alert("Maaf, produk ini masih Coming Soon dan belum bisa dipesan.");
+        return; // Menghentikan proses agar tidak masuk ke keranjang
+    }
+    // ------------------------------------------
+           const qty = parseInt(document.getElementById('detail-qty').innerText);
+           const variantRadio = document.querySelector('input[name="prod-variant"]:checked');
+    const variant = variantRadio ? variantRadio.value : "Standar";
             const cartItemKey = `${prod.id}-${variant}`;
             const exist = cart.find(item => item.cartKey === cartItemKey);
 
