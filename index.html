@@ -130,12 +130,10 @@
              <button onclick="setCategory('COMING SOON', this)" class="category-btn bg-white text-gray-600 border border-gray-200 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap">COMING SOON</button>
         </div>
     </section>
-
-    <main class="px-4 py-2">
-        <h2 class="text-sm font-bold text-gray-700 mb-3">Yuk, Stock Sekarang! Klik produk untuk detail ♡</h2>
-        <div id="product-grid" class="grid grid-cols-2 gap-3"></div>
+        <main class="w-full max-w-6xl mx-auto px-4 py-2">
+        <h2 class="text-sm font-bold text-gray-700 mb-3 md:text-base">Yuk, Stock Sekarang! Klik produk untuk detail ♡</h2>
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4"></div>
     </main>
-
     <div id="detail-modal" class="fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 hidden opacity-0 flex items-end justify-center">
         <div class="w-full max-w-md bg-white rounded-t-3xl p-5 space-y-4 max-h-[85vh] overflow-y-auto transform translate-y-full transition-transform duration-300" id="detail-container"></div>
     </div>
@@ -269,7 +267,7 @@
                 grid.innerHTML += `
                     <div onclick="openDetail(${prod.id})" class="bg-white rounded-2xl border border-purple-50/80 p-2.5 shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform">
                         <div>
-                            <div class="w-full h-36 bg-gray-50 rounded-xl overflow-hidden mb-2 relative flex items-center justify-center p-1">
+                            <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 relative flex items-center justify-center p-1">
                                 <img src="${coverImg}" alt="${prod.name}" class="max-w-full max-h-full object-contain">
                                 <span class="absolute top-1 left-1 bg-purple-100 text-purple-700 text-[8px] font-bold px-1.5 py-0.5 rounded-md">${prod.category}</span>
                                 ${promoBadge}
