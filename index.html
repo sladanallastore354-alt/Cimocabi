@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cimocabi - Frozen Food & Cemilan Praktis</title>
-    <link class="style-link" rel="stylesheet" href="style.css?v8">
+    <link class="style-link" rel="stylesheet" href="style.css?v7">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Poppins', sans-serif; }
 
-
-        /* 1. ANIMASI SHAKE INTELLIGENT UNTUK BUTTON GAMBAR */
+        /* 1. REGISTRASI FONT ORBITRON DIGITAL */
+.digital-clock-style{
+    font-family:'Orbitron', monospace;
+    font-size:24px;
+    letter-spacing:3px;
+    color:white;
+}
+        /* 2. ANIMASI SHAKE INTELLIGENT UNTUK BUTTON GAMBAR */
         @keyframes getar-tombol {
             0%, 100%, 40% { transform: scale(1) translateX(0) rotate(0deg); }
             5% { transform: scale(1.02) translateX(-2px) rotate(-0.5deg); }
@@ -29,7 +34,7 @@
             transform-origin: center;
         }
 
-        /* 2. ANIMASI BURST POP (EFEK LEDAKAN PENDARAN PER HURUF CIMOCABI) */
+        /* 3. ANIMASI BURST POP (EFEK LEDAKAN PENDARAN PER HURUF CIMOCABI) */
         @keyframes burst-efek {
             0%, 100%, 45% { transform: scale(1); text-shadow: none; filter: brightness(1); }
             5% { transform: scale(1.35); text-shadow: 0 0 12px rgba(168, 85, 247, 0.8), 0 0 25px rgba(168, 85, 247, 0.4); filter: brightness(1.2); }
@@ -555,6 +560,6 @@ function lanjutKeCheckout() {
     // Alihkan halaman secara mulus ke formulir checkout
     window.location.href = 'checkout.html';
 }
-    </script><script src="tour.js?v=8"></script>
+    </script><script src="tour.js?v=6"></script>
 </body>
 </html>
