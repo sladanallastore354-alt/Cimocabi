@@ -219,9 +219,11 @@
                     <p class="font-bold text-purple-600">3. Validasi Pembayaran</p>
                     <p class="text-gray-500">Pesanan hanya akan diproses dan masuk antrean masak setelah pembeli mengirimkan bukti transfer berupa foto/tangkapan layar yang sah kepada Admin.</p>
                 </div>
+            <div class="mt-6 flex justify-end">
+                <button onclick="toggleTerms()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-xl text-xs font-bold transition-all shadow-lg">
+                    Saya Mengerti & Lanjut
+                </button>
             </div>
-            <button onclick="toggleTerms()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl text-xs shadow transition cursor-pointer">Saya Mengerti & Setuju</button>
-        </div>
     </div>
 
     <a href="#" id="wa-floating-btn" target="_blank" class="wa-floating">
@@ -538,8 +540,16 @@
         };
 
         renderProducts(products);
-
-        function toggleTerms() {
+    // TAMBAHKAN LOGIKA INI:
+    // Cek apakah user sudah pernah tekan "Saya Mengerti" sebelumnya
+if (!localStorage.getItem('cimocabi_terms_accepted')) {
+        setTimeout(toggleTerms, 1000); 
+    }
+        // Jika belum, munculkan modal setelah 1 detik
+        setTimeout(toggleTerms, 1000);
+        function terimaSyarat() {
+        localStorage.setItem('cimocabi_terms_accepted', 'true');
+    toggleTerms();
             const modal = document.getElementById('terms-modal');
             if(modal.classList.contains('hidden')) {
                 modal.classList.remove('hidden');
