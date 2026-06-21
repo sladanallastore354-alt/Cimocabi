@@ -1,5 +1,5 @@
 /* ==========================================================
-   CIMOCABI INTERACTIVE TOUR
+   CIMOCABI INTERACTIVE TOUR (FONT SIZE OPTIMIZED)
    file : tour.js
 ========================================================== */
 
@@ -74,106 +74,50 @@ document.body.insertAdjacentHTML("beforeend", `
     <h3 class="tour-title"></h3>
     <div class="tour-text"></div>
     <div class="tour-buttons">
-        <button id="tour-prev">Previous</button>
+        <button id="tour-prev">Prev</button>
         <button id="tour-next">Next</button>
         <button id="tour-skip">Skip</button>
     </div>
 </div>
-<button id="tour-start-btn">❓ Mulai Tur</button>
+<button id="tour-start-btn">❓ Tur</button>
 `);
 
-/* ========= css ========= */
+/* ========= css (font diperkecil) ========= */
 const style = document.createElement("style");
 style.innerHTML = `
-#tour-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.65);
-    display: none;
-    z-index: 99998;
-    backdrop-filter: blur(2px);
+#tour-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.65); display: none; z-index: 99998; backdrop-filter: blur(2px); }
+#tour-tooltip { 
+    position: fixed; width: 260px; max-width: 85vw; background: #9333EA; color: white; 
+    padding: 12px; border-radius: 16px; display: none; z-index: 99999; box-shadow: 0 10px 30px rgba(0,0,0,.3);
 }
-#tour-tooltip {
-    position: fixed;
-    width: 300px;
-    max-width: 90vw;
-    background: #9333EA;
-    color: white;
-    padding: 18px;
-    border-radius: 20px;
-    display: none;
-    z-index: 99999;
-    box-shadow: 0 20px 60px rgba(0,0,0,.35);
-}
-.tour-highlight {
-    position: relative;
-    z-index: 99999 !important;
-    box-shadow: 0 0 0 5px rgba(147,51,234,.5);
-    border-radius: 20px;
-    animation: pulseTour 1s infinite;
-}
-@keyframes pulseTour {
-    50% { transform: scale(1.02); }
-}
-#tour-start-btn {
-    position: fixed;
-    left: 20px;
-    bottom: 20px;
-    background: #9333EA;
-    color: white;
-    border: none;
-    padding: 12px 16px;
-    border-radius: 14px;
-    cursor: pointer;
-    z-index: 99997;
-    box-shadow: 0 4px 10px rgba(147,51,234,.4);
-}
+.tour-title { font-size: 14px; font-weight: bold; margin: 0 0 5px 0; }
+.tour-text { font-size: 12px; line-height: 1.4; opacity: 0.9; }
+.tour-progress { font-size: 10px; margin-bottom: 5px; opacity: 0.7; }
+.tour-highlight { position: relative; z-index: 99999 !important; box-shadow: 0 0 0 4px rgba(147,51,234,.5); border-radius: 12px; }
+#tour-start-btn { position: fixed; left: 15px; bottom: 15px; background: #9333EA; color: white; border: none; padding: 8px 12px; border-radius: 10px; cursor: pointer; z-index: 99997; font-size: 12px; }
 
-/* PERBAIKAN TOMBOL AGAR MUNCUL (DIAMANKAN DARI TAILWIND) */
-.tour-buttons {
-    display: flex;
-    gap: 8px;
-    margin-top: 15px;
-}
-.tour-buttons button {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    background-color: white !important; /* Paksa Background Putih */
-    color: #9333EA !important;          /* Paksa Text Ungu */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+.tour-buttons { display: flex; gap: 6px; margin-top: 12px; }
+.tour-buttons button { 
+    flex: 1; padding: 6px; border: none; border-radius: 8px; cursor: pointer; 
+    font-weight: bold; font-size: 11px;
+    background-color: white !important; color: #9333EA !important; 
     transition: transform 0.1s;
-}
-.tour-buttons button:active {
-    transform: scale(0.95);
 }
 `;
 document.head.append(style);
 
+/* ========= fungsi logika (tetap sama, posisi sudah dioptimalkan) ========= */
 const overlay = document.getElementById("tour-overlay");
 const tooltip = document.getElementById("tour-tooltip");
 
-function clearHighlight() {
-    document.querySelectorAll(".tour-highlight").forEach(e => e.classList.remove("tour-highlight"));
-}
+function clearHighlight() { document.querySelectorAll(".tour-highlight").forEach(e => e.classList.remove("tour-highlight")); }
 
 function showStep(step) {
     clearHighlight();
     currentStep = step;
     localStorage.setItem(TOUR_KEY, step);
-
     let el = document.querySelector(tourData[step].selector);
-    
-    // Perbaikan Lintas Halaman
-    if (!el) {
-        console.warn("Elemen Tur tidak ditemukan di halaman ini:", tourData[step].selector);
-        overlay.style.display = "none";
-        tooltip.style.display = "none";
-        return;
-    }
+    if (!el) { overlay.style.display = "none"; tooltip.style.display = "none"; return; }
 
     document.querySelector(".tour-progress").innerHTML = (step + 1) + " / " + tourData.length;
     document.querySelector(".tour-title").innerHTML = tourData[step].title;
@@ -181,102 +125,40 @@ function showStep(step) {
 
     el.scrollIntoView({ behavior: "smooth", block: "center" });
     el.classList.add("tour-highlight");
-
     overlay.style.display = "block";
     tooltip.style.display = "block";
 
     setTimeout(() => {
         let rect = el.getBoundingClientRect();
-        tooltip.style.left = Math.max(10, rect.left) + "px";
-        tooltip.style.top = Math.max(20, rect.top - 160) + "px";
-    }, 300);
+        let screenWidth = window.innerWidth;
+        let tooltipWidth = tooltip.offsetWidth || 260;
+        let posLeft = rect.left;
+        if (posLeft + tooltipWidth > screenWidth) posLeft = screenWidth - tooltipWidth - 10;
+        tooltip.style.left = Math.max(5, posLeft) + "px";
+        let posTop = rect.top - tooltip.offsetHeight - 20;
+        if (posTop < 20) posTop = rect.bottom + 20;
+        tooltip.style.top = posTop + "px";
+    }, 500);
 }
 
-/* next */
-document.getElementById("tour-next").onclick = () => {
-    if (currentStep < tourData.length - 1) {
-        showStep(currentStep + 1);
-    } else {
-        finishTour();
-    }
-};
-
-/* prev */
-document.getElementById("tour-prev").onclick = () => {
-    if (currentStep > 0) {
-        showStep(currentStep - 1);
-    }
-};
-
-/* skip */
+document.getElementById("tour-next").onclick = () => (currentStep < tourData.length - 1) ? showStep(currentStep + 1) : finishTour();
+document.getElementById("tour-prev").onclick = () => (currentStep > 0) ? showStep(currentStep - 1) : null;
 document.getElementById("tour-skip").onclick = finishTour;
+document.getElementById("tour-start-btn").onclick = () => showStep(0);
 
-/* start */
-document.getElementById("tour-start-btn").onclick = () => {
-    showStep(0);
-};
+function finishTour() { clearHighlight(); overlay.style.display = "none"; tooltip.style.display = "none"; localStorage.setItem(TOUR_DONE, true); localStorage.removeItem(TOUR_KEY); }
 
-/* finish */
-function finishTour() {
-    clearHighlight();
-    overlay.style.display = "none";
-    tooltip.style.display = "none";
-    localStorage.setItem(TOUR_DONE, true);
-    localStorage.removeItem(TOUR_KEY);
-}
-
-/* auto run */
 function jalankanTurOtomatis() {
     if(localStorage.getItem(TOUR_DONE)) return;
-
     let saved = parseInt(localStorage.getItem(TOUR_KEY) || 0);
-
-    setTimeout(() => {
-        showStep(saved);
-    }, 1200);
+    setTimeout(() => showStep(saved), 1200);
 }
 
-if (document.readyState === "complete") {
-    jalankanTurOtomatis();
-} else {
-    window.addEventListener("load", jalankanTurOtomatis);
-}
-
-/* ===================================================
-   AUTO STEP (Perbaikan Tombol & Jembatan Antar Halaman)
-=================================================== */
+if (document.readyState === "complete") jalankanTurOtomatis(); else window.addEventListener("load", jalankanTurOtomatis);
 
 document.addEventListener("click", (e) => {
-    
-    // Step 3: Klik Ketentuan (Saya Mengerti)
-    if (currentStep === 3) {
-        const btn = e.target.closest("button");
-        if (btn && btn.innerText.includes("Saya Mengerti")) {
-            setTimeout(() => { showStep(4); }, 500);
-        }
-    }
-
-    // Step 4: Klik Detail Produk
-    if (currentStep === 4) {
-        const btn = e.target.closest("button");
-        if (btn && btn.innerText.includes("Detail")) {
-            setTimeout(() => { showStep(5); }, 700);
-        }
-    }
-
-    // Step 7: Klik Masukkan Keranjang
-    if (currentStep === 7) {
-        const btn = e.target.closest("button[onclick='addFromModalToCart()']");
-        if (btn) {
-            setTimeout(() => { showStep(8); }, 700);
-        }
-    }
-
-    // JEMBATAN LINTAS HALAMAN (Dari index.html menuju checkout.html)
-    if (currentStep === 8) {
-        const btn = e.target.closest("button[onclick='lanjutKeCheckout()']");
-        if (btn) {
-            localStorage.setItem(TOUR_KEY, 9);
-        }
-    }
+    if (currentStep === 3 && e.target.innerText.includes("Saya Mengerti")) setTimeout(() => showStep(4), 500);
+    if (currentStep === 4 && e.target.innerText.includes("Detail")) setTimeout(() => showStep(5), 700);
+    if (currentStep === 7 && e.target.closest("button[onclick='addFromModalToCart()']")) setTimeout(() => showStep(8), 700);
+    if (currentStep === 8 && e.target.closest("button[onclick='lanjutKeCheckout()']")) localStorage.setItem(TOUR_KEY, 9);
 });
