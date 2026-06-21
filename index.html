@@ -7,8 +7,6 @@
     <link class="style-link" rel="stylesheet" href="style.css?v8">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Poppins', sans-serif; }
@@ -378,20 +376,30 @@
         }
 
         function addFromModalToCart() {
-            const prod = products.find(p => p.id === activeProductId);
-            const qty = parseInt(document.getElementById('detail-qty').innerText);
-            const variantRadio = document.querySelector('input[name="prod-variant"]:checked');
-            const variant = variantRadio ? variantRadio.value : "Standar";
+    const prod = products.find(p => p.id === activeProductId);
+    const qty = parseInt(document.getElementById('detail-qty').innerText);
+    const variantRadio = document.querySelector('input[name="prod-variant"]:checked');
+    const variant = variantRadio ? variantRadio.value : "Standar";
 
-            const cartItemKey = `${prod.id}-${variant}`;
-            const exist = cart.find(item => item.cartKey === cartItemKey);
+    // --- SISIPKAN VALIDASI DI SINI ---
+    // Pastikan kategori diubah ke huruf kecil dulu agar pengecekannya lebih akurat
+    let cekKategori = prod.category ? prod.category.toLowerCase() : "";
+    
+    if (prod.price === 0 || cekKategori.includes('coming soon') || cekKategori.includes('comingsoon')) {
+        alert("Tidak bisa di beli untuk saat ini, silahkan tunggu updatenya melalui sosial media kami, informasi bisa di akses pada bagian bawah halaman. ");
+        return; // 'return' akan menghentikan fungsi, sehingga produk batal masuk keranjang
+    }
+    // ---------------------------------
 
-            if(exist) { exist.qty += qty; } else {
-                cart.push({ cartKey: cartItemKey, id: prod.id, name: prod.name, price: prod.price, variant: variant, qty: qty });
-            }
-            updateCart();
-            closeDetail();
-        }
+    const cartItemKey = `${prod.id}-${variant}`;
+    const exist = cart.find(item => item.cartKey === cartItemKey);
+
+    if(exist) { exist.qty += qty; } else {
+        cart.push({ cartKey: cartItemKey, id: prod.id, name: prod.name, price: prod.price, variant: variant, qty: qty });
+    }
+    updateCart();
+    closeDetail();
+}
 
         function updateCart() {
             const countEl = document.getElementById('cart-count');
@@ -540,21 +548,8 @@
             }
         }
         // ========================================================
-// FUNGSI JEMBATAN UNTUK TRANSFER DATA KERANJANG KE FORM CHECKOUT
-// ========================================================
-function lanjutKeCheckout() {
-    // Memastikan variabel array keranjang belanja Anda (cart) ada dan tidak kosong
-    if (typeof cart === 'undefined' || cart.length === 0) {
-        alert("Keranjang belanja Anda masih kosong! Silakan pilih menu Cimocabi terlebih dahulu sebelum checkout.");
-        return;
-    }
-    
-    // Simpan data keranjang asli ke memori lokal browser (localStorage) dengan nama kunci terstandarisasi
-    localStorage.setItem('cimocabi_cart_data', JSON.stringify(cart));
-    
-    // Alihkan halaman secara mulus ke formulir checkout
-    window.location.href = 'checkout.html';
-}
-    </script><script src="tour.js?v=6"></script>
+    </script>
+    <script src="tour.js?v=6"></script>
+    <script src="validasi.js"></script>
 </body>
 </html>
