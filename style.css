@@ -97,3 +97,10 @@
     display: inline-block;
     animation: jalan-marquee 20s linear infinite;
 }
+/* ===== FONT JAM DIGITAL ===== */
+.digital-clock-style{
+    font-family:'Orbitron', monospace;
+    font-size:24px;
+    letter-spacing:3px;
+    color:white;
+}
