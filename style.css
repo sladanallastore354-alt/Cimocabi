@@ -100,25 +100,25 @@
 /* ===== JAM DIGITAL ELEGAN MINI ===== */
 .digital-clock-style{
     font-family:'Orbitron', monospace;
-    font-size:10px;
+    font-size:8px;
     font-weight:400;
-    letter-spacing:0,8px;
-    color:white;
+    letter-spacing:1px;
+    color:black;
 
     display:inline-block;
 
     background:linear-gradient(
         135deg,
-        rgba(255,210,0,.45),
-        rgba(255,180,0,.25)
+        rgba(255,215,0,.55),
+        rgba(255,185,0,.30)
     );
 
-    padding:5px 12px;
+    padding:4px 10px;
     border-radius:999px;
 
-    border:2px solid rgba(255,255,255,.8);
+    border:1px solid rgba(255,255,255,.8);
 
     box-shadow:
-        0 0 8px rgba(255,215,0,.8),
-        0 0 16px rgba(255,215,0,.4);
+        0 0 6px rgba(255,215,0,.8),
+        0 0 12px rgba(255,215,0,.4);
 }
