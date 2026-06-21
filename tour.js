@@ -1,7 +1,5 @@
-```javascript
 /* ==========================================================
    CIMOCABI INTERACTIVE TOUR
-   BAGIAN 1
 ========================================================== */
 
 const TOUR_KEY = "cimocabiTourStep";
@@ -242,10 +240,8 @@ document.head.append(style);
 const overlay = document.getElementById("tour-overlay");
 
 const tooltip = document.getElementById("tour-tooltip");
-```
-```javascript id="st4bcb"
+
 /* ==========================================================
-   BAGIAN 2
    LOGIKA TOUR
 ========================================================== */
 
@@ -448,10 +444,8 @@ jalankanTurOtomatis
 );
 
 }
-```
-```javascript
+
 /* ==========================================================
-   BAGIAN 3
    AUTO STEP + DRAG BUTTON
 ========================================================== */
 
