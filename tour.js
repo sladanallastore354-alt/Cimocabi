@@ -292,22 +292,22 @@ localStorage.removeItem(TOUR_KEY);
 }
 
 /* auto run */
+function jalankanTurOtomatis() {
+    if(localStorage.getItem(TOUR_DONE)) return;
 
-window.addEventListener("load",()=>{
+    let saved = parseInt(localStorage.getItem(TOUR_KEY) || 0);
 
-if(localStorage.getItem(TOUR_DONE))
-return;
+    setTimeout(() => {
+        showStep(saved);
+    }, 1200);
+}
 
-let saved=
-parseInt(localStorage.getItem(TOUR_KEY)||0);
-
-setTimeout(()=>{
-
-showStep(saved);
-
-},1200);
-
-});
+// Mengecek apakah halaman sudah selesai dimuat atau belum
+if (document.readyState === "complete") {
+    jalankanTurOtomatis();
+} else {
+    window.addEventListener("load", jalankanTurOtomatis);
+}
 
 
 /* ===================================================
