@@ -79,7 +79,7 @@ document.body.insertAdjacentHTML("beforeend", `
         <button id="tour-skip">Skip</button>
     </div>
 </div>
-<button id="tour-start-btn">❓ mulai tour</button>
+<button id="tour-start-btn">🚀</button>
 `);
 
 /* ========= css (font diperkecil) ========= */
