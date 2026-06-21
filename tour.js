@@ -162,3 +162,101 @@ document.addEventListener("click", (e) => {
     if (currentStep === 7 && e.target.closest("button[onclick='addFromModalToCart()']")) setTimeout(() => showStep(8), 700);
     if (currentStep === 8 && e.target.closest("button[onclick='lanjutKeCheckout()']")) localStorage.setItem(TOUR_KEY, 9);
 });
+/* ==========================================================
+   FITUR TOMBOL TUR BISA DIGESER (DRAGGABLE) & LEBIH TINGGI
+========================================================== */
+const tourBtn = document.getElementById("tour-start-btn"); // Sesuaikan ID jika berbeda
+
+if (tourBtn) {
+    // 1. Buat tombol lebih tinggi dari posisi awal (naik menjadi 150px dari bawah)
+    tourBtn.style.bottom = "150px"; 
+    tourBtn.style.touchAction = "none"; // Mencegah layar ikut ter-scroll saat tombol digeser di HP
+    
+    let isDragging = false;
+    let isMoved = false; // Penanda untuk membedakan antara 'klik' dan 'geser'
+    let startX, startY, initialLeft, initialTop;
+
+    // Fungsi mulai geser
+    const startDrag = (e) => {
+        isDragging = true;
+        isMoved = false;
+        
+        // Ambil koordinat kursor atau sentuhan jari
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX;
+        startY = clientY;
+
+        // Ambil posisi awal tombol
+        const rect = tourBtn.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        // Matikan transisi hover sementara agar pergerakan mulus mengikuti kursor
+        tourBtn.style.transition = "none";
+    };
+
+    // Fungsi saat tombol sedang digeser
+    const onDrag = (e) => {
+        if (!isDragging) return;
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        const dx = clientX - startX;
+        const dy = clientY - startY;
+
+        // Jika digeser lebih dari 5px, anggap sedang ditarik (bukan diklik)
+        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+            isMoved = true;
+            e.preventDefault(); // Cegah layar ikut scroll saat geser tombol di mobile
+        }
+
+        // Hitung posisi baru
+        let newLeft = initialLeft + dx;
+        let newTop = initialTop + dy;
+
+        // Pastikan tombol tidak keluar dari batas layar
+        const btnWidth = tourBtn.offsetWidth;
+        const btnHeight = tourBtn.offsetHeight;
+
+        if (newLeft < 0) newLeft = 0;
+        if (newTop < 0) newTop = 0;
+        if (newLeft + btnWidth > window.innerWidth) newLeft = window.innerWidth - btnWidth;
+        if (newTop + btnHeight > window.innerHeight) newTop = window.innerHeight - btnHeight;
+
+        // Terapkan posisi baru, reset atribut bottom/right bawaan CSS
+        tourBtn.style.left = newLeft + "px";
+        tourBtn.style.top = newTop + "px";
+        tourBtn.style.right = "auto";
+        tourBtn.style.bottom = "auto";
+    };
+
+    // Fungsi berhenti geser
+    const stopDrag = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        // Kembalikan efek transisi jika ada (misal untuk animasi hover)
+        tourBtn.style.transition = "transform 0.2s";
+    };
+
+    // --- EVENT LISTENER MOUSE (Desktop) ---
+    tourBtn.addEventListener("mousedown", startDrag);
+    document.addEventListener("mousemove", onDrag, { passive: false });
+    document.addEventListener("mouseup", stopDrag);
+
+    // --- EVENT LISTENER TOUCH (Mobile) ---
+    tourBtn.addEventListener("touchstart", startDrag, { passive: false });
+    document.addEventListener("touchmove", onDrag, { passive: false });
+    document.addEventListener("touchend", stopDrag);
+
+    // --- MENCEGAH KLIK SAAT TOMBOL DIGESER ---
+    // Agar tur tidak tiba-tiba terbuka saat kita selesai menggeser tombol
+    tourBtn.addEventListener("click", (e) => {
+        if (isMoved) {
+            e.preventDefault();
+            e.stopImmediatePropagation(); // Membatalkan event onclick tur
+        }
+    }, true); 
+}
