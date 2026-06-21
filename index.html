@@ -12,19 +12,19 @@
         body { font-family: 'Poppins', sans-serif; }
 
         /* 1. REGISTRASI FONT EKSTERNAL LIQUID CRYSTAL DIGITAL */
-        @font-face {
-            font-family: 'Liquid Crystal';
-            src: url('Liquid-Crystal.ttf') format('truetype');
-            font-weight: bold;
-            font-style: normal;
-        }
+         @font-face {
+    font-family: 'Liquid Crystal';
+    src: url('https://raw.githubusercontent.com/sladanallastore354-alt/Cimocabi/main/LiquidCrystal.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-        .digital-clock-style {
-            font-family: 'Liquid Crystal', monospace;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
+.digital-clock-style{
+    font-family:'Liquid Crystal', monospace;
+    font-size:32px;
+    letter-spacing:2px;
+    color:white;
+}
         /* 2. ANIMASI SHAKE INTELLIGENT UNTUK BUTTON GAMBAR */
         @keyframes getar-tombol {
             0%, 100%, 40% { transform: scale(1) translateX(0) rotate(0deg); }
@@ -90,14 +90,16 @@
         <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
             <div class="relative z-10 max-w-full">
                 <div class="flex flex-wrap items-center gap-2 mb-2">
-                    <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Bisa Jadi Ide Hampers! ♡</span>
+                    <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Caro Ide Hampers? Cimocabi aja♡</span>
                 </div>
                 <h1 class="text-xl font-bold mt-2 leading-tight">OPEN PRE-ORDER NOW!</h1>
-                <p class="text-xs text-purple-100 mt-1">Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
+                <p class="text-xs text-purple-100 mt-1">Camilan Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
             </div>
         <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
     <i class="fa-solid fa-clock mr-1 text-[10px]"></i>
-    <span id="clock-time">00:00:00</span>
+    <span id="clock-time" class="digital-clock-style">
+00:00:00
+</span>
             </div>
             <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
         </div>
