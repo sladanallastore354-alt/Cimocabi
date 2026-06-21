@@ -74,9 +74,9 @@ document.body.insertAdjacentHTML("beforeend", `
     <h3 class="tour-title"></h3>
     <div class="tour-text"></div>
     <div class="tour-buttons">
-        <button id="tour-prev" style="color: #9333EA;">Previous</button>
-        <button id="tour-next" style="color: #9333EA;">Next</button>
-        <button id="tour-skip" style="color: #9333EA;">Skip</button>
+        <button id="tour-prev">Previous</button>
+        <button id="tour-next">Next</button>
+        <button id="tour-skip">Skip</button>
     </div>
 </div>
 <button id="tour-start-btn">❓ Mulai Tur</button>
@@ -126,7 +126,10 @@ style.innerHTML = `
     border-radius: 14px;
     cursor: pointer;
     z-index: 99997;
+    box-shadow: 0 4px 10px rgba(147,51,234,.4);
 }
+
+/* PERBAIKAN TOMBOL AGAR MUNCUL (DIAMANKAN DARI TAILWIND) */
 .tour-buttons {
     display: flex;
     gap: 8px;
@@ -139,6 +142,13 @@ style.innerHTML = `
     border-radius: 12px;
     cursor: pointer;
     font-weight: bold;
+    background-color: white !important; /* Paksa Background Putih */
+    color: #9333EA !important;          /* Paksa Text Ungu */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: transform 0.1s;
+}
+.tour-buttons button:active {
+    transform: scale(0.95);
 }
 `;
 document.head.append(style);
@@ -157,7 +167,7 @@ function showStep(step) {
 
     let el = document.querySelector(tourData[step].selector);
     
-    // Perbaikan Lintas Halaman: Jika elemen tidak ada di halaman saat ini (Misal sedang di checkout)
+    // Perbaikan Lintas Halaman
     if (!el) {
         console.warn("Elemen Tur tidak ditemukan di halaman ini:", tourData[step].selector);
         overlay.style.display = "none";
@@ -178,7 +188,6 @@ function showStep(step) {
     setTimeout(() => {
         let rect = el.getBoundingClientRect();
         tooltip.style.left = Math.max(10, rect.left) + "px";
-        // Perbaikan: Mencegah pop-up hilang ke atas layar jika elemen berada di paling atas
         tooltip.style.top = Math.max(20, rect.top - 160) + "px";
     }, 300);
 }
@@ -227,7 +236,6 @@ function jalankanTurOtomatis() {
     }, 1200);
 }
 
-// Mengecek apakah halaman sudah selesai dimuat untuk menghindari Race Condition
 if (document.readyState === "complete") {
     jalankanTurOtomatis();
 } else {
@@ -268,8 +276,6 @@ document.addEventListener("click", (e) => {
     if (currentStep === 8) {
         const btn = e.target.closest("button[onclick='lanjutKeCheckout()']");
         if (btn) {
-            // Kita paksa atur state ke Step 9.
-            // Sehingga saat checkout.html berhasil terbuka, tur langsung otomatis melompat ke form!
             localStorage.setItem(TOUR_KEY, 9);
         }
     }
