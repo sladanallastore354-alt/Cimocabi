@@ -90,14 +90,14 @@
         <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
             <div class="relative z-10 max-w-full">
                 <div class="flex flex-wrap items-center gap-2 mb-2">
-                    <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Cari Ide Hampers? Cimocabi aja🩷</span>
+                    <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Bisa Jadi Ide Hampers! ♡</span>
                 </div>
                 <h1 class="text-xl font-bold mt-2 leading-tight">OPEN PRE-ORDER NOW!</h1>
-                <p class="text-xs text-purple-100 mt-1">Camilan Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
+                <p class="text-xs text-purple-100 mt-1">Enak, Gurih, Praktis, cocok untuk snack nonton, bekal keluarga & acara arisan.</p>
             </div>
-        <div class="inline-flex items-center bg-amber-400/40 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-amber-200/30 shadow-sm digital-clock-style text-amber-950 font-bold mt-4">
-    <i class="fa-solid fa-clock mr-1.5 text-[11px]"></i>
-    <span id="clock-time" class="text-xs tracking-wider">00:00</span>
+        <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
+    <i class="fa-solid fa-clock mr-1 text-[10px]"></i>
+    <span id="clock-time">00:00:00</span>
             </div>
             <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
         </div>
@@ -219,11 +219,9 @@
                     <p class="font-bold text-purple-600">3. Validasi Pembayaran</p>
                     <p class="text-gray-500">Pesanan hanya akan diproses dan masuk antrean masak setelah pembeli mengirimkan bukti transfer berupa foto/tangkapan layar yang sah kepada Admin.</p>
                 </div>
-            <div class="mt-6 flex justify-end">
-                <button onclick="toggleTerms()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-xl text-xs font-bold transition-all shadow-lg">
-                    Saya Mengerti & Lanjut
-                </button>
             </div>
+            <button onclick="toggleTerms()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl text-xs shadow transition cursor-pointer">Saya Mengerti & Setuju</button>
+        </div>
     </div>
 
     <a href="#" id="wa-floating-btn" target="_blank" class="wa-floating">
@@ -540,16 +538,8 @@
         };
 
         renderProducts(products);
-    // TAMBAHKAN LOGIKA INI:
-    // Cek apakah user sudah pernah tekan "Saya Mengerti" sebelumnya
-if (!localStorage.getItem('cimocabi_terms_accepted')) {
-        setTimeout(toggleTerms, 1000); 
-    }
-        // Jika belum, munculkan modal setelah 1 detik
-        setTimeout(toggleTerms, 1000);
-        function terimaSyarat() {
-        localStorage.setItem('cimocabi_terms_accepted', 'true');
-    toggleTerms();
+
+        function toggleTerms() {
             const modal = document.getElementById('terms-modal');
             if(modal.classList.contains('hidden')) {
                 modal.classList.remove('hidden');
