@@ -51,27 +51,25 @@
     </style>
 </head>
 <body class="bg-purple-50/30 text-gray-800">
-
     <header class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-40 px-4 py-3 flex justify-between items-center border-b border-purple-100">
         
         <div class="flex items-center space-x-2">
             <img src="images/logo.jpg" alt="Logo Cimocabi" class="w-9 h-9 rounded-full object-cover border border-purple-100 shadow-sm flex-shrink-0">
-             <span class="text-2xl font-bold text-purple-600 tracking-wide cimo-burst">
-    <span>C</span><span>I</span><span>M</span><span>O</span><span>C</span><span>A</span><span>B</span><span>I</span>
-           </span>
-
+            <span class="text-2xl font-bold text-purple-600 tracking-wide cimo-burst">
+                <span>C</span><span>I</span><span>M</span><span>O</span><span>C</span><span>A</span><span>B</span><span>I</span>
+            </span>
         </div>
         
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2">
             
-            </div>
             <button onclick="lanjutKeCheckout()" class="relative block w-28 h-11 overflow-hidden rounded-xl active:scale-[0.98] transition flex-shrink-0 p-0 border-0 bg-transparent cursor-pointer shadow-xs">
                 <img src="images/lanjut-bayar.png" alt="pesan & bayar disini" class="w-full h-full object-cover scale-[1.28]">
                 <span id="cart-count" class="absolute top-0.5 right-0.5 bg-amber-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">00</span>
             </button>
             
+            <div id="tempat-kebab-menu"></div>
+            
         </div>
-        <div id="tempat-kebab-menu"></div>
     </header>
     
     <section class="p-4 pb-2">
@@ -552,7 +550,7 @@
         </script>
     <script src="tour.js?v=6"></script>
     <script src="validasi.js"></script>
- <script src="komponen/kebab.js"></script>
+ <script src="kebab.js"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
