@@ -51,7 +51,7 @@
     </style>
 </head>
 <body class="bg-purple-50/30 text-gray-800">
-    <header class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-40 px-4 py-3 flex justify-between items-center border-b border-purple-100">
+    <header class="sticky top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-[1000] px-4 py-3 flex justify-between items-center border-b border-purple-100">
         
         <div class="flex items-center space-x-2">
             <img src="images/logo.jpg" alt="Logo Cimocabi" class="w-9 h-9 rounded-full object-cover border border-purple-100 shadow-sm flex-shrink-0">
@@ -95,11 +95,6 @@
             Melariskan dagangan kami sama dengan mendukung ekonomi Indonesia! Ayo lariskan dagangan kami dan dukung UMKM! &nbsp;&nbsp;&nbsp;&nbsp; 🇮🇩✨ &nbsp; "Semoga Alloh memberikan kelancaran,keluasan, dan kebarokan rezeki kita" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </div>
-
-            <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
-        </div>
-    </section>
-
             </div>
             <div class="absolute right-[-10px] bottom-[-20px] w-40 h-40 opacity-20 bg-white rounded-full"></div>
         </div>
@@ -121,11 +116,11 @@
         <h2 class="text-sm font-bold text-gray-700 mb-3 md:text-base">Yuk, Stock Sekarang! Klik produk untuk detail ♡</h2>
         <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4"></div>
     </main>
-    <div id="detail-modal" class="fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 hidden opacity-0 flex items-end justify-center">
+    <div id="detail-modal" class="fixed inset-0 bg-black/60 z-[4000] transition-opacity duration-300 hidden opacity-0 flex items-end justify-center">
         <div class="w-full max-w-md bg-white rounded-t-3xl p-5 space-y-4 max-h-[85vh] overflow-y-auto transform translate-y-full transition-transform duration-300" id="detail-container"></div>
     </div>
 
-    <div id="cart-drawer" class="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 hidden opacity-0">
+    <div id="cart-drawer" class="fixed inset-0 bg-black/50 z-[3000] transition-opacity duration-300 hidden opacity-0">
         <div class="absolute right-0 bottom-0 top-0 w-full max-w-md bg-white rounded-t-2xl md:rounded-l-2xl md:rounded-t-none flex flex-col shadow-2xl">
             <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-purple-50/50">
                 <h3 class="font-bold text-gray-700"><i class="fa-solid fa-basket-shopping text-purple-600 mr-2"></i>Keranjang Belanja</h3>
@@ -187,7 +182,7 @@
         </button>
     </footer>
 
-    <div id="terms-modal" class="fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 hidden opacity-0 flex items-center justify-center p-4">
+    <div id="terms-modal" class="fixed inset-0 bg-black/60 z-[5000] transition-opacity duration-300 hidden opacity-0 flex items-center justify-center p-4">
         <div class="w-full max-w-sm bg-white rounded-2xl p-5 space-y-4 max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-gray-100 pb-2">
                 <h3 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-shield-halved text-purple-600 mr-2"></i>Ketentuan Cimocabi</h3>
@@ -551,12 +546,31 @@
     <script src="tour.js?v=6"></script>
     <script src="validasi.js"></script>
  <script src="kebab.js"></script>
-    <script type="text/javascript">
+ <script>
+window.addEventListener("load", ()=>{
+
+    // Hapus banner Google Translate terus-menerus
+    setInterval(()=>{
+
+        const banner =
+            document.querySelector(".goog-te-banner-frame");
+
+        if(banner){
+            banner.style.display="none";
+        }
+
+        document.body.style.top="0px";
+
+    },300);
+
+});
+</script>
+<script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'id', // Bahasa asli website (Indonesia)
                 includedLanguages: 'en,ja,ko,ar,ms,zh-CN', // Pilihan bahasa: Inggris, Jepang, Korea, Arab, Melayu, Mandarin
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                layout: google.translate.TranslateElement.InlineLayout.VERTICAL
             }, 'google_translate_element');
         }
     </script>

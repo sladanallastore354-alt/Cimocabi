@@ -128,33 +128,45 @@
         0 0 8px rgba(255,215,0,.8),
         0 0 16px rgba(255,215,0,.4);
 }
+
 /* ==========================================
-   KUSTOMISASI GOOGLE TRANSLATE
-   ========================================== */
-/* Sembunyikan banner atas bawaan Google agar layout tidak turun */
-.goog-te-banner-frame.skiptranslate {
+   GOOGLE TRANSLATE FIX
+========================================== */
+
+/* Hilangkan banner atas */
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame {
     display: none !important;
 }
+
+/* Cegah body bergeser */
 body {
-    top: 0px !important;
+    top: 0 !important;
 }
-/* Rapikan desain kotak dropdown pilihan bahasanya */
-.goog-te-combo {
-    border: 1px solid #d8b4fe;
-    border-radius: 0.5rem;
-    padding: 0.25rem;
-    outline: none;
-    color: #4b5563;
-    background-color: white;
-    width: 100%;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.875rem;
-}
-/* Sembunyikan tulisan "Powered by Google" agar lebih bersih */
-.goog-logo-link, .goog-te-gadget span {
+
+/* Hilangkan iframe banner */
+.skiptranslate iframe {
     display: none !important;
 }
+
+/* Hilangkan tulisan Powered by Google */
+.goog-logo-link,
+.goog-te-gadget span {
+    display: none !important;
+}
+
 .goog-te-gadget {
     color: transparent !important;
-    font-size: 0px;
+    font-size: 0;
+}
+
+/* Percantik dropdown bahasa */
+.goog-te-combo{
+    width:100%;
+    padding:8px;
+    border-radius:12px;
+    border:1px solid #d8b4fe;
+    background:white;
+    font-size:13px;
+    color:#4b5563;
 }
