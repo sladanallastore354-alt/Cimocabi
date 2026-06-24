@@ -479,3 +479,29 @@ button[onclick="lanjutKeCheckout()"] {
     cursor: pointer !important;
     pointer-events: auto !important;
 }
+/* ==========================================
+   STYLE TOMBOL CHECK-OUT (GLASSMORPHISM LUCU)
+   ========================================== */
+.btn-checkout-glass {
+    background: rgba(147, 51, 234, 0.15); 
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 18px; 
+    box-shadow: 0 4px 10px rgba(147, 51, 234, 0.08);
+    min-width: 120px;
+    height: 44px; 
+}
+
+.btn-checkout-glass:hover {
+    background: rgba(147, 51, 234, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(147, 51, 234, 0.15);
+}
+
+.cart-badge {
+    background-color: #ff758f; 
+    color: white;
+    box-shadow: 0 2px 4px rgba(255, 117, 143, 0.4);
+    z-index: 10;
+}

@@ -113,10 +113,14 @@
         
         <div class="flex items-center space-x-2">
             
-            <button onclick="lanjutKeCheckout()" class="relative block w-28 h-11 overflow-hidden rounded-xl active:scale-[0.98] transition flex-shrink-0 p-0 border-0 bg-transparent cursor-pointer shadow-xs">
-                <img src="images/lanjut-bayar.png" alt="Pesan dan Bayar Disini" width="112" height="44" draggable="false" class="w-full h-full object-cover scale-[1.28] select-none">
-                <span id="cart-count" class="absolute top-0.5 right-0.5 bg-amber-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">00</span>
-            </button>
+            <button onclick="lanjutKeCheckout()" class="btn-checkout-glass relative flex items-center justify-center px-4 py-2 active:scale-[0.98] transition-all flex-shrink-0 cursor-pointer">
+    <span class="text-sm font-bold text-purple-700 tracking-wide flex items-center gap-1">
+        Check-out 💳
+    </span>
+    <span id="cart-count" class="cart-badge absolute -top-1.5 -right-1.5 text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center border border-white shadow-sm hidden">
+        0
+    </span>
+</button>
             
             <div id="tempat-kebab-menu" 
             class="relative z-10"></div>
