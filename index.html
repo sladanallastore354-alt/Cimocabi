@@ -413,7 +413,7 @@ img: "images/coming-soon.jpg"
 }
         ];
 
-        let cart = [];
+        
         let currentCategory = 'all';
         let activeProductId = null;
         function renderProducts(items) {
@@ -652,51 +652,32 @@ draggable="false">
 }
 
         function addFromModalToCart() {
-
     const prod = products.find(p => p.id === activeProductId);
-
     if (!prod) return;
 
     const qtyEl = document.getElementById('detail-qty');
-
     if (!qtyEl) return;
 
     const qty = parseInt(qtyEl.innerText);
-
     const variantRadio = document.querySelector('input[name="prod-variant"]:checked');
+    const variant = variantRadio ? variantRadio.value : "Standar";
+    const cekKategori = prod.category ? prod.category.toLowerCase() : "";
 
-    const variant = variantRadio
-        ? variantRadio.value
-        : "Standar";
-
-    const cekKategori = prod.category
-        ? prod.category.toLowerCase()
-        : "";
-
-    if (
-        prod.price === 0 ||
-        cekKategori.includes('coming soon') ||
-        cekKategori.includes('comingsoon')
-    ) {
-
-        alert(
-            "Tidak bisa dibeli untuk saat ini, silakan tunggu update berikutnya melalui sosial media kami. Informasi dapat diakses pada bagian bawah halaman."
-        );
-
+    if (prod.price === 0 || cekKategori.includes('coming soon') || cekKategori.includes('comingsoon')) {
+        alert("Tidak bisa dibeli untuk saat ini, silakan tunggu update berikutnya melalui sosial media kami.");
         return;
     }
 
     const cartItemKey = `${prod.id}-${variant}`;
-
-    const exist = cart.find(item => item.cartKey === cartItemKey);
+    
+    // Membaca kondisi keranjang paling segar dari localStorage
+    let currentCart = getCart();
+    const exist = currentCart.find(item => item.cartKey === cartItemKey);
 
     if (exist) {
-
         exist.qty += qty;
-
     } else {
-
-        cart.push({
+        currentCart.push({
             cartKey: cartItemKey,
             id: prod.id,
             name: prod.name,
@@ -704,101 +685,68 @@ draggable="false">
             variant: variant,
             qty: qty
         });
-
     }
 
+    // Disimpan permanen agar tidak lenyap saat reload halaman
+    saveCart(currentCart);
     updateCart();
-
     closeDetail();
-
 }
-// ===== CACHE DOM =====
-const productGrid = document.getElementById('product-grid');
 
-const cartCountEl = document.getElementById('cart-count');
-const cartItemsEl = document.getElementById('cart-items');
-const cartTotalEl = document.getElementById('cart-total');
-
-const searchInput = document.getElementById('search-bar');
-
-const cartPopup = document.getElementById('cart-drawer');
-const detailModal = document.getElementById('detail-modal');
-        function updateCart() {
-
+function updateCart() {
     const countEl = document.getElementById('cart-count');
     const itemsEl = document.getElementById('cart-items');
     const totalEl = document.getElementById('cart-total');
 
     if (!countEl || !itemsEl || !totalEl) return;
 
-    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    // Menarik data dari penyimpanan lokal browser
+    let currentCart = getCart();
+
+    const totalItems = currentCart.reduce((sum, item) => sum + item.qty, 0);
+    const totalPrice = currentCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
     countEl.textContent = totalItems;
     countEl.classList.toggle('hidden', totalItems === 0);
-
     totalEl.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
 
-    if (cart.length === 0) {
-
-        itemsEl.innerHTML = `
-            <p class="text-xs text-gray-400 text-center py-6">
-                Keranjang masih kosong
-            </p>
-        `;
-
+    if (currentCart.length === 0) {
+        itemsEl.innerHTML = `<p class="text-xs text-gray-400 text-center py-6">Keranjang masih kosong</p>`;
         return;
     }
 
-    itemsEl.innerHTML = cart.map(item => {
-
-        const variantLabel = item.variant !== "Standar"
-            ? `<span class="text-[10px] bg-purple-100 text-purple-700 px-1 py-0.5 rounded font-semibold">
-                    [ ${item.variant} ]
-               </span>`
+    itemsEl.innerHTML = currentCart.map(item => {
+        const variantLabel = item.variant !== "Standar" 
+            ? `<span class="text-[10px] bg-purple-100 text-purple-700 px-1 py-0.5 rounded font-semibold">[ ${item.variant} ]</span>` 
             : '';
 
         return `
             <div class="flex items-center justify-between border-b border-purple-50 pb-2">
-
-                <div class="max-w-[65%]">
-
-                    <h4 class="text-xs font-bold text-gray-700 truncate">
-                        ${item.name}
-                    </h4>
-
-                    <p class="text-[10px] text-purple-500 mt-0.5">
-                        Rp ${item.price.toLocaleString('id-ID')}
-                        ${variantLabel}
-                    </p>
-
+                <div class="max-w-[50%]">
+                    <h4 class="text-xs font-bold text-gray-700 truncate">${item.name}</h4>
+                    <p class="text-[10px] text-purple-500 mt-0.5">Rp ${item.price.toLocaleString('id-ID')} ${variantLabel}</p>
                 </div>
-
-                <div class="flex items-center space-x-1">
-
-                    <button
-                        onclick="changeCartQty('${item.cartKey}', -1)"
-                        class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-bold active:scale-95 transition">
-                        -
+                
+                <div class="flex items-center space-x-3">
+                    <div class="flex items-center bg-gray-100 rounded-lg px-1 py-0.5 shadow-inner">
+                        <button onclick="changeCartQty('${item.cartKey}', -1)" class="text-gray-600 px-2 text-xs font-bold hover:text-purple-600 active:scale-95 transition">-</button>
+                        
+                        <input type="number" 
+                               value="${item.qty}" 
+                               onchange="setManualQuantity('${item.cartKey}', this.value)" 
+                               class="w-6 text-center text-[11px] font-bold bg-transparent border-none focus:outline-none text-gray-700" 
+                               min="1">
+                        
+                        <button onclick="changeCartQty('${item.cartKey}', 1)" class="text-gray-600 px-2 text-xs font-bold hover:text-purple-600 active:scale-95 transition">+</button>
+                    </div>
+                    
+                    <button onclick="removeItem('${item.cartKey}')" class="text-red-400 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-md transition text-xs">
+                        <i class="fa-solid fa-trash-can"></i>
                     </button>
-
-                    <span class="text-xs font-bold px-1">
-                        ${item.qty}
-                    </span>
-
-                    <button
-                        onclick="changeCartQty('${item.cartKey}', 1)"
-                        class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-bold active:scale-95 transition">
-                        +
-                    </button>
-
                 </div>
-
             </div>
         `;
-
     }).join('');
-
 }
 
         function changeCartQty(cartKey, delta) {
@@ -942,7 +890,8 @@ const detailModal = document.getElementById('detail-modal');
             setInterval(() => {
                 document.title = toggleTitle ? "Cimocabi - Frozen Food & Cemilan Praktis ❄️" : "Ada Promo Menarik Hari Ini! 🥳";
                 toggleTitle = !toggleTitle;
-            }, 2000);
+            }, 2000); 
+            updateCart();
         };
 
         renderProducts(products);
@@ -1003,6 +952,7 @@ const detailModal = document.getElementById('detail-modal');
 
 <script
 src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-</script>
+</script> 
+<script src="cart.js"></script>
 </body>
 </html>
