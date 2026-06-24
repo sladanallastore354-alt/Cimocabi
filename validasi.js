@@ -4,19 +4,32 @@
 // ========================================================
 function lanjutKeCheckout() {
     // 1. Pastikan keranjang tidak kosong
-    if (typeof cart === 'undefined' || cart.length === 0) {
-        alert("Keranjang belanja Anda masih kosong! Silakan pilih menu Cimocabi terlebih dahulu sebelum checkout.");
-        return;
-    }
+    if (
+    typeof cart === 'undefined' ||
+    !Array.isArray(cart) ||
+    cart.length === 0
+) {
+
+    alert(
+        "Keranjang belanja Anda masih kosong! Silakan pilih menu Cimocabi terlebih dahulu sebelum checkout."
+    );
+
+    return;
+
+}
 
     // 2. Cek setiap produk di dalam keranjang
     let adaProdukTidakValid = false;
 
-    for (let i = 0; i < cart.length; i++) {
-        let item = cart[i];
+    for (const item of cart) {
+
+    if (!item) continue;
+
+if (!item) continue;
         
         // Ambil nilai harga 
-        let hargaProduk = item.price !== undefined ? item.price : item.harga;
+        let hargaProduk =
+    item.price ?? item.harga ?? 0;
         
         // Ubah format harga ke angka bulat (berjaga-jaga jika formatnya string)
         if (typeof hargaProduk === 'string') {
@@ -25,22 +38,36 @@ function lanjutKeCheckout() {
 
         // 3. PERBAIKAN BUG: Ambil kategori langsung dari array 'products' berdasarkan ID
         let kategoriProduk = "";
-        
-        // Cek apakah array products tersedia (untuk keamanan)
-        if (typeof products !== 'undefined') {
-            // Cocokkan ID produk di keranjang dengan ID di database
-            let produkAsli = products.find(p => p.id === item.id);
-            if (produkAsli && produkAsli.category) {
-                kategoriProduk = produkAsli.category;
-            }
-        }
+
+if (
+    typeof products !== 'undefined' &&
+    Array.isArray(products)
+) {
+
+    const produkAsli =
+        products.find(
+            p => p.id === item.id
+        );
+
+    if (
+        produkAsli &&
+        produkAsli.category
+    ) {
+
+        kategoriProduk =
+            produkAsli.category;
+
+    }
+
+}
         
         // Fallback (cadangan) jika tidak ditemukan di database products utama
         if (!kategoriProduk) {
             kategoriProduk = item.category || item.kategori || item.label || "";
         }
-        
-        kategoriProduk = kategoriProduk.toLowerCase();
+        kategoriProduk = String(kategoriProduk);
+    
+        kategoriProduk = String(kategoriProduk).toLowerCase();
 
         // 4. Logika Pemblokiran: Jika harga = 0 ATAU ada kata "comingsoon" di kategori
         if (hargaProduk === 0 || kategoriProduk.includes('comingsoon') || kategoriProduk.includes('coming soon')) {
@@ -56,6 +83,24 @@ function lanjutKeCheckout() {
     }
     
     // 6. Jika semua aman, simpan ke memori dan pindah ke halaman checkout
-    localStorage.setItem('cimocabi_cart_data', JSON.stringify(cart));
+    try {
+
+    localStorage.setItem(
+        'cimocabi_cart_data',
+        JSON.stringify(cart)
+    );
+
     window.location.href = 'checkout.html';
+
+} catch (error) {
+
+    console.error(
+        "Gagal menyimpan data keranjang:",
+        error
+    );
+
+    alert(
+        "Terjadi masalah saat memproses keranjang belanja."
+    );
+
 }

@@ -2,59 +2,110 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+
+    <!-- Responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
     <title>Cimocabi - Frozen Food & Cemilan Praktis</title>
-    <link class="style-link" rel="stylesheet" href="style.css?v8">
+
+    <meta
+        name="description"
+        content="Cimocabi menyediakan frozen food dan cemilan praktis seperti cireng isi, cimol, dan berbagai paket favorit dengan sistem pre-order yang praktis dan higienis.">
+
+    <meta
+        name="keywords"
+        content="cimocabi, frozen food, cireng isi, cimol, cemilan, makanan beku, snack">
+
+    <meta
+        name="author"
+        content="Cimocabi">
+
+    <meta
+        name="robots"
+        content="index,follow">
+
+    <!-- Theme -->
+    <meta
+        name="theme-color"
+        content="#9333EA">
+
+    <!-- Open Graph -->
+    <meta property="og:title"
+        content="Cimocabi - Frozen Food & Cemilan Praktis">
+
+    <meta property="og:description"
+        content="Cireng isi, cimol dan berbagai paket favorit dengan sistem pre-order yang praktis dan higienis.">
+
+    <meta property="og:type"
+        content="website">
+
+    <meta property="og:image"
+        content="images/logo.jpg">
+
+    <!-- Canonical -->
+    <link rel="canonical"
+        href="https://github.com/sladanallastore354-alt/Cimocabi">
+
+    <!-- Preconnect -->
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <!-- Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+        href="style.css?v10">
+
+    <!-- Tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body { font-family: 'Poppins', sans-serif; }
 
-
-        /* 1. ANIMASI SHAKE INTELLIGENT UNTUK BUTTON GAMBAR */
-        @keyframes getar-tombol {
-            0%, 100%, 40% { transform: scale(1) translateX(0) rotate(0deg); }
-            5% { transform: scale(1.02) translateX(-2px) rotate(-0.5deg); }
-            10% { transform: scale(1.02) translateX(2px) rotate(0.5deg); }
-            15% { transform: scale(1.02) translateX(-2px) rotate(-0.5deg); }
-            20% { transform: scale(1.02) translateX(2px) rotate(0.5deg); }
-            25%, 35% { transform: scale(1.01) translateX(0) rotate(0deg); }
+        body{
+            font-family:'Poppins',sans-serif;
         }
 
-        .animate-shake {
-            animation: getar-tombol 3s ease-in-out infinite;
-            transform-origin: center;
+        /* Optimasi animasi GPU */
+        .animate-shake,
+        .cimo-burst span,
+        .running-text-gerak,
+        .wa-floating{
+            will-change:transform;
+            transform:translateZ(0);
         }
 
-        /* 2. ANIMASI BURST POP (EFEK LEDAKAN PENDARAN PER HURUF CIMOCABI) */
-        @keyframes burst-efek {
-            0%, 100%, 45% { transform: scale(1); text-shadow: none; filter: brightness(1); }
-            5% { transform: scale(1.35); text-shadow: 0 0 12px rgba(168, 85, 247, 0.8), 0 0 25px rgba(168, 85, 247, 0.4); filter: brightness(1.2); }
-            12% { transform: scale(0.95); }
-            20% { transform: scale(1.05); }
-            28% { transform: scale(1); }
+        /* Mengurangi beban CPU */
+        @media (prefers-reduced-motion:reduce){
+
+            *,
+            *::before,
+            *::after{
+                animation:none!important;
+                transition:none!important;
+            }
+
         }
 
-        .cimo-burst span {
-            display: inline-block;
-            animation: burst-efek 2.5s ease-in-out infinite;
-        }
-        .cimo-burst span:nth-child(1) { animation-delay: 0.1s; }
-        .cimo-burst span:nth-child(2) { animation-delay: 0.2s; }
-        .cimo-burst span:nth-child(3) { animation-delay: 0.3s; }
-        .cimo-burst span:nth-child(4) { animation-delay: 0.4s; }
-        .cimo-burst span:nth-child(5) { animation-delay: 0.5s; }
-        .cimo-burst span:nth-child(6) { animation-delay: 0.6s; }
-        .cimo-burst span:nth-child(7) { animation-delay: 0.7s; }
-        .cimo-burst span:nth-child(8) { animation-delay: 0.8s; }
     </style>
+
 </head>
 <body class="bg-purple-50/30 text-gray-800">
-    <header class="sticky top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-[1000] px-4 py-3 flex justify-between items-center border-b border-purple-100">
+    <header class="sticky top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-[1000] px-4 py-3 flex justify-between items-center border-b border-purple-100">
         
         <div class="flex items-center space-x-2">
-            <img src="images/logo.jpg" alt="Logo Cimocabi" class="w-9 h-9 rounded-full object-cover border border-purple-100 shadow-sm flex-shrink-0">
+            <img src="images/logo.jpg" alt="Logo Cimocabi" width="36" height="36" draggable="false" class="w-9 h-9 rounded-full object-cover border border-purple-100 shadow-sm flex-shrink-0 select-none">
             <span class="text-2xl font-bold text-purple-600 tracking-wide cimo-burst">
                 <span>C</span><span>I</span><span>M</span><span>O</span><span>C</span><span>A</span><span>B</span><span>I</span>
             </span>
@@ -63,7 +114,7 @@
         <div class="flex items-center space-x-2">
             
             <button onclick="lanjutKeCheckout()" class="relative block w-28 h-11 overflow-hidden rounded-xl active:scale-[0.98] transition flex-shrink-0 p-0 border-0 bg-transparent cursor-pointer shadow-xs">
-                <img src="images/lanjut-bayar.png" alt="pesan & bayar disini" class="w-full h-full object-cover scale-[1.28]">
+                <img src="images/lanjut-bayar.png" alt="Pesan dan Bayar Disini" width="112" height="44" draggable="false" class="w-full h-full object-cover scale-[1.28] select-none">
                 <span id="cart-count" class="absolute top-0.5 right-0.5 bg-amber-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">00</span>
             </button>
             
@@ -73,7 +124,7 @@
     </header>
     
     <section class="p-4 pb-2">
-        <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
+        <div class="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden rounded-xl">
             <div class="relative z-10 max-w-full">
                 <div class="flex flex-wrap items-center gap-2 mb-2">
                     <span class="bg-amber-400 text-gray-900 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Cari Ide Hampers? Cimocabi aja♡</span>
@@ -121,7 +172,7 @@
     </div>
 
     <div id="cart-drawer" class="fixed inset-0 bg-black/50 z-[3000] transition-opacity duration-300 hidden opacity-0">
-        <div class="absolute right-0 bottom-0 top-0 w-full max-w-md bg-white rounded-t-2xl md:rounded-l-2xl md:rounded-t-none flex flex-col shadow-2xl">
+        <div class="absolute right-0 bottom-0 top-0 w-full max-w-md bg-white rounded-t-2xl md:rounded-l-2xl md:rounded-t-none flex flex-col shadow-md">
             <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-purple-50/50">
                 <h3 class="font-bold text-gray-700"><i class="fa-solid fa-basket-shopping text-purple-600 mr-2"></i>Keranjang Belanja</h3>
                 <button onclick="toggleCart()" class="text-gray-400 hover:text-gray-600 text-xl"><i class="fa-solid fa-xmark"></i></button>
@@ -209,64 +260,262 @@
     <a href="#" id="wa-floating-btn" target="_blank" class="wa-floating">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
-    
-    <script>
+
+    <script>'use strict';
         const products = [
-            { id: 1, name: "PAKET HEMAT (Cireng + Cimol)", price: 25000, originalPrice: 31000,category: "Bundling", stock: 100, variantType: "food", desc: "Perpaduan pas untuk ngemil santai! Terdiri dari 1 Pack Cireng Frozen isi ayam/keju (4pcs) dan 1 Pack Cimol Frozen isi keju melimpah (25 butir). Lengkap dengan bumbu tabur gurih.", img: "images/paket-komplit.jpg" },
-            { id: 2, name: "PAKET KOMPLIT (Cireng + Cimol)", price: 33000, originalPrice: 40000,category: "Bundling", stock: 100, variantType: "food", desc: "Porsi lebih puas untuk keluarga! Dapat 2 Pack Cireng Frozen (total 8 pcs, bebas pilih varian rasa isi ayam/keju) dan 1 Pack Cimol Frozen isi keju (25 butir).", img: "images/paket-bundling.jpg" },
-            { id: 3, name: "PAKET FAMILY (Cireng + Cimol)", price: 46000, originalPrice: 53000 ,category: "Bundling", stock: 100, variantType: "food", desc: "Paket super untung untuk acara arisan atau kumpul besar! Berisi 2 Pack Cireng Frozen (8pcs) ditambah 2 Pack Cimol Frozen isi keju (total 50 butir). Sangat cocok dijadikan ide hampers cantik.", img: "images/paket-keluarga.jpg" },
-            { id: 4, name: "Cireng Isi Ayam / Keju", price: 10000, originalPrice: 13000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs per bungkus. Cireng premium bertekstur renyah garing di luar namun sangat lembut di dalam. Dilengkapi isian daging ayam suwir pedas atau keju gurih melimpah.", img: ["images/cireng-isi-ayam-pedas.jpg", "images/cireng-isi-keju.jpg"] },
-            { id: 5, name: "Cireng Kuah Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 4 Pcs. Sensasi baru makan cireng isi hangat yang disiram racikan bumbu kuah keju spesial yang kental, creamy, dan gurih pedas manis berpadu sempurna.", img: "images/cireng-kuah-keju.jpg" },
-            { id: 6, name: "Cimol Isi Keju", price: 15000, category: "Frozen", stock: 100, variantType: "food", desc: "Isi 25 Butir. Cimol kopong anti-meledak saat digoreng. Isian potongan keju di dalamnya meleleh pas dikunyah, makin nikmat dicampur dengan aneka pilihan bumbu tabur.", img: "images/cimol-isi-keju.jpg" },
-            { id: 8, name: "Add On: Cooler Bag", price: 5000, category: "Frozen", stock: 100, variantType: "none", desc: "Tas aluminium foil pelindung suhu dingin khusus berukuran 26x17x28cm. Menjaga kualitas frozen food Cimocabi tetap beku dan fresh selama proses pengiriman ke rumah Anda.", img: "images/cooler-bag.jpg" },
-            { id: 7, name: "Coming Soon", price: 0, category: "COMING SOON", stock: 0, variantType: "none", desc: "Produk akan tersedia nanti, harap sabar menunggu....", img: "images/coming-soon.jpg" }
+{ id: 1, 
+name: "PAKET HEMAT (Cireng + Cimol)", 
+
+price: 25000, 
+originalPrice: 31000, 
+
+category: "Bundling", 
+stock: 100, 
+
+rating: 4.9, 
+sold: 30, 
+
+variantType: "food", 
+
+desc: "Perpaduan pas untuk ngemil santai! Terdiri dari 1 Pack Cireng Frozen isi ayam/keju (4pcs) dan 1 Pack Cimol Frozen isi keju melimpah (25 butir). Lengkap dengan bumbu tabur gurih.", 
+
+img: "images/paket-komplit.jpg" 
+
+},
+{ id: 2, 
+name: "PAKET KOMPLIT (Cireng + Cimol)", 
+
+price: 33000, 
+originalPrice: 40000, 
+
+category: "Bundling", 
+stock: 100, 
+
+rating: 4.9, 
+sold: 25, 
+
+variantType: "food", 
+
+desc: "Porsi lebih puas untuk keluarga! Dapat 2 Pack Cireng Frozen (total 8 pcs, bebas pilih varian rasa isi ayam/keju) dan 1 Pack Cimol Frozen isi keju (25 butir).", 
+
+img: "images/paket-bundling.jpg" 
+
+},
+{ id: 3, 
+name: "PAKET FAMILY (Cireng + Cimol)", 
+
+price: 46000, 
+originalPrice: 53000, 
+
+category: "Bundling", 
+stock: 100, 
+
+rating: 4.8, 
+sold: 29, 
+
+variantType: "food", 
+
+desc: "Paket super untung untuk acara arisan atau kumpul besar! Berisi 2 Pack Cireng Frozen (8pcs) ditambah 2 Pack Cimol Frozen isi keju (total 50 butir). Sangat cocok dijadikan ide hampers cantik.", 
+
+img: "images/paket-keluarga.jpg" 
+
+},
+{ id: 4, 
+name: "Cireng Isi Ayam / Keju", 
+
+price: 10000, 
+originalPrice: 13000, 
+
+category: "Frozen", 
+stock: 100, 
+
+rating: 5.0, 
+sold: 1212, 
+
+variantType: "food", 
+
+desc: "Isi 4 Pcs per bungkus. Cireng premium bertekstur renyah garing di luar namun sangat lembut di dalam. Dilengkapi isian daging ayam suwir pedas atau keju gurih melimpah.", 
+
+img: ["images/cireng-isi-ayam-pedas.jpg", "images/cireng-isi-keju.jpg"] 
+
+},
+{ id: 5, 
+name: "Cireng Kuah Keju", 
+
+price: 15000, 
+
+category: "Frozen", 
+stock: 100, 
+
+rating: 4.9, 
+sold: 313, 
+
+variantType: "food", 
+
+desc: "Isi 4 Pcs. Sensasi baru makan cireng isi hangat yang disiram racikan bumbu kuah keju spesial yang kental, creamy, dan gurih pedas manis berpadu sempurna.", 
+
+img: "images/cireng-kuah-keju.jpg" 
+
+},
+{ id: 6, 
+name: "Cimol Isi Keju", 
+
+price: 15000, 
+
+category: "Frozen", 
+stock: 100, 
+
+rating: 4.8, 
+sold: 2018, 
+
+variantType: "food", 
+
+desc: "Isi 25 Butir. Cimol kopong anti-meledak saat digoreng. Isian potongan keju di dalamnya meleleh pas dikunyah, makin nikmat dicampur dengan aneka pilihan bumbu tabur.", 
+
+img: "images/cimol-isi-keju.jpg" 
+
+},
+{ id: 8, 
+name: "Add On: Cooler Bag", 
+
+price: 5000, 
+
+category: "Frozen", 
+stock: 100, 
+
+rating: 4.8, 
+sold: 77, 
+
+variantType: "none", 
+
+desc: "Tas aluminium foil pelindung suhu dingin khusus berukuran 26x17x28cm. Menjaga kualitas frozen food Cimocabi tetap beku dan fresh selama proses pengiriman ke rumah Anda.", 
+
+img: "images/cooler-bag.jpg" 
+
+},
+{id: 7,
+name: "Coming Soon", 
+
+price: 0, 
+
+category: "COMING SOON", 
+stock: 0, 
+
+rating: 0,
+sold: 0,
+
+variantType: "none",
+
+desc: "Produk akan tersedia nanti, harap sabar menunggu dan pantau trus ya sosial media kami.", 
+
+img: "images/coming-soon.jpg" 
+
+}
         ];
 
         let cart = [];
         let currentCategory = 'all';
         let activeProductId = null;
-       function renderProducts(items) {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-            if(items.length === 0) {
-                grid.innerHTML = '<p class="text-xs text-gray-400 col-span-2 text-center py-8">Produk tidak ditemukan...</p>';
-                return;
-            }
-            items.forEach(prod => {
-                const coverImg = Array.isArray(prod.img) ? prod.img[0] : prod.img;
-                
-                // Logika memunculkan badge DISKON merah berkedip hanya jika ada originalPrice
-                const promoBadge = prod.originalPrice ? `<span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-md animate-kedip shadow-md z-10">DISKON</span>` : '';
-                
-                // Logika memisahkan tampilan harga normal dan harga coret diskon
-                const priceHTML = prod.originalPrice 
-                    ? `<div class="flex flex-col">
-                           <span class="text-[9px] text-gray-400 line-through leading-none mb-0.5">Rp ${prod.originalPrice.toLocaleString('id-ID')}</span>
-                           <span class="text-xs font-bold text-purple-600 leading-none">Rp ${prod.price.toLocaleString('id-ID')}</span>
-                       </div>`
-                    : `<span class="text-xs font-bold text-purple-600">Rp ${prod.price.toLocaleString('id-ID')}</span>`;
+        function renderProducts(items) {
 
-                grid.innerHTML += `
-                    <div onclick="openDetail(${prod.id})" class="bg-white rounded-2xl border border-purple-50/80 p-2.5 shadow-sm flex flex-col justify-between cursor-pointer active:scale-95 transition-transform">
-                        <div>
-                            <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 relative flex items-center justify-center p-1">
-                                <img src="${coverImg}" alt="${prod.name}" class="max-w-full max-h-full object-contain">
-                                <span class="absolute top-1 left-1 bg-purple-100 text-purple-700 text-[8px] font-bold px-1.5 py-0.5 rounded-md">${prod.category}</span>
-                                ${promoBadge}
-                            </div>
-                            <h3 class="text-xs font-bold text-gray-800 line-clamp-1">${prod.name}</h3>
-                            <p class="text-[10px] text-gray-400 line-clamp-2 mt-0.5">${prod.desc}</p>
-                        </div>
-                        <div class="mt-2 flex items-center justify-between">
-                            ${priceHTML}
-                            <span class="text-[9px] bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded font-medium">Detail →</span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-        function openDetail(id) {
-            const prod = products.find(p => p.id === id);
+    const grid = document.getElementById('product-grid');
+
+    if (!grid) return;
+
+    if (!items?.length) {
+        grid.innerHTML = `
+            <p class="text-xs text-gray-400 col-span-2 text-center py-8">
+                Produk tidak ditemukan...
+            </p>
+        `;
+        return;
+    }
+
+    grid.innerHTML = items.map(prod => {
+
+        const coverImg = Array.isArray(prod.img) ? prod.img[0] : prod.img;
+
+        const promoBadge = prod.originalPrice
+            ? `<span class="absolute top-1 right-1 bg-red-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-md animate-kedip shadow-md z-10">DISKON</span>`
+            : '';
+
+        const bestSellerBadge = prod.sold >= 100
+            ? `<span class="absolute bottom-1 right-1 bg-orange-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-md shadow-md z-10">🔥 Terlaris</span>`
+            : '';
+
+        const priceHTML = prod.originalPrice
+            ? `
+                <div class="flex flex-col">
+                    <span class="text-[9px] text-gray-400 line-through leading-none mb-0.5">
+                        Rp ${prod.originalPrice.toLocaleString('id-ID')}
+                    </span>
+                    <span class="text-lg font-bold text-purple-600 leading-none">
+                        Rp ${prod.price.toLocaleString('id-ID')}
+                    </span>
+                </div>`
+            : `
+                <span class="text-xs font-bold text-purple-600">
+                    Rp ${prod.price.toLocaleString('id-ID')}
+                </span>`;
+
+        return `
+        <div class="product-card bg-white rounded-2xl border border-purple-50/80 p-2 shadow-sm hover:shadow-md flex flex-col justify-between cursor-pointer active:scale-[0.98] transition-transform duration-200"
+             data-id="${prod.id}">
+
+            <div>
+
+                <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 relative flex items-center justify-center p-1">
+
+                    <img
+                        src="${coverImg}"
+                        alt="${prod.name}"
+                        loading="lazy"
+                        decoding="async"
+                        class="w-full h-full object-cover select-none"
+draggable="false">
+
+                    <span class="absolute top-1 left-1 bg-purple-100 text-purple-700 text-[8px] font-bold px-1.5 py-0.5 rounded-md">
+                        ${prod.category}
+                    </span>
+
+                    ${promoBadge}
+                    ${bestSellerBadge}
+
+                </div>
+
+                <p class="text-sm font-semibold text-gray-800 line-clamp-2 leading-snug min-h-[40px]">
+                    ${prod.name}
+                </p>
+
+            </div>
+
+            <div class="mt-2 space-y-1">
+
+                ${priceHTML}
+
+                <div class="mt-1 flex items-center text-[10px]">
+                    <span class="text-yellow-500">★</span>
+                    <span class="ml-1 text-gray-500">${prod.rating}</span>
+                    <span class="mx-1 text-gray-300">|</span>
+                    <span class="text-gray-500">Terjual ${prod.sold}</span>
+                </div>
+
+                <div class="text-[10px] text-gray-400 truncate">
+                    📍 Depok, Jawa Barat
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+    }).join('');
+
+}
+            
+        function openDetail(id){
+            const prod = products.find(p => p.id === id); 
+            if (!prod) return;
             activeProductId = id;
             const container = document.getElementById('detail-container');
             const firstImg = Array.isArray(prod.img) ? prod.img[0] : prod.img;
@@ -277,7 +526,7 @@
                 prod.img.forEach(image => {
                     thumbnailsHTML += `
                         <div onclick="changeDetailImage('${image}')" class="w-14 h-14 bg-gray-50 rounded-lg overflow-hidden border border-purple-200 cursor-pointer active:scale-95 transition-transform flex-shrink-0 flex items-center justify-center p-0.5">
-    <img src="${image}" class="max-w-full max-h-full object-contain">
+    <img src="${image}" class="w-full h-full object-cover">
                          </div>`;
                 });
                 thumbnailsHTML += `</div>`;
@@ -311,7 +560,7 @@
                     <button onclick="closeDetail()" class="text-gray-400 text-lg"><i class="fa-solid fa-xmark"></i></button>
                 </div>
               <div class="w-full h-60 bg-gray-50 rounded-2xl overflow-hidden shadow-sm flex items-center justify-center p-2">
-    <img id="main-detail-img" src="${firstImg}" class="max-w-full max-h-full object-contain">
+    <img id="main-detail-img" src="${firstImg}" class="w-full h-full object-cover">
                 </div>
                 ${thumbnailsHTML}
                 <div>
@@ -354,97 +603,245 @@
         }
 
         function closeDetail() {
-            const modal = document.getElementById('detail-modal');
-            const container = document.getElementById('detail-container');
-            container.classList.replace('translate-y-0', 'translate-y-full');
-            modal.classList.replace('opacity-100', 'opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-            activeProductId = null;
-        }
 
-        function adjustDetailQty(delta) {
-            const qtyEl = document.getElementById('detail-qty');
-            let currentQty = parseInt(qtyEl.innerText) + delta;
-            if(currentQty < 1) currentQty = 1;
-            qtyEl.innerText = currentQty;
-        }
+    const modal = document.getElementById('detail-modal');
+    const container = document.getElementById('detail-container');
 
-        function addFromModalToCart() {
-    const prod = products.find(p => p.id === activeProductId);
-    const qty = parseInt(document.getElementById('detail-qty').innerText);
-    const variantRadio = document.querySelector('input[name="prod-variant"]:checked');
-    const variant = variantRadio ? variantRadio.value : "Standar";
+    if (!modal || !container) return;
 
-    // --- SISIPKAN VALIDASI DI SINI ---
-    // Pastikan kategori diubah ke huruf kecil dulu agar pengecekannya lebih akurat
-    let cekKategori = prod.category ? prod.category.toLowerCase() : "";
-    
-    if (prod.price === 0 || cekKategori.includes('coming soon') || cekKategori.includes('comingsoon')) {
-        alert("Tidak bisa di beli untuk saat ini, silahkan tunggu updatenya melalui sosial media kami, informasi bisa di akses pada bagian bawah halaman. ");
-        return; // 'return' akan menghentikan fungsi, sehingga produk batal masuk keranjang
+    container.classList.replace('translate-y-0', 'translate-y-full');
+
+    modal.classList.replace('opacity-100', 'opacity-0');
+
+    setTimeout(() => {
+
+        modal.classList.add('hidden');
+
+    }, 300);
+
+    activeProductId = null;
+
+    // Reset jumlah kembali ke 1
+    const qtyEl = document.getElementById('detail-qty');
+
+    if (qtyEl) {
+        qtyEl.innerText = 1;
     }
-    // ---------------------------------
 
-    const cartItemKey = `${prod.id}-${variant}`;
-    const exist = cart.find(item => item.cartKey === cartItemKey);
+    // Reset pilihan varian
+    const radios = document.querySelectorAll('input[name="prod-variant"]');
 
-    if(exist) { exist.qty += qty; } else {
-        cart.push({ cartKey: cartItemKey, id: prod.id, name: prod.name, price: prod.price, variant: variant, qty: qty });
-    }
-    updateCart();
-    closeDetail();
+    radios.forEach(radio => {
+        radio.checked = false;
+    });
+
 }
 
+        function adjustDetailQty(delta) {
+
+    const qtyEl = document.getElementById('detail-qty');
+
+    if (!qtyEl) return;
+
+    let currentQty = parseInt(qtyEl.innerText) + delta;
+
+    if (currentQty < 1) currentQty = 1;
+
+    qtyEl.innerText = currentQty;
+
+}
+
+        function addFromModalToCart() {
+
+    const prod = products.find(p => p.id === activeProductId);
+
+    if (!prod) return;
+
+    const qtyEl = document.getElementById('detail-qty');
+
+    if (!qtyEl) return;
+
+    const qty = parseInt(qtyEl.innerText);
+
+    const variantRadio = document.querySelector('input[name="prod-variant"]:checked');
+
+    const variant = variantRadio
+        ? variantRadio.value
+        : "Standar";
+
+    const cekKategori = prod.category
+        ? prod.category.toLowerCase()
+        : "";
+
+    if (
+        prod.price === 0 ||
+        cekKategori.includes('coming soon') ||
+        cekKategori.includes('comingsoon')
+    ) {
+
+        alert(
+            "Tidak bisa dibeli untuk saat ini, silakan tunggu update berikutnya melalui sosial media kami. Informasi dapat diakses pada bagian bawah halaman."
+        );
+
+        return;
+    }
+
+    const cartItemKey = `${prod.id}-${variant}`;
+
+    const exist = cart.find(item => item.cartKey === cartItemKey);
+
+    if (exist) {
+
+        exist.qty += qty;
+
+    } else {
+
+        cart.push({
+            cartKey: cartItemKey,
+            id: prod.id,
+            name: prod.name,
+            price: prod.price,
+            variant: variant,
+            qty: qty
+        });
+
+    }
+
+    updateCart();
+
+    closeDetail();
+
+}
+// ===== CACHE DOM =====
+const productGrid = document.getElementById('product-grid');
+
+const cartCountEl = document.getElementById('cart-count');
+const cartItemsEl = document.getElementById('cart-items');
+const cartTotalEl = document.getElementById('cart-total');
+
+const searchInput = document.getElementById('search-input');
+
+const cartPopup = document.getElementById('cart-popup');
+const detailModal = document.getElementById('detail-modal');
         function updateCart() {
-            const countEl = document.getElementById('cart-count');
-            const itemsEl = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total');
-            
-            let totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
-            let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
 
-            countEl.innerText = totalItems;
-            countEl.classList.toggle('hidden', totalItems === 0);
-            totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+    const countEl = document.getElementById('cart-count');
+    const itemsEl = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
 
-            itemsEl.innerHTML = cart.length === 0 ? '<p class="text-xs text-gray-400 text-center py-6">Keranjang masih kosong</p>' : '';
-            cart.forEach(item => {
-                const variantLabel = item.variant !== "Standar" ? ` <span class="text-[10px] bg-purple-100 text-purple-700 px-1 py-0.2 rounded font-semibold">[ ${item.variant} ]</span>` : '';
-                itemsEl.innerHTML += `
-                    <div class="flex items-center justify-between border-b border-purple-50 pb-2">
-                        <div class="max-w-[65%]">
-                            <h4 class="text-xs font-bold text-gray-700 truncate">${item.name}</h4>
-                            <p class="text-[10px] text-purple-500 mt-0.5">Rp ${item.price.toLocaleString('id-ID')} ${variantLabel}</p>
-                        </div>
-                        <div class="flex items-center space-x-1">
-                            <button onclick="changeCartQty('${item.cartKey}', -1)" class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-bold">-</button>
-                            <span class="text-xs font-bold px-1">${item.qty}</span>
-                            <button onclick="changeCartQty('${item.cartKey}', 1)" class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-bold">+</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
+    if (!countEl || !itemsEl || !totalEl) return;
+
+    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+    countEl.textContent = totalItems;
+    countEl.classList.toggle('hidden', totalItems === 0);
+
+    totalEl.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+
+    if (cart.length === 0) {
+
+        itemsEl.innerHTML = `
+            <p class="text-xs text-gray-400 text-center py-6">
+                Keranjang masih kosong
+            </p>
+        `;
+
+        return;
+    }
+
+    itemsEl.innerHTML = cart.map(item => {
+
+        const variantLabel = item.variant !== "Standar"
+            ? `<span class="text-[10px] bg-purple-100 text-purple-700 px-1 py-0.5 rounded font-semibold">
+                    [ ${item.variant} ]
+               </span>`
+            : '';
+
+        return `
+            <div class="flex items-center justify-between border-b border-purple-50 pb-2">
+
+                <div class="max-w-[65%]">
+
+                    <h4 class="text-xs font-bold text-gray-700 truncate">
+                        ${item.name}
+                    </h4>
+
+                    <p class="text-[10px] text-purple-500 mt-0.5">
+                        Rp ${item.price.toLocaleString('id-ID')}
+                        ${variantLabel}
+                    </p>
+
+                </div>
+
+                <div class="flex items-center space-x-1">
+
+                    <button
+                        onclick="changeCartQty('${item.cartKey}', -1)"
+                        class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-bold active:scale-95 transition">
+                        -
+                    </button>
+
+                    <span class="text-xs font-bold px-1">
+                        ${item.qty}
+                    </span>
+
+                    <button
+                        onclick="changeCartQty('${item.cartKey}', 1)"
+                        class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-bold active:scale-95 transition">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+    }).join('');
+
+}
 
         function changeCartQty(cartKey, delta) {
-            const item = cart.find(i => i.cartKey === cartKey);
-            if(item) {
-                item.qty += delta;
-                if(item.qty <= 0) cart = cart.filter(i => i.cartKey !== cartKey);
-                updateCart();
-            }
-        }
+
+    const item = cart.find(i => i.cartKey === cartKey);
+
+    if (!item) return;
+
+    item.qty += delta;
+
+    if (item.qty <= 0) {
+        cart = cart.filter(i => i.cartKey !== cartKey);
+    }
+
+    updateCart();
+
+}
 
         function toggleCart() {
-            const drawer = document.getElementById('cart-drawer');
-            if(drawer.classList.contains('hidden')) {
-                drawer.classList.remove('hidden');
-                setTimeout(() => drawer.classList.replace('opacity-0', 'opacity-100'), 10);
-            } else {
-                drawer.classList.replace('opacity-100', 'opacity-0');
-                setTimeout(() => drawer.classList.add('hidden'), 300);
-            }
-        }
+
+    const drawer = document.getElementById('cart-drawer');
+
+    if (!drawer) return;
+
+    if (drawer.classList.contains('hidden')) {
+
+        drawer.classList.remove('hidden');
+
+        setTimeout(() => {
+            drawer.classList.replace('opacity-0', 'opacity-100');
+        }, 10);
+
+    } else {
+
+        drawer.classList.replace('opacity-100', 'opacity-0');
+
+        setTimeout(() => {
+            drawer.classList.add('hidden');
+        }, 300);
+
+    }
+
+}
 
         function checkoutToWhatsApp() {
             const name = document.getElementById('buyer-name').value;
@@ -480,13 +877,32 @@
         }
 
         function filterProducts() {
-            const searchVal = document.getElementById('search-bar').value.toLowerCase();
-            const filtered = products.filter(p => {
-                const matchCategory = currentCategory === 'all' || p.category === currentCategory;
-                return matchCategory && (p.name.toLowerCase().includes(searchVal) || p.desc.toLowerCase().includes(searchVal));
-            });
-            renderProducts(filtered);
-        }
+
+    const searchInput = document.getElementById('search-bar');
+
+    if (!searchInput) return;
+
+    const searchVal = searchInput.value.toLowerCase();
+
+    const filtered = products.filter(p => {
+
+        const matchCategory =
+            currentCategory === 'all' ||
+            p.category === currentCategory;
+
+        return (
+            matchCategory &&
+            (
+                p.name.toLowerCase().includes(searchVal) ||
+                p.desc.toLowerCase().includes(searchVal)
+            )
+        );
+
+    });
+
+    renderProducts(filtered);
+
+}
 
         function setCategory(cat, btnElement) {
             currentCategory = cat;
@@ -532,48 +948,52 @@
         renderProducts(products);
 
         function toggleTerms() {
-            const modal = document.getElementById('terms-modal');
-            if(modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                setTimeout(() => modal.classList.replace('opacity-0', 'opacity-100'), 10);
-            } else {
-                modal.classList.replace('opacity-100', 'opacity-0');
-                setTimeout(() => modal.classList.add('hidden'), 300);
-                
-            }
-        }
+
+    const modal = document.getElementById('terms-modal');
+
+    if (!modal) return;
+
+    if (modal.classList.contains('hidden')) {
+
+        modal.classList.remove('hidden');
+
+        setTimeout(() => {
+            modal.classList.replace('opacity-0', 'opacity-100');
+        }, 10);
+
+    } else {
+
+        modal.classList.replace('opacity-100', 'opacity-0');
+
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+
+    }
+
+}
+        if (productGrid) {
+
+    productGrid.addEventListener('click', (e) => {
+
+        const card = e.target.closest('.product-card');
+
+        if (!card) return;
+
+        openDetail(Number(card.dataset.id));
+
+    });
+
+}
         </script>
     <script src="tour.js?v=6"></script>
     <script src="validasi.js"></script>
- <script src="kebab.js"></script>
- <script>
-window.addEventListener("load", ()=>{
+    <div id="google_translate_element"></div>
 
-    // Hapus banner Google Translate terus-menerus
-    setInterval(()=>{
+<script src="kebab.js"></script>
 
-        const banner =
-            document.querySelector(".goog-te-banner-frame");
-
-        if(banner){
-            banner.style.display="none";
-        }
-
-        document.body.style.top="0px";
-
-    },300);
-
-});
+<script
+src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 </script>
-<script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'id', // Bahasa asli website (Indonesia)
-                includedLanguages: 'en,ja,ko,ar,ms,zh-CN, id', // Pilihan bahasa: Inggris, Jepang, Korea, Arab, Melayu, Mandarin, Indonesia
-                layout: google.translate.TranslateElement.InlineLayout.VERTICAL
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

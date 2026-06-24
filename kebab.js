@@ -48,3 +48,113 @@ window.addEventListener('click', function(e) {
     }
 
 });
+/* =========================
+   GOOGLE TRANSLATE
+========================= */
+
+function googleTranslateElementInit() {
+
+    new google.translate.TranslateElement(
+        {
+            pageLanguage: 'id',
+            includedLanguages: 'en,ja,ko,ar,ms,zh-CN',
+            autoDisplay: false,
+            layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+        },
+        'google_translate_element'
+    );
+
+}
+
+
+/* =========================
+   HAPUS BANNER GOOGLE
+========================= */
+
+const hideGoogleBanner = setInterval(() => {
+
+    const banner = document.querySelector('.goog-te-banner-frame');
+
+    if (!banner) return;
+
+    banner.style.display = 'none';
+
+    document.body.style.top = '0px';
+
+}, 1000);
+
+
+/* =========================
+   KEMBALI KE BAHASA ASLI
+========================= */
+
+function kembaliBahasaAsli() {
+
+    document.cookie =
+        'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+
+    document.cookie =
+        'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+
+    localStorage.removeItem('selectedLanguage');
+
+    const combo = document.querySelector('.goog-te-combo');
+
+    if (!combo) return;
+
+    combo.value = '';
+
+    combo.dispatchEvent(
+        new Event('change')
+    );
+
+}
+
+
+/* =========================
+   SIMPAN BAHASA TERAKHIR
+========================= */
+
+const translateWatcher = setInterval(() => {
+
+    const combo = document.querySelector('.goog-te-combo');
+
+    if (!combo) return;
+
+    clearInterval(translateWatcher);
+
+    const savedLang = localStorage.getItem('selectedLanguage');
+
+    if (
+        savedLang &&
+        savedLang !== combo.value
+    ) {
+
+        combo.value = savedLang;
+
+        combo.dispatchEvent(
+            new Event('change')
+        );
+
+    }
+
+    combo.addEventListener('change', () => {
+
+        if (combo.value) {
+
+            localStorage.setItem(
+                'selectedLanguage',
+                combo.value
+            );
+
+        } else {
+
+            localStorage.removeItem(
+                'selectedLanguage'
+            );
+
+        }
+
+    });
+
+}, 500);

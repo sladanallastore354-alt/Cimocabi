@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS -->
+    <link rel="stylesheet"
+        href="style.css?v10">
     <title>Formulir Pengiriman & Checkout - Cimocabi</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -80,7 +83,19 @@
         const ADMIN_WHATSAPP = "6281326916315"; 
 
         // Membaca data keranjang belanja riil dari halaman utama
-        let riilCart = JSON.parse(localStorage.getItem('cimocabi_cart_data')) || [];
+        let riilCart = [];
+
+try {
+
+    riilCart = JSON.parse(
+        localStorage.getItem('cimocabi_cart_data')
+    ) || [];
+
+} catch {
+
+    riilCart = [];
+
+}
 
         // Proteksi: Jika mencoba bypass masuk tanpa belanja, usir kembali ke beranda
         if (riilCart.length === 0) {
@@ -89,33 +104,57 @@
         }
 
         function hitungKalkulasiBelanja() {
-            const container = document.getElementById('checkout-items-list');
-            let totalHargaVal = 0;
-            let totalQtyVal = 0;
-            let textRingkasanItems = [];
-            
-            container.innerHTML = '';
-            
-            riilCart.forEach(item => {
-                const subTotal = (item.price * item.qty);
-                totalHargaVal += subTotal;
-                totalQtyVal += item.qty;
-                
-                // Format string rincian produk (Nama + Varian jika ada)
-                let itemString = `${item.name}${item.variant ? ` [${item.variant}]` : ''} (${item.qty}x)`;
-                textRingkasanItems.push(itemString);
-                
-                container.innerHTML += `
-                    <div class="flex justify-between items-center py-2">
-                        <div>
-                            <p class="font-bold text-gray-700 text-xs">${item.name}</p>
-                            ${item.variant ? `<p class="text-[10px] text-purple-500 font-medium">Varian: ${item.variant}</p>` : ''}
-                            <p class="text-gray-400 text-[10px]">${item.qty} pcs x Rp ${item.price.toLocaleString('id-ID')}</p>
-                        </div>
-                        <span class="font-semibold text-gray-600 text-xs">Rp ${subTotal.toLocaleString('id-ID')}</span>
-                    </div>
-                `;
-            });
+            const container =
+    document.getElementById('checkout-items-list');
+
+if (!container)
+    return {
+        totalHarga: 0,
+        totalQty: 0,
+        stringRingkasan: ""
+    };
+
+container.innerHTML = '';
+
+let html = '';
+
+riilCart.forEach(item => {
+
+    const subTotal = item.price * item.qty;
+
+    totalHargaVal += subTotal;
+    totalQtyVal += item.qty;
+
+    const itemString =
+        `${item.name}${item.variant ? ` [${item.variant}]` : ''} (${item.qty}x)`;
+
+    textRingkasanItems.push(itemString);
+
+    html += `
+        <div class="flex justify-between items-center py-2">
+            <div>
+                <p class="font-bold text-gray-700 text-xs">${item.name}</p>
+
+                ${item.variant
+                    ? `<p class="text-[10px] text-purple-500 font-medium">
+                        Varian: ${item.variant}
+                       </p>`
+                    : ''}
+
+                <p class="text-gray-400 text-[10px]">
+                    ${item.qty} pcs x Rp ${item.price.toLocaleString('id-ID')}
+                </p>
+            </div>
+
+            <span class="font-semibold text-gray-600 text-xs">
+                Rp ${subTotal.toLocaleString('id-ID')}
+            </span>
+        </div>
+    `;
+
+});
+
+container.innerHTML = html;
             
             document.getElementById('checkout-total-price').innerText = "Rp " + totalHargaVal.toLocaleString('id-ID');
             return {
@@ -128,31 +167,181 @@
         const dataBelanja = hitungKalkulasiBelanja();
 
         async function eksekusiCheckout(event) {
-            event.preventDefault();
+            if (event) {
+    event.preventDefault();
+}
             
             // Pengaman Anti-Spam Honeypot
-            if(document.getElementById('antiSpamHoney').value !== "") {
-                alert("Deteksi aktivitas mencurigakan.");
-                return;
-            }
+            const antiSpam =
+    document.getElementById('antiSpamHoney');
+
+if (
+    antiSpam &&
+    antiSpam.value !== ""
+) {
+
+    alert("Deteksi aktivitas mencurigakan.");
+
+    return;
+
+}
 
             const btnSubmit = document.getElementById('btnSubmitOrder');
             const btnText = document.getElementById('btnTextText');
+            if (!btnSubmit || !btnText) return; 
             
             // Double-Submit Protection (Kunci tombol)
             btnSubmit.disabled = true;
             btnSubmit.classList.add('opacity-50', 'cursor-not-allowed');
             btnText.innerText = "SEDANG MENCATAT PESANAN...";
 
-            const namaInput = document.getElementById('buyerName').value.trim();
-            const whatsappInput = document.getElementById('buyerWhatsApp').value.trim();
-            const alamatInput = document.getElementById('buyerAddress').value.trim();
-            const catatanInput = document.getElementById('buyerNotes').value.trim();
+            const buyerName = document.getElementById('buyerName');
+const buyerWhatsApp = document.getElementById('buyerWhatsApp');
+const buyerAddress = document.getElementById('buyerAddress');
+const buyerNotes = document.getElementById('buyerNotes');
 
+if (
+    !buyerName ||
+    !buyerWhatsApp ||
+    !buyerAddress ||
+    !buyerNotes
+) {
+
+    btnSubmit.disabled = false;
+    btnSubmit.classList.remove(
+        'opacity-50',
+        'cursor-not-allowed'
+    );
+
+    btnText.innerText =
+        "PESAN SEKARANG VIA WHATSAPP";
+
+    return;
+
+}
+
+const namaInput = buyerName.value.trim();
+
+if (namaInput.length < 3) {
+
+    alert("Nama pembeli minimal 3 karakter.");
+
+    btnSubmit.disabled = false;
+
+    btnSubmit.classList.remove(
+        'opacity-50',
+        'cursor-not-allowed'
+    );
+
+    btnText.innerText =
+        "PESAN SEKARANG VIA WHATSAPP";
+
+    return;
+
+}
+
+const whatsappInput =
+    buyerWhatsApp.value.trim();
+
+const nomorWA =
+    whatsappInput.replace(/\D/g, '');
+
+if (
+    nomorWA.length < 10 ||
+    nomorWA.length > 15
+) {
+
+    alert(
+        "Nomor WhatsApp tidak valid."
+    );
+
+    btnSubmit.disabled = false;
+
+    btnSubmit.classList.remove(
+        'opacity-50',
+        'cursor-not-allowed'
+    );
+
+    btnText.innerText =
+        "PESAN SEKARANG VIA WHATSAPP";
+
+    return;
+
+}
+
+const alamatInput =
+    buyerAddress.value.trim();
+
+if (alamatInput.length < 10) {
+
+    alert(
+        "Alamat pengiriman terlalu pendek."
+    );
+
+    btnSubmit.disabled = false;
+
+    btnSubmit.classList.remove(
+        'opacity-50',
+        'cursor-not-allowed'
+    );
+
+    btnText.innerText =
+        "PESAN SEKARANG VIA WHATSAPP";
+
+    return;
+
+}
+
+const catatanInput =
+    buyerNotes.value.trim();
+
+if (catatanInput.length > 300) {
+
+    alert(
+        "Catatan terlalu panjang."
+    );
+
+    btnSubmit.disabled = false;
+
+    btnSubmit.classList.remove(
+        'opacity-50',
+        'cursor-not-allowed'
+    );
+
+    btnText.innerText =
+        "PESAN SEKARANG VIA WHATSAPP";
+
+    return;
+
+}
+if (
+    !dataBelanja ||
+    typeof dataBelanja.totalHarga !== 'number'
+) {
+
+    alert(
+        "Data pesanan tidak ditemukan."
+    );
+
+    btnSubmit.disabled = false;
+
+    btnSubmit.classList.remove(
+        'opacity-50',
+        'cursor-not-allowed'
+    );
+
+    btnText.innerText =
+        "PESAN SEKARANG VIA WHATSAPP";
+
+    return;
+
+}
             const payload = {
-                nama: namaInput,
-                whatsapp: whatsappInput,
-                alamat: alamatInput,
+                nama: namaInput.replace(/\s+/g,' '),
+
+whatsapp: nomorWA,
+
+alamat: alamatInput.replace(/\s+/g,' '),
                 catatan: catatanInput ? catatanInput : "-",
                 produk: dataBelanja.stringRingkasan,
                 qty: dataBelanja.totalQty,
@@ -161,6 +350,25 @@
 
             try {
                 // Tembak data ke Google Sheet Database via Fetch API API Gateway
+                if (!APPS_SCRIPT_URL) {
+
+    alert(
+        "Konfigurasi server belum tersedia."
+    );
+
+    btnSubmit.disabled = false;
+
+    btnSubmit.classList.remove(
+        'opacity-50',
+        'cursor-not-allowed'
+    );
+
+    btnText.innerText =
+        "PESAN SEKARANG VIA WHATSAPP";
+
+    return;
+
+}
                 await fetch(APPS_SCRIPT_URL, {
                     method: "POST",
                     mode: "no-cors", 
@@ -175,7 +383,15 @@
 
                 // Generate template pesan instan teks WhatsApp untuk Admin
                 const waMessage = `Halo Admin Cimocabi,\n\nSaya sudah melakukan pemesanan.\n\nNama: ${namaInput}\nNo HP: ${whatsappInput}\nProduk: ${dataBelanja.stringRingkasan}\nJumlah: ${dataBelanja.totalQty} Pack\nTotal: Rp ${dataBelanja.totalHarga.toLocaleString('id-ID')}\nCatatan: ${catatanInput || '-'}\n\nMohon diproses.`;
-                
+                if (!ADMIN_WHATSAPP) {
+
+    alert(
+        "Nomor admin belum tersedia."
+    );
+
+    return;
+
+}
                 window.location.href = `https://api.whatsapp.com/send?phone=${ADMIN_WHATSAPP}&text=${encodeURIComponent(waMessage)}`;
 
             } catch (error) {
