@@ -236,7 +236,8 @@ document.addEventListener("click", (e) => {
 /* ==========================================================
    FITUR TOMBOL TUR BISA DIGESER (DRAGGABLE) & LEBIH TINGGI
 ========================================================== */
-const tourBtn = document.getElementById("tour-start-btn"); // Sesuaikan ID jika berbeda
+const tourBtn = document.getElementById("tour-start-btn"); 
+
 
 if (tourBtn) {
     // 1. Buat tombol lebih tinggi dari posisi awal (naik menjadi 150px dari bawah)

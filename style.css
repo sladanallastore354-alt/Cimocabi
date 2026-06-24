@@ -389,3 +389,37 @@ img{
     transform:translateZ(0);
     backface-visibility:hidden;
 }
+
+/* ===== FLOATING TOUR BUTTON ===== */
+#tour-start-btn{
+    position: fixed;
+    right: 20px;
+    bottom: 100px; /* di atas tombol WhatsApp */
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    z-index: 9998;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.15);
+
+    animation: floatTour 3s ease-in-out infinite;
+}
+
+@keyframes floatTour{
+    0%{
+        transform: translateY(0);
+    }
+
+    50%{
+        transform: translateY(-8px);
+    }
+
+    100%{
+        transform: translateY(0);
+    }
+}
