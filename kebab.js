@@ -4,6 +4,7 @@ document.getElementById('tempat-kebab-menu').innerHTML = `
         <button onclick="toggleMenu()" class="text-gray-600 hover:text-purple-600 focus:outline-none p-2">
             <i class="fas fa-ellipsis-v text-2xl"></i>
         </button>
+        <button onclick="kembaliBahasaAsli()">  Indonesia </button>
 
         <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden z-[2000]">
             <div class="py-1">
@@ -21,7 +22,6 @@ document.getElementById('tempat-kebab-menu').innerHTML = `
                 
                 <div class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 transition-colors">
                     <div id="google_translate_element"></div>
-                    <button onclick="kembaliBahasaAsli()"> 🇮🇩 Indonesia </button>
                 </div>
             </div>
         </div>
