@@ -76,7 +76,7 @@
             </form>
         </div>
     </main>
-
+    <script src="cart.js"></script>
     <script>
         // MASUKKAN URL WEB APP DEPLOYMENT GOOGLE APPS SCRIPT SAKTI ANDA DI SINI
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyCsr8M7s7IWRoBm7H811oSi3VPM9gwdwkFPBlxdwjT8X2Rf0XlDSaG9a-2mY5btjR/exec";
@@ -102,11 +102,8 @@ try {
             alert("Keranjang belanja Anda terdeteksi kosong. Silakan pilih menu terlebih dahulu!");
             window.location.href = 'index.html';
         }
-
-         // 1. Ambil data keranjang saat halaman checkout dimuat
-        let riilCart = JSON.parse(localStorage.getItem('cimocabi_cart_data')) || [];
-
-        // 2. Fungsi utama kalkulasi dan render tampilan checkout
+        
+        // Fungsi utama kalkulasi dan render tampilan checkout
         function hitungKalkulasiBelanja() {
             const container = document.getElementById('checkout-items-list');
             if (!container) return { totalHarga: 0, totalQty: 0, stringRingkasan: "" };

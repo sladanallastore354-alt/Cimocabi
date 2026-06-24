@@ -260,7 +260,7 @@
     <a href="#" id="wa-floating-btn" target="_blank" class="wa-floating">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
-
+  <script src="cart.js"></script>
     <script>'use strict';
         const products = [
 { id: 1, 
@@ -693,7 +693,7 @@ draggable="false">
     closeDetail();
 }
 
-function updateCart() {
+         function updateCart() {
     const countEl = document.getElementById('cart-count');
     const itemsEl = document.getElementById('cart-items');
     const totalEl = document.getElementById('cart-total');
@@ -748,23 +748,6 @@ function updateCart() {
         `;
     }).join('');
 }
-
-        function changeCartQty(cartKey, delta) {
-
-    const item = cart.find(i => i.cartKey === cartKey);
-
-    if (!item) return;
-
-    item.qty += delta;
-
-    if (item.qty <= 0) {
-        cart = cart.filter(i => i.cartKey !== cartKey);
-    }
-
-    updateCart();
-
-}
-
         function toggleCart() {
 
     const drawer = document.getElementById('cart-drawer');
@@ -792,37 +775,40 @@ function updateCart() {
 }
 
         function checkoutToWhatsApp() {
-            const name = document.getElementById('buyer-name').value;
-            const phone = document.getElementById('buyer-phone').value;
-            const address = document.getElementById('buyer-address').value;
-            const payment = document.getElementById('payment-method').value;
+    const name = document.getElementById('buyer-name').value;
+    const phone = document.getElementById('buyer-phone').value;
+    const address = document.getElementById('buyer-address').value;
+    const payment = document.getElementById('payment-method').value;
 
-            if(!name || !phone || !address) {
-                alert('Mohon isi Nama, No HP, dan Alamat Anda.');
-                return;
-            }
-            if(cart.length === 0) {
-                alert('Keranjang Anda masih kosong.');
-                return;
-            }
+    if(!name || !phone || !address) {
+        alert('Mohon isi Nama, No HP, dan Alamat Anda.');
+        return;
+    }
 
-            const admins = ["6281326916315", "628991183100"];
-            const chosenAdmin = admins[Math.floor(Math.random() * admins.length)];
+    // Ambil data aktif dari localStorage via fungsi cart.js
+    const cart = getCart(); 
+    if(cart.length === 0) {
+        alert('Keranjang Anda masih kosong.');
+        return;
+    }
 
-            let text = `*HALO ADMIN CIMOCABI, SAYA MAU ORDER* 🥳\n\n`;
-            text += `*Data Pembeli:*\n• Nama: ${name}\n• No HP: ${phone}\n• Alamat: ${address}\n• Pembayaran: ${payment}\n\n`;
-            text += `*Pesanan:*\n`;
-            
-            cart.forEach((item, idx) => {
-                const variantString = item.variant !== "Standar" ? ` [${item.variant}]` : '';
-                text += `${idx+1}. ${item.name}${variantString} (${item.qty}x) -> Rp ${(item.price * item.qty).toLocaleString('id-ID')}\n`;
-            });
-            
-            let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-            text += `\n*Total Belanja:* Rp ${totalPrice.toLocaleString('id-ID')}\n\n_Mohon dihitung ongkirnya ya kak!_`;
+    const admins = ["6281326916315", "628991183100"];
+    const chosenAdmin = admins[Math.floor(Math.random() * admins.length)];
 
-            window.open(`https://api.whatsapp.com/send?phone=${chosenAdmin}&text=${encodeURIComponent(text)}`, '_blank');
-        }
+    let text = `*HALO ADMIN CIMOCABI, SAYA MAU ORDER* 🥳\n\n`;
+    text += `*Data Pembeli:*\n• Nama: ${name}\n• No HP: ${phone}\n• Alamat: ${address}\n• Pembayaran: ${payment}\n\n`;
+    text += `*Pesanan:*\n`;
+    
+    cart.forEach((item, idx) => {
+        const variantString = item.variant !== "Standar" ? ` [${item.variant}]` : '';
+        text += `${idx+1}. ${item.name}${variantString} (${item.qty}x) -> Rp ${(item.price * item.qty).toLocaleString('id-ID')}\n`;
+    });
+    
+    let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+    text += `\n*Total Belanja:* Rp ${totalPrice.toLocaleString('id-ID')}\n\n_Mohon dihitung ongkirnya ya kak!_`;
+
+    window.open(`https://api.whatsapp.com/send?phone=${chosenAdmin}&text=${encodeURIComponent(text)}`, '_blank');
+}
 
         function filterProducts() {
 
@@ -891,10 +877,23 @@ function updateCart() {
                 document.title = toggleTitle ? "Cimocabi - Frozen Food & Cemilan Praktis ❄️" : "Ada Promo Menarik Hari Ini! 🥳";
                 toggleTitle = !toggleTitle;
             }, 2000); 
-            updateCart();
-        };
-
-        renderProducts(products);
+    renderProducts(products); 
+    updateCart(); 
+          //4.Perbaikan event listener productGrid agar tidak crash saat strict mode
+const productGrid = document.getElementById('product-grid');
+if (productGrid) {
+    productGrid.addEventListener('click', (e) => {
+        const card = e.target.closest('.product-card');
+        if (!card) return;
+        openDetail(Number(card.dataset.id));
+    });
+}
+    
+};
+        
+        function lanjutKeCheckout() {
+    window.location.href = 'checkout.html';
+}
 
         function toggleTerms() {
 
@@ -921,19 +920,6 @@ function updateCart() {
     }
 
 }
-        if (productGrid) {
-
-    productGrid.addEventListener('click', (e) => {
-
-        const card = e.target.closest('.product-card');
-
-        if (!card) return;
-
-        openDetail(Number(card.dataset.id));
-
-    });
-
-}
         </script>
         <script>
            function googleTranslateElementInit() {
@@ -953,6 +939,5 @@ function updateCart() {
 <script
 src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 </script> 
-<script src="cart.js"></script>
 </body>
 </html>
