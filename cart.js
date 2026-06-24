@@ -1,16 +1,16 @@
 // cart.js
 
-const CART_KEY = 'cimocabi_cart_data';
+const CART_STORAGE_KEY = 'cimocabi_cart_data';
 
 // 1. Ambil data dari localStorage
 function getCart() {
-    const data = localStorage.getItem(CART_KEY);
+    const data = localStorage.getItem(CART_STORAGE_KEY);
     return data ? JSON.parse(data) : [];
 }
 
 // 2. Simpan data ke localStorage
 function saveCart(cart) {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
 }
 
 // 3. Fungsi Tambah/Kurangi (+/-)

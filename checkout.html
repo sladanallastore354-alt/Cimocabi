@@ -88,7 +88,7 @@
 try {
 
     riilCart = JSON.parse(
-        localStorage.getItem('cimocabi_cart_data')
+        localStorage.getItem(CART_STORAGE_KEY) 
     ) || [];
 
 } catch {
@@ -179,14 +179,14 @@ try {
                 return;
             }
             
-            localStorage.setItem('cimocabi_cart_data', JSON.stringify(riilCart));
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(riilCart));
             dataBelanja = hitungKalkulasiBelanja();
         }
 
         // 4. Fungsi menghapus item langsung dari halaman checkout
         function hapusItemCheckout(key) {
             riilCart = riilCart.filter(i => i.cartKey !== key && `${i.id}-${i.variant || 'Standar'}` !== key);
-            localStorage.setItem('cimocabi_cart_data', JSON.stringify(riilCart));
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(riilCart));
             
             // Jika setelah dihapus keranjang kosong, paksa kembali ke beranda
             if (riilCart.length === 0) {
@@ -415,7 +415,7 @@ alamat: alamatInput.replace(/\s+/g,' '),
                 alert(`Pemesanan Berhasil Dicatat!\n\nNama: ${namaInput}\nSistem otomatis mengarahkan Anda ke WhatsApp Admin untuk validasi.`);
 
                 // Mengosongkan isi keranjang belanja karena checkout sudah sah berhasil
-                localStorage.removeItem('cimocabi_cart_data');
+                localStorage.removeItem(CART_STORAGE_KEY);
 
                 // Generate template pesan instan teks WhatsApp untuk Admin
                 const waMessage = `Halo Admin Cimocabi,\n\nSaya sudah melakukan pemesanan.\n\nNama: ${namaInput}\nNo HP: ${whatsappInput}\nProduk: ${dataBelanja.stringRingkasan}\nJumlah: ${dataBelanja.totalQty} Pack\nTotal: Rp ${dataBelanja.totalHarga.toLocaleString('id-ID')}\nCatatan: ${catatanInput || '-'}\n\nMohon diproses.`;
