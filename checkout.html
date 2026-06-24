@@ -103,70 +103,96 @@ try {
             window.location.href = 'index.html';
         }
 
-        function hitungKalkulasiBelanja() {
-            const container =
-    document.getElementById('checkout-items-list');
+         function hitungKalkulasiBelanja() {
+            const container = document.getElementById('checkout-items-list');
+            if (!container) return { totalHarga: 0, totalQty: 0, stringRingkasan: "" };
 
-if (!container)
-    return {
-        totalHarga: 0,
-        totalQty: 0,
-        stringRingkasan: ""
-    };
+            container.innerHTML = '';
+            let html = '';
+            let totalHargaVal = 0;
+            let totalQtyVal = 0;
+            let textRingkasanItems = [];
 
-container.innerHTML = '';
+            riilCart.forEach(item => {
+                const subTotal = item.price * item.qty;
+                totalHargaVal += subTotal;
+                totalQtyVal += item.qty;
 
-let html = '';
+                const itemString = `${item.name}${item.variant && item.variant !== "Standar" ? ` [${item.variant}]` : ''} (${item.qty}x)`;
+                textRingkasanItems.push(itemString);
 
-let totalHargaVal = 0;
-let totalQtyVal = 0;
-let textRingkasanItems = [];
+                // Pengaman penanda unik item keranjang
+                const itemKey = item.cartKey || `${item.id}-${item.variant || 'Standar'}`;
 
-riilCart.forEach(item => {
+                html += `
+                    <div class="flex justify-between items-center py-2 gap-2 border-b border-purple-50">
+                        <div class="flex-1 min-w-0">
+                            <p class="font-bold text-gray-700 text-xs truncate">${item.name}</p>
+                            ${item.variant && item.variant !== "Standar" ? `<p class="text-[10px] text-purple-500 font-medium">Varian: ${item.variant}</p>` : ''}
+                            <p class="text-gray-400 text-[10px]">Rp ${item.price.toLocaleString('id-ID')} / pcs</p>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2 flex-shrink-0">
+                            <div class="flex items-center bg-purple-50 border border-purple-100 rounded-lg px-2 py-0.5 space-x-2">
+                                <button type="button" onclick="ubahQtyCheckout('${itemKey}', -1)" class="font-bold text-purple-600 text-xs hover:text-purple-800 transition px-1 cursor-pointer">-</button>
+                                <span class="text-xs font-bold text-gray-700 min-w-[12px] text-center">${item.qty}</span>
+                                <button type="button" onclick="ubahQtyCheckout('${itemKey}', 1)" class="font-bold text-purple-600 text-xs hover:text-purple-800 transition px-1 cursor-pointer">+</button>
+                            </div>
+                            <button type="button" onclick="hapusItemCheckout('${itemKey}')" class="text-red-400 hover:text-red-600 transition p-1 text-xs cursor-pointer">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
 
-    const subTotal = item.price * item.qty;
+                        <span class="font-semibold text-gray-600 text-xs text-right min-w-[70px] flex-shrink-0">
+                            Rp ${subTotal.toLocaleString('id-ID')}
+                        </span>
+                    </div>
+                `;
+            });
 
-    totalHargaVal += subTotal;
-    totalQtyVal += item.qty;
-
-    const itemString =
-        `${item.name}${item.variant ? ` [${item.variant}]` : ''} (${item.qty}x)`;
-
-    textRingkasanItems.push(itemString);
-
-    html += `
-        <div class="flex justify-between items-center py-2">
-            <div>
-                <p class="font-bold text-gray-700 text-xs">${item.name}</p>
-
-                ${item.variant
-                    ? `<p class="text-[10px] text-purple-500 font-medium">
-                        Varian: ${item.variant}
-                       </p>`
-                    : ''}
-
-                <p class="text-gray-400 text-[10px]">
-                    ${item.qty} pcs x Rp ${item.price.toLocaleString('id-ID')}
-                </p>
-            </div>
-
-            <span class="font-semibold text-gray-600 text-xs">
-                Rp ${subTotal.toLocaleString('id-ID')}
-            </span>
-        </div>
-    `;
-
-});
-
-container.innerHTML = html;
-            
+            container.innerHTML = html;
             document.getElementById('checkout-total-price').innerText = "Rp " + totalHargaVal.toLocaleString('id-ID');
+            
             return {
                 totalHarga: totalHargaVal,
                 totalQty: totalQtyVal,
                 stringRingkasan: textRingkasanItems.join(', ')
             };
         }
+
+        // Fungsi manipulasi jumlah pesanan langsung di halaman checkout
+        function ubahQtyCheckout(key, delta) {
+            const item = riilCart.find(i => i.cartKey === key || `${i.id}-${i.variant || 'Standar'}` === key);
+            if (!item) return;
+            
+            item.qty += delta;
+            if (item.qty <= 0) {
+                hapusItemCheckout(key);
+                return;
+            }
+            
+            localStorage.setItem('cimocabi_cart_data', JSON.stringify(riilCart));
+            dataBelanja = hitungKalkulasiBelanja();
+        }
+
+        // Fungsi menghapus item langsung dari halaman checkout
+        function hapusItemCheckout(key) {
+            riilCart = riilCart.filter(i => i.cartKey !== key && `${i.id}-${i.variant || 'Standar'}` !== key);
+            localStorage.setItem('cimocabi_cart_data', JSON.stringify(riilCart));
+            
+            // Jika setelah dihapus keranjang kosong, paksa kembali ke beranda
+            if (riilCart.length === 0) {
+                alert("Keranjang belanja Anda kosong! Silakan pilih menu Cimocabi terlebih dahulu sebelum checkout! ");
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            dataBelanja = hitungKalkulasiBelanja();
+        }
+
+        // Ganti deklarasi const menjadi let agar data variabel fleksibel terupdate secara dinamis
+        let dataBelanja = hitungKalkulasiBelanja();
+
 
         const dataBelanja = hitungKalkulasiBelanja();
 

@@ -53,7 +53,7 @@ function lanjutKeCheckout() {
         return; // Batalkan proses checkout, tetap di halaman yang sama
     }
     
-    // 6. Jika semua aman, simpan ke memori dan pindah ke halaman checkout
+    // pindah ke halaman checkout
     try {
         localStorage.setItem('cimocabi_cart_data', JSON.stringify(cart));
         window.location.href = 'checkout.html';
