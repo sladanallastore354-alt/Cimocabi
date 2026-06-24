@@ -151,75 +151,6 @@ background-color .25s ease;
         0 0 16px rgba(255,215,0,.4);
 }
 
-/* ==========================================
-   GOOGLE TRANSLATE FIX
-========================================== */
-
-/* Hilangkan banner atas */
-.goog-te-banner-frame.skiptranslate,
-iframe.goog-te-banner-frame {
-    display: none !important;
-}
-
-
-/* Cegah body bergeser */
-
-
-/* Hilangkan iframe banner */
-.skiptranslate iframe {
-    display: none !important;
-}
-
-/* Hilangkan tulisan Powered by Google */
-.goog-logo-link,
-.goog-te-gadget span {
-    display: none !important;
-}
-
-.goog-te-gadget {
-    color: transparent !important;
-    font-size: 0;
-}
-
-/* Percantik dropdown bahasa */
-.goog-te-combo{
-    width:100%;
-    padding:8px;
-    border-radius:12px;
-    border:1px solid #d8b4fe;
-    background:white;
-    font-size:13px;
-    color:#4b5563;
-}
-
-
-
-
-/* ===== SCROLLBAR ===== */
-
-::-webkit-scrollbar{
-    width:6px;
-    height:6px;
-}
-
-::-webkit-scrollbar-track{
-    background:#f3f4f6;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#c084fc;
-    border-radius:999px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:#a855f7;
-}
-
-
-
-img[loading="lazy"]{
-    content-visibility:auto;
-}
 /* ===== GLOBAL OVERFLOW FIX ===== */
 
 html{
@@ -422,4 +353,70 @@ img{
     100%{
         transform: translateY(0);
     }
+}
+/* =========================================
+   GOOGLE TRANSLATE CUSTOMIZATION
+========================================= */
+
+/* Container utama widget */
+.translate-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb; /* tailwind gray-200 */
+}
+
+/* Mempercantik box pilihan bahasa (Select Box) */
+.goog-te-combo {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #4c1d95; /* tailwind purple-900 */
+    border: none;
+    background-color: #f3f4f6; /* tailwind gray-100 */
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    margin: 0 !important;
+}
+
+.goog-te-combo:focus {
+    background-color: #f5f3ff; /* tailwind purple-50 */
+    box-shadow: 0 0 0 2px #d8b4fe; /* tailwind purple-300 */
+}
+
+/* Menyembunyikan teks "Powered by Google" & Icon */
+.goog-te-gadget {
+    font-size: 0 !important; /* Menghilangkan teks sisa */
+    color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.goog-te-gadget .goog-logo-link {
+    display: none !important;
+}
+
+.goog-te-gadget img {
+    display: none !important;
+}
+
+/* Mencegah Google Translate merusak layout Header */
+body {
+    top: 0 !important; 
+    position: static !important; /* Mencegah body diset ke relative oleh Google */
+}
+
+.skiptranslate iframe,
+.goog-te-banner-frame {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Mempertegas tampilan tombol reset */
+.translate-reset-btn {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
 }
