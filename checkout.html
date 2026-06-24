@@ -118,6 +118,10 @@ container.innerHTML = '';
 
 let html = '';
 
+let totalHargaVal = 0;
+let totalQtyVal = 0;
+let textRingkasanItems = [];
+
 riilCart.forEach(item => {
 
     const subTotal = item.price * item.qty;
@@ -404,6 +408,5 @@ alamat: alamatInput.replace(/\s+/g,' '),
             }
         }
     </script>
-<script src="tour.js?v=6"></script>
 </body>
 </html>

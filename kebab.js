@@ -1,38 +1,43 @@
 // Memasukkan HTML Kebab Menu ke dalam titik kumpul di index.html
-document.getElementById('tempat-kebab-menu').innerHTML = `
-    <div id="kebab-container" class="relative inline-block text-left ml-3">
-        <button onclick="toggleKebabMenu(event)" class="text-gray-600 hover:text-purple-600 focus:outline-none p-2">
-            <i class="fas fa-ellipsis-v text-2xl"></i>
-        </button>
+document.addEventListener("DOMContentLoaded", function() {
+    const tempatKebab = document.getElementById('tempat-kebab-menu');
+    if (tempatKebab) {
+        tempatKebab.innerHTML = `
+            <div id="kebab-container" class="relative inline-block text-left ml-3">
+                <button onclick="toggleKebabMenu(event)" class="text-gray-600 hover:text-purple-600 focus:outline-none p-2">
+                    <i class="fas fa-ellipsis-v text-2xl"></i>
+                </button>
 
-        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden z-[2000]">
-            <div class="py-1">
-                <a href="about.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">
-                    <i class="fas fa-store mr-2 w-5 text-center"></i> Tentang Kami
-                </a>
-                <a href="ongkir.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">
-                    <i class="fas fa-motorcycle mr-2 w-5 text-center"></i> Cek Ongkir
-                </a>
-                <a href="faq.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">
-                    <i class="fas fa-question-circle mr-2 w-5 text-center"></i> FAQ
-                </a>
+                <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden z-[2000]">
+                    <div class="py-1">
+                        <a href="about.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">
+                            <i class="fas fa-store mr-2 w-5 text-center"></i> Tentang Kami
+                        </a>
+                        <a href="ongkir.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">
+                            <i class="fas fa-motorcycle mr-2 w-5 text-center"></i> Cek Ongkir
+                        </a>
+                        <a href="faq.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">
+                            <i class="fas fa-question-circle mr-2 w-5 text-center"></i> FAQ
+                        </a>
 
-                <hr class="border-gray-200 my-1">
+                        <hr class="border-gray-200 my-1">
 
-                <div class="px-4 py-2">
-                    <p class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Pilih Bahasa</p>
-                    <div class="translate-wrapper">
-                        <div id="google_translate_element"></div>
+                        <div class="px-4 py-2">
+                            <p class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Pilih Bahasa</p>
+                            <div class="translate-wrapper">
+                                <div id="google_translate_element"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="kembaliBahasaAsli()" class="w-full text-left block px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors translate-reset-btn">
+                            <i class="fas fa-undo mr-2 w-5 text-center"></i> Kembali ke Indonesia
+                        </button>
                     </div>
                 </div>
-
-                <button onclick="kembaliBahasaAsli()" class="w-full text-left block px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors translate-reset-btn">
-                    <i class="fas fa-undo mr-2 w-5 text-center"></i> Kembali ke Indonesia
-                </button>
             </div>
-        </div>
-    </div>
-`;
+        `;
+    }
+});
 
 /* =========================
    TOGGLE DROPDOWN MENU
@@ -99,3 +104,18 @@ const translateWatcher = setInterval(() => {
         }
     });
 }, 1000);
+
+/* ==================================
+🟢 GOOGLE TRANSLATE INIT
+================================== */
+function googleTranslateElementInit() {
+
+    new google.translate.TranslateElement(
+        {
+            pageLanguage: 'id',
+            autoDisplay: false
+        },
+        'google_translate_element'
+    );
+
+}

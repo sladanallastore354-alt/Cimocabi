@@ -118,8 +118,8 @@
                 <span id="cart-count" class="absolute top-0.5 right-0.5 bg-amber-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">00</span>
             </button>
             
-            <div id="tempat-kebab-menu"></div>
-            
+            <div id="tempat-kebab-menu" 
+            class="relative z-10"></div>
         </div>
     </header>
     
@@ -719,9 +719,9 @@ const cartCountEl = document.getElementById('cart-count');
 const cartItemsEl = document.getElementById('cart-items');
 const cartTotalEl = document.getElementById('cart-total');
 
-const searchInput = document.getElementById('search-input');
+const searchInput = document.getElementById('search-bar');
 
-const cartPopup = document.getElementById('cart-popup');
+const cartPopup = document.getElementById('cart-drawer');
 const detailModal = document.getElementById('detail-modal');
         function updateCart() {
 
@@ -986,6 +986,17 @@ const detailModal = document.getElementById('detail-modal');
 
 }
         </script>
+        <script>
+           function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+        {
+            pageLanguage: 'id',
+            autoDisplay: false
+        },
+        'google_translate_element'
+    );
+}
+</script>
     <script src="tour.js?v=6"></script>
     <script src="validasi.js"></script>
     <script src="kebab.js"></script>
