@@ -21,6 +21,7 @@ document.getElementById('tempat-kebab-menu').innerHTML = `
                 
                 <div class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 transition-colors">
                     <div id="google_translate_element"></div>
+                    <button onclick="kembaliBahasaAsli()"> 🇮🇩 Indonesia </button>
                 </div>
             </div>
         </div>
@@ -57,7 +58,7 @@ function googleTranslateElementInit() {
     new google.translate.TranslateElement(
         {
             pageLanguage: 'id',
-            includedLanguages: 'en,ja,ko,ar,ms,zh-CN',
+            includedLanguages: 'id,en,ja,ko,ar,ms,zh-CN',
             autoDisplay: false,
             layout: google.translate.TranslateElement.InlineLayout.VERTICAL
         },
@@ -91,22 +92,14 @@ const hideGoogleBanner = setInterval(() => {
 function kembaliBahasaAsli() {
 
     document.cookie =
-        'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+        "googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
 
     document.cookie =
-        'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+        "googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=" + location.hostname;
 
     localStorage.removeItem('selectedLanguage');
 
-    const combo = document.querySelector('.goog-te-combo');
-
-    if (!combo) return;
-
-    combo.value = '';
-
-    combo.dispatchEvent(
-        new Event('change')
-    );
+    location.reload();
 
 }
 
