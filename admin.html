@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin CIMOCABI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: #ecf0f1; color: #333; }
+        .admin-header { background: #2c3e50; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center; }
+        .stat-card h3 { color: #7f8c8d; font-size: 14px; margin-bottom: 10px; }
+        .stat-card p { font-size: 24px; font-weight: bold; color: #e67e22; }
+
+        .table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+        th { background: #f8f9fa; color: #2c3e50; font-weight: 500; }
+        
+        .status-badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; display: inline-block; }
+        .diterima { background: #ffeaa7; color: #d63031; }
+        .diproses { background: #74b9ff; color: #0984e3; }
+        .dikirim { background: #a29bfe; color: #6c5ce7; }
+        .selesai { background: #55efc4; color: #00b894; }
+
+        .action-select { padding: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; outline: none; }
+        .btn-update { background: #e67e22; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-left: 5px; }
+        .btn-update:hover { background: #d35400; }
+        
+        .loading { text-align: center; padding: 20px; font-style: italic; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-header">
+        <h2>CIMOCABI Admin Panel</h2>
+        <a href="index.html" style="color: white; text-decoration: none;">&larr; Ke Website</a>
+    </div>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Pesanan Masuk</h3>
+                <p id="total-orders">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Pesanan Diproses</h3>
+                <p id="active-orders">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Pesanan Selesai</h3>
+                <p id="completed-orders">0</p>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h3>Daftar Pesanan Terbaru</h3>
+            <div id="loading" class="loading">Memuat data pesanan dari Google Sheets...</div>
+            <table id="order-table" style="display: none; margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th>ID Order</th>
+                        <th>Waktu</th>
+                        <th>Pembeli</th>
+                        <th>Detail Item</th>
+                        <th>Total Rp</th>
+                        <th>Status Saat Ini</th>
+                        <th>Aksi / Ubah Status</th>
+                    </tr>
+                </thead>
+                <tbody id="order-body">
+                    <!-- Data masuk ke sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // LINK MILIK ANDA
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkEtrVVD3r9TuFYZXSoL3EZw6zy57R7HMsQnGJu5GomNHrEsWNSjhJ8wsdEkzq8GrIDQ/exec'; 
+
+        // Fungsi fetch data order asli dari Google Sheets
+        async function fetchOrders() {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getOrders`);
+                const data = await response.json();
+                renderTable(data);
+            } catch (error) {
+                document.getElementById('loading').innerText = "Belum ada data pesanan atau gagal memuat data.";
+            }
+        }
+
+        function renderTable(data) {
+            document.getElementById('loading').style.display = 'none';
+            const table = document.getElementById('order-table');
+            const tbody = document.getElementById('order-body');
+            table.style.display = 'table';
+            tbody.innerHTML = '';
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Belum ada pesanan masuk.</td></tr>';
+                return;
+            }
+
+            let total = data.length;
+            let active = 0;
+            let completed = 0;
+
+            // Loop dari bawah ke atas agar data terbaru di pucuk tabel
+            for(let i = data.length - 1; i >= 0; i--) {
+                let row = data[i];
+                let wkt = new Date(row[0]).toLocaleString('id-ID');
+                let idOrder = row[1];
+                let nama = row[2];
+                let detail = row[6];
+                let harga = row[7] || 0;
+                let status = row[8] || 'Pesanan Diterima'; 
+
+                if(status === 'Pesanan Diterima' || status === 'Pesanan Diproses' || status === 'Pesanan Dikirim') active++;
+                if(status === 'Pesanan Selesai') completed++;
+
+                let statusClass = status.toLowerCase().replace('pesanan ', '');
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${idOrder}</strong></td>
+                        <td>${wkt}</td>
+                        <td>${nama}</td>
+                        <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${detail}">${detail}</td>
+                        <td>Rp ${harga.toLocaleString('id-ID')}</td>
+                        <td><span class="status-badge ${statusClass}">${status}</span></td>
+                        <td>
+                            <select class="action-select" id="sel-${idOrder}">
+                                <option value="Pesanan Diproses">Diproses</option>
+                                <option value="Pesanan Dikirim">Dikirim</option>
+                                <option value="Pesanan Selesai">Selesai</option>
+                            </select>
+                            <button class="btn-update" onclick="updateStatus('${idOrder}')">Ubah</button>
+                        </td>
+                    </tr>
+                `;
+            }
+
+            document.getElementById('total-orders').innerText = total;
+            document.getElementById('active-orders').innerText = active;
+            document.getElementById('completed-orders').innerText = completed;
+        }
+
+        function updateStatus(idOrder) {
+            const newStatus = document.getElementById(`sel-${idOrder}`).value;
+            if(confirm(`Yakin ubah status ${idOrder} menjadi ${newStatus}?`)) {
+                
+                // MENGIRIM PERUBAHAN STATUS KE GOOGLE SHEETS
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'updateStatus', idOrder: idOrder, statusBaru: newStatus })
+                })
+                .then(response => response.json())
+                .then(data => { 
+                    alert('Status berhasil diupdate!'); 
+                    fetchOrders(); // Refresh tabel setelah update
+                })
+                .catch(error => {
+                    alert('Gagal update status. Periksa koneksi.');
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchOrders);
+    </script>
+</body>
+</html>
