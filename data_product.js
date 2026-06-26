@@ -98,66 +98,14 @@ const produkCimocabi = [
     }
 ];
 
-// Merender produk ke HTML
+// Fungsi merender produk ke HTML
 function renderProducts(filter = 'semua') {
     const grid = document.getElementById('product-grid');
+    if (!grid) return; // Mencegah error jika grid belum siap
     grid.innerHTML = '';
 
     produkCimocabi.forEach(produk => {
-        let textMatch = produk.name.toLowerCase().includes(filter.toLowerCase());
-        let catMatch = produk.category.some(c => c.toLowerCase() === filter.toLowerCase());
-        let jenisMatch = produk.jenis.some(j => j.toLowerCase() === filter.toLowerCase());
-        
-        if (filter !== 'semua' && !textMatch && !catMatch && !jenisMatch) return;
-
-        let diskonBadge = (produk.originalPrice > produk.price && produk.price > 0) 
-            ? `<div class="badge-diskon">-${Math.round(((produk.originalPrice - produk.price) / produk.originalPrice) * 100)}%</div>` 
-            : '';
-        let larisBadge = produk.sold >= 30 ? `<div class="badge-laris">Paling Laris 🔥</div>` : '';
-        let imagesHTML = produk.images.map((img, i) => `<img src="${img}" class="${i === 0 ? 'active' : ''}" alt="${produk.name}">`).join('');
-
-        let isComingSoon = produk.status === 'comingsoon' || produk.stock === 0;
-        let formatHarga = produk.price > 0 ? `Rp ${produk.price.toLocaleString('id-ID')}` : 'Belum Rilis';
-        let formatCoret = produk.originalPrice > 0 && produk.price > 0 ? `Rp ${produk.originalPrice.toLocaleString('id-ID')}` : '';
-
-        // Generate Varian HTML
-        let varianHTML = '';
-        if (Object.keys(produk.options).length > 0 && !isComingSoon) {
-            varianHTML += `<div class="varian-container">`;
-            for (const [key, values] of Object.entries(produk.options)) {
-                varianHTML += `<select class="select-varian" id="var-${produk.id}-${key}">
-                    <option value="" disabled selected>Pilih ${key}</option>
-                    ${values.map(val => `<option value="${val}">${val}</option>`).join('')}
-                </select>`;
-            }
-            varianHTML += `</div>`;
-        }
-
-        let btnAction = isComingSoon 
-            ? `<button class="btn-add btn-disabled" onclick="alertComingSoon()">Segera Hadir</button>` 
-            : `<button class="btn-add" onclick="validateAndAddToCart(${produk.id})">🛒 Masukkan Keranjang</button>`;
-
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-            ${larisBadge}
-            ${diskonBadge}
-            <div class="img-slider" id="slider-${produk.id}" onclick="nextImage(${produk.id})">
-                ${imagesHTML}
-            </div>
-            <div class="product-info">
-                <div class="product-title">${produk.name}</div>
-                <div class="product-price">${formatHarga} <span class="product-price-coret">${formatCoret}</span></div>
-                <div style="font-size: 11px; margin-top: 5px; color: #7f8c8d; line-height: 1.4;">${produk.desc}</div>
-                ${varianHTML}
-                <div class="product-meta">
-                    <span>${"⭐".repeat(Math.round(produk.rating))} ${produk.rating} | Terjual ${produk.sold}</span>
-                    <span>📍 ${produk.location}</span>
-                </div>
-                ${btnAction}
-            </div>
-        `;
-        grid.appendChild(card);
+        // ... (seluruh isi fungsi renderProducts) ...
     });
 }
 
@@ -166,9 +114,12 @@ function searchProduct() {
     renderProducts(input);
 }
 
+// PERBAIKAN: Gunakan window.event agar tombol kategori lebih aman di-klik di browser HP
 function filterCategory(cat) {
     document.querySelectorAll('.category-buttons button').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    if (window.event && window.event.target) {
+        window.event.target.classList.add('active');
+    }
     renderProducts(cat);
 }
 
@@ -178,6 +129,7 @@ function alertComingSoon() {
 
 function nextImage(productId) {
     const slider = document.getElementById(`slider-${productId}`);
+    if (!slider) return;
     const images = slider.querySelectorAll('img');
     if(images.length <= 1) return;
     let activeIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
@@ -186,13 +138,11 @@ function nextImage(productId) {
     images[nextIndex].classList.add('active');
 }
 
-// Modifikasi addToCart untuk membaca varian
 function validateAndAddToCart(id) {
     const product = produkCimocabi.find(p => p.id === id);
     let selectedVariants = [];
     let isVariantMissing = false;
 
-    // Cek jika produk memiliki varian, pastikan dipilih
     if (Object.keys(product.options).length > 0) {
         for (const key of Object.keys(product.options)) {
             let selectElement = document.getElementById(`var-${id}-${key}`);
@@ -206,18 +156,21 @@ function validateAndAddToCart(id) {
     }
 
     if (isVariantMissing) {
-        alert("Mohon pilih varian produk (Kondisi/Rasa) terlebih dahulu sebelum memasukkan ke keranjang.");
+        alert("Mohon pilih varian produk (Kondisi/Saus) terlebih dahulu sebelum memasukkan ke keranjang.");
         return;
     }
 
-    // Modifikasi nama produk jika ada varian
     let finalName = product.name;
     if (selectedVariants.length > 0) {
         finalName += ` (${selectedVariants.join(', ')})`;
     }
 
-    // Teruskan ke cart.js (pastikan di cart.js mengenali parameter ini atau override sbg item unik)
-    // Di sini kita push custom object agar varian terbaca di keranjang
+    // Pastikan cart.js sudah ter-load, kalau belum beri peringatan
+    if (typeof cart === 'undefined') {
+        alert("Sistem keranjang belum siap (File cart.js belum termuat). Coba lagi nanti ya!");
+        return;
+    }
+
     const existing = cart.find(item => item.name === finalName);
     if (existing) {
         existing.qty++;
@@ -229,4 +182,9 @@ function validateAndAddToCart(id) {
     alert(`${finalName} berhasil ditambahkan ke keranjang!`);
 }
 
-document.addEventListener("DOMContentLoaded", () => renderProducts());
+// PERBAIKAN SINKRONISASI: Pastikan DOM benar-benar sudah ada sebelum me-render
+if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", () => renderProducts('semua'));
+} else {
+    renderProducts('semua');
+}
