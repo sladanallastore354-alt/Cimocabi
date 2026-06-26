@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Ongkir & Resi - CIMOCABI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: #f5f5f5; color: #333; }
+        .header { background: #e67e22; color: white; padding: 15px 20px; display: flex; align-items: center; gap: 15px; position: sticky; top: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .header a { color: white; text-decoration: none; font-size: 24px; font-weight: bold; }
+        .header h1 { font-size: 18px; font-weight: 500; }
+        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        .info-text { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.5; }
+        
+        .courier-card { background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 10px; }
+        .courier-header { display: flex; align-items: center; gap: 10px; }
+        .courier-icon { width: 40px; height: 40px; background: #eee; border-radius: 5px; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+        .courier-name { font-size: 16px; font-weight: bold; color: #2c3e50; }
+        .btn-cek { display: block; text-align: center; background: #e67e22; color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: 500; transition: 0.2s; }
+        .btn-cek:hover { background: #d35400; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="../index.html">&#8592;</a>
+        <h1>Cek Ongkir & Resi</h1>
+    </div>
+
+    <div class="container">
+        <p class="info-text">
+            Silakan pilih ekspedisi yang Anda gunakan untuk mengecek estimasi ongkos kirim atau melacak posisi paket (resi) Anda secara mandiri di website resmi mereka.
+        </p>
+
+        <div class="courier-card">
+            <div class="courier-header">
+                <div class="courier-icon">📦</div>
+                <div class="courier-name">Paxel (Sameday/Nextday)</div>
+            </div>
+            <p style="font-size: 12px; color: #7f8c8d;">Rekomendasi untuk pengiriman camilan beku (frozen food) luar area karena dilengkapi fasilitas cold storage.</p>
+            <a href="https://paxel.co/id/home#track-check-rates-shipment" target="_blank" class="btn-cek">Cek Ongkir / Resi Paxel</a>
+        </div>
+
+        <div class="courier-card">
+            <div class="courier-header">
+                <div class="courier-icon">🦁</div>
+                <div class="courier-name">Lion Parcel</div>
+            </div>
+            <p style="font-size: 12px; color: #7f8c8d;">Solusi pengiriman reguler dengan jangkauan luas ke seluruh Indonesia dengan harga terjangkau.</p>
+            <a href="https://lionparcel.com/ongkir" target="_blank" class="btn-cek">Cek Ongkir Lion Parcel</a>
+        </div>
+        
+        <div class="courier-card">
+            <div class="courier-header">
+                <div class="courier-icon">🛵</div>
+                <div class="courier-name">Grab / Gojek (Instan & Sameday)</div>
+            </div>
+            <p style="font-size: 12px; color: #7f8c8d;">Khusus area Jabodetabek. Ongkos kirim akan diinformasikan langsung oleh Admin CIMOCABI via WhatsApp saat checkout.</p>
+        </div>
+    </div>
+
+</body>
+</html>
