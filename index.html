@@ -9,7 +9,6 @@
     <title>CIMOCABI | Camilan Enak & Praktis</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -64,10 +63,10 @@
     </section>
 
     <main>
-        <div id="product-grid" class="product-grid">
-            </div>
+        <div id="product-grid" class="product-grid"></div>
     </main>
 
+    <!-- Cart Overlay -->
     <div id="cart-overlay" class="overlay-hidden">
         <div class="cart-panel">
             <div class="cart-header">
@@ -95,11 +94,16 @@
         <div class="footer-links">
             <a href="#" onclick="showTerm()">Syarat & Ketentuan</a>
             <a href="components/rating.html">Beri Ulasan</a>
-            <p>Hubungi Kami: <a href="https://www.instagram.com/cimocabi?igsh=MTRhYzMwdGcxM2NjbQ==">Instagram</a> | <a href="https://www.facebook.com/share/18xwt1YSVq/">Facebook</a> | <a href="https://www.tiktok.com/@spfirdaussyyy?_r=1&_t=ZS-97V3ZKwZxK8">TikTok</a></p>
+            <p>Hubungi Kami: 
+                <a href="https://www.instagram.com/cimocabi?igsh=MTRhYzMwdGcxM2NjbQ==" target="_blank">Instagram</a> | 
+                <a href="https://www.facebook.com/share/18xwt1YSVq/" target="_blank">Facebook</a> | 
+                <a href="https://www.tiktok.com/@spfirdaussyyy" target="_blank">TikTok</a>
+            </p>
         </div>
         <p class="copyright">&copy; 2026 CIMOCABI. All Rights Reserved.</p>
     </footer>
 
+    <!-- Term Modal -->
     <div id="term-modal" class="modal-hidden">
         <div class="modal-content">
             <span class="close" onclick="closeTerm()">&times;</span>
@@ -107,57 +111,67 @@
         </div>
     </div>
 
-    <script src="data_produk.js"></script>
-    <script src="cart.js"></script>
-    <script src="sold.js"></script>
-    <script src="components/dropdown.js"></script>
-    <script src="components/translate.js"></script>
-    <script src="ask.js"></script>
-    <script src="tour.js"></script>
-    <script src="term.js"></script>
+    <!-- Scripts -->
+    <script src="data_produk.js" defer></script>
+    <script src="cart.js" defer></script>
+    <script src="ask.js" defer></script>
+    <script src="tour.js" defer></script>
+    <script src="term.js" defer></script>
+    <script src="components/dropdown.js" defer></script>
+    <script src="sold.js" defer></script>
 
     <script>
-        // Fitur jam glowing
+        // Global Error Handler
+        window.onerror = function(msg, url, line) {
+            console.error(`JS Error: ${msg} at line ${line}`);
+        };
+
+        // Jam Digital
         setInterval(() => {
             const date = new Date();
             document.getElementById('digital-clock').innerText = date.toLocaleTimeString('id-ID');
         }, 1000);
 
-        // Fitur Kembang Api pada Title
-        const headerTitle = document.getElementById('header-title');
-        const surpriseText = document.getElementById('surprise-text');
+        // Fireworks
         const canvas = document.getElementById('fireworksCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        const headerTitle = document.getElementById('header-title');
+        const surpriseText = document.getElementById('surprise-text');
+
         headerTitle.addEventListener('click', () => {
             surpriseText.classList.add('show-downwards');
             createFireworks();
-            setTimeout(() => { surpriseText.classList.remove('show-downwards'); }, 3000);
+            setTimeout(() => surpriseText.classList.remove('show-downwards'), 3000);
         });
 
         function createFireworks() {
-            // Logika kembang api sederhana menggunakan JS Canvas
             let particles = [];
-            for(let i=0; i<50; i++) {
+            for(let i = 0; i < 50; i++) {
                 particles.push({
-                    x: window.innerWidth / 2, y: 100,
-                    vx: (Math.random() - 0.5) * 10, vy: (Math.random() - 0.5) * 10,
+                    x: window.innerWidth / 2,
+                    y: 100,
+                    vx: (Math.random() - 0.5) * 10,
+                    vy: (Math.random() - 0.5) * 10,
                     color: `hsl(${Math.random() * 360}, 100%, 50%)`,
                     life: 100
                 });
             }
             function animate() {
-                ctx.clearRect(0,0, canvas.width, canvas.height);
-                particles.forEach((p, index) => {
-                    p.x += p.vx; p.y += p.vy; p.life--;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles = particles.filter(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life--;
                     ctx.fillStyle = p.color;
-                    ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI*2); ctx.fill();
-                    if(p.life <= 0) particles.splice(index, 1);
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    return p.life > 0;
                 });
-                if(particles.length > 0) requestAnimationFrame(animate);
-                else ctx.clearRect(0,0, canvas.width, canvas.height);
+                if (particles.length > 0) requestAnimationFrame(animate);
             }
             animate();
         }
