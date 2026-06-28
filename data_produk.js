@@ -103,20 +103,33 @@ function renderProducts(filter = 'semua') {
     if (!grid) return;
     grid.innerHTML = '';
 
-    produkCimocabi.forEach(produk => {
-        let isMatch = filter === 'semua' || 
-                      produk.category.some(c => c.toLowerCase().includes(filter.toLowerCase())) || 
-                      produk.jenis.some(j => j.toLowerCase().includes(filter.toLowerCase())) ||
-                      produk.name.toLowerCase().includes(filter.toLowerCase());
-        
-        if (!isMatch) return;
+    // Filter dulu
+    let filteredProducts = produkCimocabi.filter(produk => {
+        if (filter === 'semua') return true;
+        return produk.category.some(c => c.toLowerCase().includes(filter.toLowerCase())) || 
+               produk.jenis.some(j => j.toLowerCase().includes(filter.toLowerCase())) ||
+               produk.name.toLowerCase().includes(filter.toLowerCase());
+    });
+
+    // SORTING: Tersedia di atas, Coming Soon di bawah
+    filteredProducts.sort((a, b) => {
+        const aComingSoon = a.status === 'comingsoon' || a.price <= 0;
+        const bComingSoon = b.status === 'comingsoon' || b.price <= 0;
+
+        if (aComingSoon && !bComingSoon) return 1;   // Coming soon ke bawah
+        if (!aComingSoon && bComingSoon) return -1;  // Tersedia ke atas
+        return 0; // urutan tetap jika sama
+    });
+
+    filteredProducts.forEach(produk => {
+        let isMatch = true; // sudah difilter di atas
 
         let diskonBadge = (produk.originalPrice > produk.price && produk.price > 0) 
             ? `<div class="badge-diskon">-${Math.round(((produk.originalPrice - produk.price) / produk.originalPrice) * 100)}%</div>` : '';
         let larisBadge = produk.sold >= 30 ? `<div class="badge-laris">Paling Laris 🔥</div>` : '';
-        let imagesHTML = produk.images.map((img, i) => `<img src="${img}" class="${i === 0 ? 'active' : ''}" onerror="this.src='https://via.placeholder.com/150'">`).join('');
+        let imagesHTML = produk.images.map((img, i) => `<img src="\( {img}" class=" \){i === 0 ? 'active' : ''}" onerror="this.src='https://via.placeholder.com/150'">`).join('');
 
-        let isComingSoon = produk.status === 'comingsoon' || produk.stock === 0;
+        let isComingSoon = produk.status === 'comingsoon' || produk.price <= 0 || produk.stock === 0;
         let formatHarga = produk.price > 0 ? `Rp ${produk.price.toLocaleString('id-ID')}` : 'Belum Rilis';
         let formatCoret = produk.originalPrice > 0 && produk.price > 0 ? `Rp ${produk.originalPrice.toLocaleString('id-ID')}` : '';
 
@@ -124,9 +137,9 @@ function renderProducts(filter = 'semua') {
         if (Object.keys(produk.options).length > 0 && !isComingSoon) {
             varianHTML += `<div class="varian-container">`;
             for (const [key, values] of Object.entries(produk.options)) {
-                varianHTML += `<select class="select-varian" id="var-${produk.id}-${key}">
+                varianHTML += `<select class="select-varian" id="var-\( {produk.id}- \){key}">
                     <option value="" disabled selected>Pilih ${key}</option>
-                    ${values.map(val => `<option value="${val}">${val}</option>`).join('')}
+                    \( {values.map(val => `<option value=" \){val}">${val}</option>`).join('')}
                 </select>`;
             }
             varianHTML += `</div>`;
@@ -141,12 +154,12 @@ function renderProducts(filter = 'semua') {
         card.innerHTML = `
             ${larisBadge}
             ${diskonBadge}
-            <div class="img-slider" id="slider-${produk.id}" onclick="nextImage(${produk.id})">
+            <div class="img-slider" id="slider-\( {produk.id}" onclick="nextImage( \){produk.id})">
                 ${imagesHTML}
             </div>
             <div class="product-info">
                 <div class="product-title">${produk.name}</div>
-                <div class="product-price">${formatHarga} <span class="product-price-coret">${formatCoret}</span></div>
+                <div class="product-price">\( {formatHarga} <span class="product-price-coret"> \){formatCoret}</span></div>
                 <div style="font-size: 11px; margin-top: 5px; color: #7f8c8d; line-height: 1.4;">${produk.desc}</div>
                 ${varianHTML}
                 <div class="product-meta">
@@ -160,6 +173,7 @@ function renderProducts(filter = 'semua') {
     });
 }
 
+// Fungsi lainnya tetap sama
 function searchProduct() {
     let input = document.getElementById('searchInput').value;
     renderProducts(input);
@@ -172,7 +186,7 @@ function filterCategory(cat) {
 }
 
 function alertComingSoon() {
-    alert("Produk ini belum dirilis! Stay tune di sosmed CIMOCABI ya!");
+    showCustomAlert("Produk ini belum dirilis! Stay tune di sosmed CIMOCABI ya!");
 }
 
 function nextImage(productId) {
@@ -193,7 +207,7 @@ function validateAndAddToCart(id) {
 
     if (Object.keys(product.options).length > 0) {
         for (const key of Object.keys(product.options)) {
-            let selectElement = document.getElementById(`var-${id}-${key}`);
+            let selectElement = document.getElementById(`var-\( {id}- \){key}`);
             if (selectElement && selectElement.value === "") {
                 isVariantMissing = true;
                 break;
@@ -204,7 +218,7 @@ function validateAndAddToCart(id) {
     }
 
     if (isVariantMissing) {
-        alert("Mohon pilih varian produk terlebih dahulu.");
+        showCustomAlert("Mohon pilih varian produk terlebih dahulu.");
         return;
     }
 
@@ -215,9 +229,9 @@ function validateAndAddToCart(id) {
         if (existing) existing.qty++;
         else cart.push({ id: product.id, name: finalName, price: product.price, qty: 1 });
         saveCart();
-        alert(`${finalName} berhasil ditambahkan!`);
+        showCustomAlert(`${finalName} berhasil ditambahkan!`);
     } else {
-        alert("File cart.js belum terload.");
+        showCustomAlert("File cart.js belum terload.");
     }
 }
 

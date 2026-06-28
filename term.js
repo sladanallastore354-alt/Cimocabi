@@ -1,18 +1,28 @@
+// =============================================
+// term.js - Syarat dan Ketentuan
+// =============================================
+
 const termText = `
     <h3>Syarat dan Ketentuan CIMOCABI</h3>
-    <ol style="margin-left:20px; margin-top:10px; line-height:1.6;">
-        <li><b>Sistem Pemesanan:</b> Pre-order. Dibuat fresh saat pesanan masuk. Minimal pengiriman 2 hari setelah pesanan diproses.</li>
-        <li><b>Area & Kurir:</b> 
-            <br>- Jabodetabek: Rekomendasi Grab/Gojek Instan/Sameday.
-            <br>- Luar Jabodetabek: Rekomendasi Lion Parcel & Paxel.
+    <p style="margin: 12px 0; color:#555; font-size:14px;">Mohon dibaca dengan seksama sebelum melakukan pemesanan.</p>
+    
+    <ol style="margin-left:20px; line-height:1.75; font-size:14.5px;">
+        <li><strong>Sistem Pemesanan:</strong> Pre-order. Semua produk dibuat fresh setelah pesanan masuk. Estimasi pengiriman minimal 2 hari kerja setelah konfirmasi pembayaran.</li>
+        <li><strong>Area Pengiriman & Kurir:</strong><br>
+            • Jabodetabek: Rekomendasi Grab/Gojek (Instan/Sameday).<br>
+            • Luar Jabodetabek: Rekomendasi Lion Parcel & Paxel (gunakan Cold Storage untuk produk frozen).
         </li>
-        <li><b>Pembayaran:</b> Kirim bukti transfer (Screenshot). Pesanan diproses sesuai urutan transfer.</li>
-        <li><b>Lain-lain:</b>
-            <br>- Kerusakan saat pengiriman adalah tanggung jawab ekspedisi.
-            <br>- Kesalahan jumlah/jenis produk dari kami bisa di-refund dengan menyertakan VIDEO UNBOXING.
-            <br>- Jika refund barang, ongkir ditanggung pembeli.
+        <li><strong>Pembayaran:</strong> Transfer bank. Kirim bukti transfer (screenshot) ke admin. Pesanan diproses sesuai urutan transfer yang diterima.</li>
+        <li><strong>Refund & Pengembalian:</strong><br>
+            • Kerusakan selama pengiriman adalah tanggung jawab ekspedisi.<br>
+            • Kesalahan dari pihak kami dapat direfund dengan menyertakan video unboxing lengkap.<br>
+            • Ongkir pengembalian ditanggung oleh pembeli.
         </li>
     </ol>
+    
+    <p style="margin-top:20px; font-size:13.5px; color:#666; text-align:center;">
+        Dengan melanjutkan pemesanan, Anda dianggap telah menyetujui semua syarat dan ketentuan di atas.
+    </p>
 `;
 
 function showTerm() {
@@ -23,4 +33,7 @@ function showTerm() {
 
 function closeTerm() {
     document.getElementById('term-modal').style.display = 'none';
+    
+    // Simpan status kunjungan
+    localStorage.setItem('hasVisited', 'true');
 }

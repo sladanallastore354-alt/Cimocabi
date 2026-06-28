@@ -28,7 +28,7 @@ function addToCart(id) {
     }
 
     saveCart();
-    alert(`${product.name} berhasil ditambahkan ke keranjang!`);
+    showCustomAlert(`${product.name} berhasil ditambahkan ke keranjang!`);
 }
 
 function updateQty(id, change) {
@@ -93,7 +93,7 @@ function updateCartUI() {
 
 function checkoutWA() {
     if (cart.length === 0) {
-        alert("Ops! Tambahkan barang dulu ke keranjang sebelum checkout.");
+        showCustomAlert("Ops! Tambahkan barang dulu ke keranjang sebelum checkout.");
         return;
     }
 
@@ -103,7 +103,7 @@ function checkoutWA() {
     const notes = document.getElementById('buyer-note').value.trim();
 
     if (!nama || !alamat || !telp) {
-        alert("Mohon lengkapi Nama, Alamat, dan No. Telepon!");
+        showCustomAlert("Mohon lengkapi Nama, Alamat, dan No. Telepon!");
         return;
     }
 
@@ -115,10 +115,10 @@ function checkoutWA() {
 
     let pesanWA = `Halo Admin CIMOCABI, saya mau pesan:%0A%0A${pesananTeks}%0A%0A*Total: Rp ${totalHarga.toLocaleString('id-ID')}*%0A%0A*Data Pengiriman:*%0ANama: ${nama}%0AAlamat: ${alamat}%0ANo WA: ${telp}%0ACatatan: ${notes || '-'}%0A%0AMohon info total tagihan beserta ongkirnya ya. Terima kasih!`;
 
-    // Buka WhatsApp dengan pesan lengkap
+    // Buka WhatsApp
     window.open(`https://wa.me/\( {waAdminNumber}?text= \){pesanWA}`, '_blank');
 
-    // Update jumlah terjual (jika sold.js sudah ada)
+    // Update jumlah terjual
     if (typeof updateSoldCount === 'function') {
         cart.forEach(item => {
             updateSoldCount(item.id, item.qty);

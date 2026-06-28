@@ -14,6 +14,7 @@
 <body>
     <canvas id="fireworksCanvas"></canvas>
 
+    <!-- ==================== HEADER ==================== -->
     <header class="rainbow-bg">
         <div class="header-container">
             <div class="logo-wrapper">
@@ -34,6 +35,7 @@
         </div>
     </header>
 
+    <!-- ==================== HERO SECTION ==================== -->
     <section class="hero-section">
         <div class="hero-content">
             <h2>Cari ide hampers? Cimocabi aja!</h2>
@@ -45,10 +47,12 @@
         </div>
     </section>
 
+    <!-- ==================== RUNNING TEXT ==================== -->
     <div class="running-text-container">
         <marquee>Selamat datang di CIMOCABI! Nikmati promo spesial untuk paket bundling bulan ini. Segera pesan sebelum kehabisan!</marquee>
     </div>
 
+    <!-- ==================== FILTER & SEARCH ==================== -->
     <section class="filter-section">
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Cari camilan favoritmu...">
@@ -62,11 +66,12 @@
         </div>
     </section>
 
+    <!-- ==================== PRODUK GRID ==================== -->
     <main>
         <div id="product-grid" class="product-grid"></div>
     </main>
 
-    <!-- Cart Overlay -->
+    <!-- ==================== CART OVERLAY ==================== -->
     <div id="cart-overlay" class="overlay-hidden">
         <div class="cart-panel">
             <div class="cart-header">
@@ -87,9 +92,11 @@
         </div>
     </div>
 
+    <!-- ==================== FLOATING BUTTONS ==================== -->
     <button class="fab fab-wa" onclick="askAdmin()">💬 Tanya Admin</button>
     <button class="fab fab-tour" onclick="startTour()">🧲 Tour Web</button>
 
+    <!-- ==================== FOOTER ==================== -->
     <footer>
         <div class="footer-links">
             <a href="#" onclick="showTerm()">Syarat & Ketentuan</a>
@@ -103,7 +110,7 @@
         <p class="copyright">&copy; 2026 CIMOCABI. All Rights Reserved.</p>
     </footer>
 
-    <!-- Term Modal -->
+    <!-- ==================== TERM MODAL ==================== -->
     <div id="term-modal" class="modal-hidden">
         <div class="modal-content">
             <span class="close" onclick="closeTerm()">&times;</span>
@@ -111,7 +118,15 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- ==================== CUSTOM ALERT ==================== -->
+    <div id="custom-alert" class="custom-alert-hidden">
+        <div class="custom-alert-content">
+            <p id="custom-alert-message"></p>
+            <button onclick="closeCustomAlert()">Saya Mengerti</button>
+        </div>
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
     <script src="data_produk.js" defer></script>
     <script src="cart.js" defer></script>
     <script src="ask.js" defer></script>
@@ -121,18 +136,12 @@
     <script src="sold.js" defer></script>
 
     <script>
-        // Global Error Handler
+        // ==================== GLOBAL ERROR HANDLER ====================
         window.onerror = function(msg, url, line) {
             console.error(`JS Error: ${msg} at line ${line}`);
         };
 
-        // Jam Digital
-        setInterval(() => {
-            const date = new Date();
-            document.getElementById('digital-clock').innerText = date.toLocaleTimeString('id-ID');
-        }, 1000);
-
-        // Fireworks
+       // ==================== FIREWORKS ====================
         const canvas = document.getElementById('fireworksCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -175,6 +184,32 @@
             }
             animate();
         }
+
+        // ==================== CUSTOM ALERT ====================
+        function showCustomAlert(message) {
+            const alertBox = document.getElementById('custom-alert');
+            const alertMessage = document.getElementById('custom-alert-message');
+            alertMessage.innerHTML = message;
+            alertBox.style.display = 'flex';
+        }
+
+        function closeCustomAlert() {
+            document.getElementById('custom-alert').style.display = 'none';
+        }
     </script>
+    <script>
+    // ==================== SHOW TERMS ON FIRST VISIT ====================
+    function checkFirstVisit() {
+        if (!localStorage.getItem('hasVisited')) {
+            // Tampilkan Syarat & Ketentuan dulu
+            setTimeout(() => {
+                showTerm();
+            }, 800); // sedikit delay agar halaman muncul dulu
+        }
+    }
+
+    // Jalankan saat halaman selesai dimuat
+    document.addEventListener("DOMContentLoaded", checkFirstVisit);
+</script>
 </body>
 </html>
