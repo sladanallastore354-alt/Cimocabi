@@ -1,4 +1,7 @@
-// Database Produk CIMOCABI
+// =============================================
+// DATA_PRODUK.JS - Database & Render Produk
+// =============================================
+
 const produkCimocabi = [
     {
         id: 1, name: "PAKET HEMAT (Cireng + Cimol)", price: 23000, originalPrice: 27000,
@@ -98,12 +101,16 @@ const produkCimocabi = [
     }
 ];
 
+// =============================================
+// FUNGSI RENDER & FILTER PRODUK
+// =============================================
+
 function renderProducts(filter = 'semua') {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
     grid.innerHTML = '';
 
-    // Filter dulu
+    // Filter produk berdasarkan input kategori atau pencarian
     let filteredProducts = produkCimocabi.filter(produk => {
         if (filter === 'semua') return true;
         return produk.category.some(c => c.toLowerCase().includes(filter.toLowerCase())) || 
@@ -111,35 +118,41 @@ function renderProducts(filter = 'semua') {
                produk.name.toLowerCase().includes(filter.toLowerCase());
     });
 
-    // SORTING: Tersedia di atas, Coming Soon di bawah
+    // SORTING: Produk tersedia di atas, Coming Soon di bawah
     filteredProducts.sort((a, b) => {
         const aComingSoon = a.status === 'comingsoon' || a.price <= 0;
         const bComingSoon = b.status === 'comingsoon' || b.price <= 0;
 
-        if (aComingSoon && !bComingSoon) return 1;   // Coming soon ke bawah
-        if (!aComingSoon && bComingSoon) return -1;  // Tersedia ke atas
-        return 0; // urutan tetap jika sama
+        if (aComingSoon && !bComingSoon) return 1;
+        if (!aComingSoon && bComingSoon) return -1;
+        return 0; 
     });
 
+    // Looping dan render setiap produk ke HTML
     filteredProducts.forEach(produk => {
-        let isMatch = true; // sudah difilter di atas
-
         let diskonBadge = (produk.originalPrice > produk.price && produk.price > 0) 
             ? `<div class="badge-diskon">-${Math.round(((produk.originalPrice - produk.price) / produk.originalPrice) * 100)}%</div>` : '';
+        
         let larisBadge = produk.sold >= 30 ? `<div class="badge-laris">Paling Laris 🔥</div>` : '';
-        let imagesHTML = produk.images.map((img, i) => `<img src="\( {img}" class=" \){i === 0 ? 'active' : ''}" onerror="this.src='https://via.placeholder.com/150'">`).join('');
+        
+        // PENTING: Perbaikan Sintaks Template Literal pada src
+        let imagesHTML = produk.images.map((img, i) => 
+            `<img src="${img}" class="${i === 0 ? 'active' : ''}" onerror="this.src='https://via.placeholder.com/150'">`
+        ).join('');
 
         let isComingSoon = produk.status === 'comingsoon' || produk.price <= 0 || produk.stock === 0;
         let formatHarga = produk.price > 0 ? `Rp ${produk.price.toLocaleString('id-ID')}` : 'Belum Rilis';
         let formatCoret = produk.originalPrice > 0 && produk.price > 0 ? `Rp ${produk.originalPrice.toLocaleString('id-ID')}` : '';
 
+        // Generate form pilihan varian jika ada
         let varianHTML = '';
         if (Object.keys(produk.options).length > 0 && !isComingSoon) {
             varianHTML += `<div class="varian-container">`;
             for (const [key, values] of Object.entries(produk.options)) {
-                varianHTML += `<select class="select-varian" id="var-\( {produk.id}- \){key}">
+                // PENTING: Perbaikan Sintaks ID dan Value Varian
+                varianHTML += `<select class="select-varian" id="var-${produk.id}-${key}">
                     <option value="" disabled selected>Pilih ${key}</option>
-                    \( {values.map(val => `<option value=" \){val}">${val}</option>`).join('')}
+                    ${values.map(val => `<option value="${val}">${val}</option>`).join('')}
                 </select>`;
             }
             varianHTML += `</div>`;
@@ -151,15 +164,17 @@ function renderProducts(filter = 'semua') {
 
         const card = document.createElement('div');
         card.className = 'product-card';
+        
+        // PENTING: Perbaikan Sintaks Template Literal Keseluruhan Card
         card.innerHTML = `
             ${larisBadge}
             ${diskonBadge}
-            <div class="img-slider" id="slider-\( {produk.id}" onclick="nextImage( \){produk.id})">
+            <div class="img-slider" id="slider-${produk.id}" onclick="nextImage(${produk.id})">
                 ${imagesHTML}
             </div>
             <div class="product-info">
                 <div class="product-title">${produk.name}</div>
-                <div class="product-price">\( {formatHarga} <span class="product-price-coret"> \){formatCoret}</span></div>
+                <div class="product-price">${formatHarga} <span class="product-price-coret">${formatCoret}</span></div>
                 <div style="font-size: 11px; margin-top: 5px; color: #7f8c8d; line-height: 1.4;">${produk.desc}</div>
                 ${varianHTML}
                 <div class="product-meta">
@@ -173,20 +188,33 @@ function renderProducts(filter = 'semua') {
     });
 }
 
-// Fungsi lainnya tetap sama
+// =============================================
+// FUNGSI PENDUKUNG (SEARCH, FILTER, SLIDER)
+// =============================================
+
 function searchProduct() {
     let input = document.getElementById('searchInput').value;
     renderProducts(input);
 }
 
 function filterCategory(cat) {
-    document.querySelectorAll('.category-buttons button').forEach(btn => btn.classList.remove('active'));
-    if (window.event && window.event.target) window.event.target.classList.add('active');
+    // Logic yang lebih stabil untuk mengubah tombol aktif tanpa error window.event
+    document.querySelectorAll('.category-buttons button').forEach(btn => {
+        if (btn.getAttribute('onclick').includes(cat)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
     renderProducts(cat);
 }
 
 function alertComingSoon() {
-    showCustomAlert("Produk ini belum dirilis! Stay tune di sosmed CIMOCABI ya!");
+    if (typeof showCustomAlert === 'function') {
+        showCustomAlert("Produk ini belum dirilis! Stay tune di sosmed CIMOCABI ya!");
+    } else {
+        alert("Produk ini belum dirilis! Stay tune di sosmed CIMOCABI ya!");
+    }
 }
 
 function nextImage(productId) {
@@ -200,14 +228,21 @@ function nextImage(productId) {
     images[nextIndex].classList.add('active');
 }
 
+// =============================================
+// FUNGSI VALIDASI VARIAN & TAMBAH KE KERANJANG
+// =============================================
+
 function validateAndAddToCart(id) {
     const product = produkCimocabi.find(p => p.id === id);
     let selectedVariants = [];
     let isVariantMissing = false;
 
+    // Cek apakah semua dropdown varian sudah dipilih
     if (Object.keys(product.options).length > 0) {
         for (const key of Object.keys(product.options)) {
-            let selectElement = document.getElementById(`var-\( {id}- \){key}`);
+            // PENTING: Perbaikan pencarian ID varian
+            let selectElement = document.getElementById(`var-${id}-${key}`);
+            
             if (selectElement && selectElement.value === "") {
                 isVariantMissing = true;
                 break;
@@ -218,21 +253,29 @@ function validateAndAddToCart(id) {
     }
 
     if (isVariantMissing) {
-        showCustomAlert("Mohon pilih varian produk terlebih dahulu.");
+        showCustomAlert("Mohon pilih varian produk (misal: Frozen/Matang) terlebih dahulu.");
         return;
     }
 
+    // Gabungkan nama produk dengan varian yang dipilih
     let finalName = product.name + (selectedVariants.length > 0 ? ` (${selectedVariants.join(', ')})` : "");
     
+    // Proses memasukkan ke keranjang
     if (typeof cart !== 'undefined') {
         const existing = cart.find(item => item.name === finalName);
-        if (existing) existing.qty++;
-        else cart.push({ id: product.id, name: finalName, price: product.price, qty: 1 });
-        saveCart();
-        showCustomAlert(`${finalName} berhasil ditambahkan!`);
+        if (existing) {
+            existing.qty++;
+        } else {
+            cart.push({ id: product.id, name: finalName, price: product.price, qty: 1 });
+        }
+        
+        if (typeof saveCart === 'function') {
+            saveCart();
+            updateCartUI(); // Sinkronisasi dengan cart.js untuk update badge/list
+        }
+        
+        showCustomAlert(`${finalName} berhasil ditambahkan ke keranjang!`);
     } else {
-        showCustomAlert("File cart.js belum terload.");
+        showCustomAlert("Sistem keranjang belum siap. Pastikan cart.js sudah ter-load.");
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => renderProducts('semua'));

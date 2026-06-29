@@ -16,14 +16,24 @@ const privacyText = `
     <p style="margin-top:20px; font-size:13.5px; color:#666; text-align:center;">
         Dengan menggunakan layanan kami, Anda menyetujui kebijakan privasi ini.
     </p>
+    <button onclick="closePrivacy()" style="width: 100%; margin-top: 15px; padding: 10px; background: #6f42c1; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Tutup</button>
 `;
 
 function showPrivacy() {
+    // Pastikan di index.html sudah ada div id="privacy-modal"
     const modal = document.getElementById('privacy-modal');
-    document.getElementById('privacy-text').innerHTML = privacyText;
-    modal.style.display = 'flex';
+    const container = document.getElementById('privacy-text');
+    if (modal && container) {
+        container.innerHTML = privacyText;
+        modal.style.display = 'flex';
+        modal.classList.remove('modal-hidden');
+    }
 }
 
 function closePrivacy() {
-    document.getElementById('privacy-modal').style.display = 'none';
+    const modal = document.getElementById('privacy-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.classList.add('modal-hidden');
+    }
 }

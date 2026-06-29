@@ -3,213 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CIMOCABI - Jual hampers, camilan matang, dan beku yang enak dan gurih.">
-    <meta property="og:title" content="CIMOCABI - Camilan Praktis & Enak">
-    <meta property="og:description" content="Cari ide hampers? Cimocabi aja! OPEN PRE ORDER NOW!">
     <title>CIMOCABI | Camilan Enak & Praktis</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <canvas id="fireworksCanvas"></canvas>
 
-    <!-- ==================== HEADER ==================== -->
     <header class="rainbow-bg">
         <div class="header-container">
             <div class="logo-wrapper">
-                <img src="images/logo.jpg" alt="Logo Cimocabi" class="logo-bulat" onerror="this.src='https://via.placeholder.com/50'">
+                <img src="images/logo.jpg" alt="Logo" class="logo-bulat" onerror="this.src='https://via.placeholder.com/50'">
                 <h1 id="header-title">CIMOCABI</h1>
                 <span id="surprise-text" class="hidden-text">[ yakin cuma satu? ]</span>
             </div>
-            
             <div class="header-actions">
-                <div class="cart-icon" onclick="toggleCart()">
-                    🛒 <span id="cart-badge">0</span>
-                </div>
-                <div class="kebab-menu" onclick="toggleDropdown()">
-                    &#8942;
+                <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-badge">0</span></div>
+                <div class="kebab-menu" onclick="toggleDropdown(event)">&#8942;
                     <div id="dropdown-content" class="dropdown-hidden"></div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ==================== HERO SECTION ==================== -->
     <section class="hero-section">
         <div class="hero-content">
             <h2>Cari ide hampers? Cimocabi aja!</h2>
-            <p>OPEN PRE ORDER NOW! Camilan enak, gurih, praktis, cocok untuk nonton, bekal keluarga dan snack arisan.</p>
-        </div>
-        <div class="clock-container">
-            <div id="digital-clock">00:00:00</div>
-            <div class="glowing-line"></div>
+            <p>OPEN PRE ORDER NOW! Camilan enak, gurih, praktis.</p>
         </div>
     </section>
 
-    <!-- ==================== RUNNING TEXT ==================== -->
-    <div class="running-text-container">
-        <marquee>Selamat datang di CIMOCABI! Nikmati promo spesial untuk paket bundling bulan ini. Segera pesan sebelum kehabisan!</marquee>
-    </div>
-
-    <!-- ==================== FILTER & SEARCH ==================== -->
     <section class="filter-section">
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Cari camilan favoritmu...">
+            <input type="text" id="searchInput" placeholder="Cari...">
             <button onclick="searchProduct()">🔍</button>
         </div>
         <div class="category-buttons">
-            <button onclick="filterCategory('semua')" class="active">Semua Produk</button>
-            <button onclick="filterCategory('food')">Food</button>
-            <button onclick="filterCategory('frozen')">Frozen</button>
-            <button onclick="filterCategory('bundling')">Bundling</button>
+            <button onclick="filterCategory('semua')" class="category-btn active">Semua</button>
+            <button onclick="filterCategory('food')" class="category-btn">Food</button>
+            <button onclick="filterCategory('frozen')" class="category-btn">Frozen</button>
         </div>
     </section>
 
-    <!-- ==================== PRODUK GRID ==================== -->
-    <main>
-        <div id="product-grid" class="product-grid"></div>
-    </main>
+    <main><div id="product-grid" class="product-grid"></div></main>
 
-    <!-- ==================== CART OVERLAY ==================== -->
-    <div id="cart-overlay" class="overlay-hidden">
+    <div id="cart-overlay" class="overlay-hidden" style="display: none;">
         <div class="cart-panel">
-            <div class="cart-header">
-                <h3>Keranjang Belanja</h3>
-                <button onclick="toggleCart()">✕</button>
-            </div>
+            <div class="cart-header"><h3>Keranjang</h3><button onclick="toggleCart()">✕</button></div>
             <div id="cart-items"></div>
-            <div class="cart-total">
-                <p>Total: <span id="total-price">Rp 0</span></p>
-            </div>
+            <div class="cart-total"><p>Total: <span id="total-price">Rp 0</span></p></div>
             <div class="checkout-form">
-                <input type="text" id="buyer-name" placeholder="Nama Lengkap" required>
-                <input type="text" id="buyer-address" placeholder="Alamat Pengiriman (Bisa Depok & sekitarnya)" required>
-                <input type="tel" id="buyer-phone" placeholder="No. Telepon / WA" required>
-                <textarea id="buyer-note" placeholder="Catatan Khusus (Opsional)"></textarea>
-                <button class="btn-wa" onclick="checkoutWA()">Kirim Pesanan ke WhatsApp</button>
+                <input type="text" id="buyer-name" placeholder="Nama">
+                <input type="text" id="buyer-address" placeholder="Alamat">
+                <input type="tel" id="buyer-phone" placeholder="No WA">
+                <textarea id="buyer-note" placeholder="Catatan"></textarea>
+                <button class="btn-wa" onclick="checkoutWA()">Kirim ke WhatsApp</button>
             </div>
         </div>
     </div>
 
-    <!-- ==================== FLOATING BUTTONS ==================== -->
-    <button class="fab fab-wa" onclick="askAdmin()">💬 Tanya Admin</button>
-    <button class="fab fab-tour" onclick="startTour()">🧲 Tour Web</button>
+    <button class="fab fab-wa" onclick="askAdmin()">💬 Tanya</button>
+    <button class="fab fab-tour" onclick="startTour()">🧲 Tour</button>
 
-    <!-- ==================== FOOTER ==================== -->
     <footer>
         <div class="footer-links">
             <a href="#" onclick="showTerm()">Syarat & Ketentuan</a>
-            <a href="components/rating.html">Beri Ulasan</a>
-            <p>Hubungi Kami: 
-                <a href="https://www.instagram.com/cimocabi?igsh=MTRhYzMwdGcxM2NjbQ==" target="_blank">Instagram</a> | 
-                <a href="https://www.facebook.com/share/18xwt1YSVq/" target="_blank">Facebook</a> | 
-                <a href="https://www.tiktok.com/@spfirdaussyyy" target="_blank">TikTok</a>
-            </p>
+            <a href="#" onclick="showPrivacy()">Kebijakan Privasi</a>
         </div>
-        <p class="copyright">&copy; 2026 CIMOCABI. All Rights Reserved.</p>
     </footer>
 
-    <!-- ==================== TERM MODAL ==================== -->
-    <div id="term-modal" class="modal-hidden">
-        <div class="modal-content">
-            <span class="close" onclick="closeTerm()">&times;</span>
-            <div id="term-text"></div>
-        </div>
-    </div>
+    <div id="term-modal" class="modal-hidden"><div class="modal-content"><span class="close" onclick="closeTerm()">&times;</span><div id="term-text"></div></div></div>
+    <div id="privacy-modal" class="modal-hidden"><div class="modal-content"><span class="close" onclick="closePrivacy()">&times;</span><div id="privacy-text"></div></div></div>
+    <div id="custom-alert" class="custom-alert-hidden"><div class="custom-alert-content"><p id="custom-alert-message"></p><button onclick="closeCustomAlert()">Saya Mengerti</button></div></div>
 
-    <!-- ==================== CUSTOM ALERT ==================== -->
-    <div id="custom-alert" class="custom-alert-hidden">
-        <div class="custom-alert-content">
-            <p id="custom-alert-message"></p>
-            <button onclick="closeCustomAlert()">Saya Mengerti</button>
-        </div>
-    </div>
-
-    <!-- ==================== SCRIPTS ==================== -->
     <script src="data_produk.js" defer></script>
     <script src="cart.js" defer></script>
     <script src="ask.js" defer></script>
     <script src="tour.js" defer></script>
     <script src="term.js" defer></script>
+    <script src="kebijakan-privasi.js" defer></script>
     <script src="components/dropdown.js" defer></script>
     <script src="sold.js" defer></script>
-
-    <script>
-        // ==================== GLOBAL ERROR HANDLER ====================
-        window.onerror = function(msg, url, line) {
-            console.error(`JS Error: ${msg} at line ${line}`);
-        };
-
-       // ==================== FIREWORKS ====================
-        const canvas = document.getElementById('fireworksCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const headerTitle = document.getElementById('header-title');
-        const surpriseText = document.getElementById('surprise-text');
-
-        headerTitle.addEventListener('click', () => {
-            surpriseText.classList.add('show-downwards');
-            createFireworks();
-            setTimeout(() => surpriseText.classList.remove('show-downwards'), 3000);
-        });
-
-        function createFireworks() {
-            let particles = [];
-            for(let i = 0; i < 50; i++) {
-                particles.push({
-                    x: window.innerWidth / 2,
-                    y: 100,
-                    vx: (Math.random() - 0.5) * 10,
-                    vy: (Math.random() - 0.5) * 10,
-                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-                    life: 100
-                });
-            }
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles = particles.filter(p => {
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.life--;
-                    ctx.fillStyle = p.color;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-                    ctx.fill();
-                    return p.life > 0;
-                });
-                if (particles.length > 0) requestAnimationFrame(animate);
-            }
-            animate();
-        }
-
-        // ==================== CUSTOM ALERT ====================
-        function showCustomAlert(message) {
-            const alertBox = document.getElementById('custom-alert');
-            const alertMessage = document.getElementById('custom-alert-message');
-            alertMessage.innerHTML = message;
-            alertBox.style.display = 'flex';
-        }
-
-        function closeCustomAlert() {
-            document.getElementById('custom-alert').style.display = 'none';
-        }
-    </script>
-    <script>
-    // ==================== SHOW TERMS ON FIRST VISIT ====================
-    function checkFirstVisit() {
-        if (!localStorage.getItem('hasVisited')) {
-            // Tampilkan Syarat & Ketentuan dulu
-            setTimeout(() => {
-                showTerm();
-            }, 800); // sedikit delay agar halaman muncul dulu
-        }
-    }
-
-    // Jalankan saat halaman selesai dimuat
-    document.addEventListener("DOMContentLoaded", checkFirstVisit);
-</script>
 </body>
 </html>
