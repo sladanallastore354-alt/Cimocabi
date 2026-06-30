@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "PAKET HEMAT (Cireng + Cimol)",
+      "price": 23000,
+      "originalPrice": 27000,
+      "stock": 100,
+      "status": "tersedia",
+      "desc": "Hampers ngemil asik! 1 bungkus cireng ayam pedas + 1 bungkus cimol Crunchy maknyus.",
+      "images": ["images/paket_hemat.jpg"]
+    },
+    {
+      "id": 6,
+      "name": "Cimol Keju",
+      "price": 15000,
+      "originalPrice": 17000,
+      "stock": 100,
+      "status": "tersedia",
+      "desc": "25 butir cimol crunchy dengan isian keju meleleh.",
+      "images": ["images/cimol_keju.jpg"]
+    }
+  ]
+}
