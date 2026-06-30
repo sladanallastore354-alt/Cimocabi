@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Stok - CIMOCABI Admin</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <div class="admin-sidebar">
+        <h2>CIMOCABI</h2>
+        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="products.html"><i class="fas fa-box"></i> Kelola Produk</a>
+        <a href="orders.html"><i class="fas fa-shopping-bag"></i> Pesanan</a>
+        <a href="discounts.html"><i class="fas fa-tags"></i> Diskon & Promo</a>
+        <a href="stock.html" class="active"><i class="fas fa-warehouse"></i> Stok</a>
+        <a href="../index.html" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+    </div>
+
+    <div class="admin-content">
+        <h1>Manajemen Stok</h1>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Produk</th>
+                    <th>Stok Saat Ini</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="stock-table"></tbody>
+        </table>
+    </div>
+
+    <script src="../assets/js/products.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script>
+        checkAdminLogin();
+
+        function renderStock() {
+            const tbody = document.getElementById('stock-table');
+            tbody.innerHTML = '';
+
+            productsData.forEach(p => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${p.name}</td>
+                        <td>${p.stock}</td>
+                        <td>
+                            <button onclick="editProduct(${p.id})">Update Stok</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        renderStock();
+    </script>
+</body>
+</html>

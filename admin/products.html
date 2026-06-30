@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Produk - CIMOCABI Admin</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <div class="admin-sidebar">
+        <h2>CIMOCABI</h2>
+        <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="products.html" class="active"><i class="fas fa-box"></i> Kelola Produk</a>
+        <a href="orders.html"><i class="fas fa-shopping-bag"></i> Pesanan</a>
+        <a href="discounts.html"><i class="fas fa-tags"></i> Diskon</a>
+        <a href="stock.html"><i class="fas fa-warehouse"></i> Stok</a>
+        <a href="../index.html" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+    </div>
+
+    <div class="admin-content">
+        <h1>Kelola Produk</h1>
+        <button onclick="alert('Fitur Tambah Produk Baru akan ditambahkan')" class="btn-primary">+ Tambah Produk Baru</button>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="product-table"></tbody>
+        </table>
+    </div>
+
+    <script src="../assets/js/products.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script>
+        checkAdminLogin();
+        renderAdminProducts();
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - CIMOCABI</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <div class="login-container">
+        <h1>🔑 Admin CIMOCABI</h1>
+        <form id="login-form">
+            <input type="password" id="password" placeholder="Masukkan Password Admin" required>
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+        <p class="note">Password default: <strong>admin123</strong></p>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pass = document.getElementById('password').value;
+            if (pass === "admin123") {
+                localStorage.setItem('adminLoggedIn', 'true');
+                window.location.href = 'dashboard.html';
+            } else {
+                alert("Password salah!");
+            }
+        });
+    </script>
+</body>
+</html>
