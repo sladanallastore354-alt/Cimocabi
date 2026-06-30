@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMOCABI - Cireng & Cimol Special Depok</title>
+    <title>Menu - CIMOCABI</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -11,28 +11,18 @@
 <body>
     <header id="header"></header>
 
-    <main>
-        <!-- Hero -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Cire ng & Cimol <span class="accent">Paling Nagih!</span></h1>
-                <p>Snack hits dari Depok — Frozen & Matang. Gurih, krispi, dan bikin ketagihan ❤️</p>
-                <button onclick="window.location.href='menu.html'" class="btn-primary">Lihat Semua Menu</button>
-            </div>
-        </section>
-
-        <!-- Featured Products -->
-        <section class="products-section">
-            <h2 class="section-title">Menu Favorit Kami</h2>
+    <main class="menu-page">
+        <div class="container">
+            <h1 class="page-title">Semua Menu</h1>
             <div id="product-grid" class="product-grid"></div>
-        </section>
+        </div>
     </main>
 
     <footer id="footer"></footer>
 
     <script src="assets/js/main.js" type="module"></script>
     <script>
-        // Render produk di halaman utama
+        // Render semua produk di halaman menu
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts('product-grid');
         });

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk - CIMOCABI</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header id="header"></header>
+
+    <main class="product-detail-page">
+        <div class="container">
+            <button onclick="history.back()" class="btn-back">
+                ← Kembali ke Menu
+            </button>
+
+            <div class="detail-grid" id="detail-content">
+                <!-- Konten diisi oleh JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script src="assets/js/main.js" type="module"></script>
+    <script src="assets/js/products.js"></script>
+    <script>
+        // Ambil ID produk dari URL (contoh: product-detail.html?id=6)
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id'));
+
+        const product = productsData.find(p => p.id === productId);
+
+        if (product) {
+            document.getElementById('detail-content').innerHTML = `
+                <div class="detail-left">
+                    <img src="\( {product.images[0]}" alt=" \){product.name}" class="detail-image">
+                </div>
+                <div class="detail-right">
+                    <h1>${product.name}</h1>
+                    
+                    <div class="price-section">
+                        <span class="current-price">Rp ${product.price.toLocaleString('id-ID')}</span>
+                        ${product.originalPrice > product.price ? 
+                            `<span class="original-price">Rp ${product.originalPrice.toLocaleString('id-ID')}</span>` : ''}
+                    </div>
+
+                    <div class="rating">
+                        ⭐ ${product.rating || '4.9'} • Terjual ${product.sold || 30}
+                    </div>
+
+                    <p class="desc-full">${product.desc}</p>
+
+                    <div class="options">
+                        <strong>Pilih Kondisi:</strong><br>
+                        <button class="option-btn active">Frozen</button>
+                        <button class="option-btn">Matang</button>
+                    </div>
+
+                    <button onclick="addToCart(${product.id});" class="btn-primary btn-large">
+                        <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                    </button>
+
+                    <button onclick="window.location.href='checkout.html'" class="btn-primary btn-large" style="background:#10b981; margin-top:10px;">
+                        Beli Langsung
+                    </button>
+                </div>
+            `;
+        } else {
+            document.getElementById('detail-content').innerHTML = `
+                <h2>Produk tidak ditemukan</h2>
+                <button onclick="history.back()" class="btn-primary">Kembali</button>
+            `;
+        }
+    </script>
+</body>
+</html>

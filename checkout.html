@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - CIMOCABI</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header id="header"></header>
+
+    <main class="checkout-page">
+        <div class="container">
+            <h1 class="page-title">Checkout</h1>
+
+            <div class="checkout-grid">
+                <!-- Form Informasi Pembeli -->
+                <div class="checkout-form">
+                    <h2>Informasi Pembeli</h2>
+                    <form id="checkout-form">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="nama" required placeholder="Masukkan nama lengkap">
+
+                        <label>Nomor WhatsApp</label>
+                        <input type="tel" id="wa" required placeholder="081234567890">
+
+                        <label>Alamat Lengkap</label>
+                        <textarea id="alamat" rows="3" required placeholder="Jl. Contoh No. 123, Depok"></textarea>
+
+                        <label>Catatan Pesanan (Opsional)</label>
+                        <textarea id="catatan" rows="2" placeholder="Tambahkan catatan untuk kurir atau admin"></textarea>
+
+                        <button type="submit" class="btn-primary btn-checkout">
+                            <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Ringkasan Pesanan -->
+                <div class="order-summary">
+                    <h2>Ringkasan Pesanan</h2>
+                    <div id="summary-items"></div>
+                    
+                    <div class="summary-total">
+                        <div class="summary-row">
+                            <span>Total Pembayaran</span>
+                            <span id="grand-total">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script src="assets/js/main.js" type="module"></script>
+    <script src="assets/js/checkout.js" type="module"></script>
+</body>
+</html>

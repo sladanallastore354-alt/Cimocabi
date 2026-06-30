@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang - CIMOCABI</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header id="header"></header>
+
+    <main class="cart-page">
+        <div class="container">
+            <h1 class="page-title">Keranjang Belanja</h1>
+            
+            <div id="cart-empty" class="empty-cart" style="display: none;">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Keranjang Anda Kosong</h2>
+                <p>Ayo tambahkan beberapa camilan nagih dari CIMOCABI!</p>
+                <button onclick="window.location.href='menu.html'" class="btn-primary">Lihat Menu</button>
+            </div>
+
+            <div id="cart-items" class="cart-items"></div>
+
+            <div id="cart-summary" class="cart-summary" style="display: none;">
+                <div class="summary-row">
+                    <span>Total</span>
+                    <span id="total-price">Rp 0</span>
+                </div>
+                <button onclick="proceedToCheckout()" class="btn-primary btn-checkout">
+                    Lanjut ke Pembayaran
+                </button>
+                <button onclick="window.location.href='menu.html'" class="btn-secondary">
+                    Lanjut Belanja
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script src="assets/js/main.js" type="module"></script>
+    <script src="assets/js/cart.js" type="module"></script>
+</body>
+</html>
